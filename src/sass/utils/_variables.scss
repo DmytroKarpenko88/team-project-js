@@ -1,0 +1,27 @@
+:root {
+  /* Fonts */
+  --main-font: 'Roboto', sans-serif;
+
+  /* Text colors */
+  --main-txt-cl: #000000;
+  --accent-txt-cl: #b92f2c;
+
+  --btn-txt-cl: #000000;
+  --btn-txt-cl: #ffffff;
+
+  --copyright-txt-cl: #545454;
+  --modal-title: #8c8c8c;
+
+  /* BG colors */
+  --bg-cl: #ffffff;
+  --footer-bg-cl: #f7f7f7;
+  --btn-bg-color: #000000;
+
+  /* Others */
+  --btn-radius: 100px;
+}
+
+// BREAKPOINTS
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1200px;
