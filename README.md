@@ -3,7 +3,7 @@
 ## URLS
 
 - [Main Instruction]()
-- [Trello Instruction]()
+- [Trello Instruction](https://trello.com/b/eesbzFD4/filmoteka)
 - [Parcel Project Template](https://github.com/goitacademy/parcel-project-template)
 - [Тех Завдання](https://docs.google.com/spreadsheets/d/1Nqu0GSddprM_I402OnudsdgPxkUhCtb71Y3zjUvx8E0/edit?usp=sharing)
 - [Макет](https://www.figma.com/file/ieXHCTVNre6afLNCW0cDFc/Filmoteka?node-id=0-1&t=954GzFZxBGWPDLFe-0)
