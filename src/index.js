@@ -1,1 +1,1 @@
-import './events/renderGallerycard';
+import './js/services/service-api';
