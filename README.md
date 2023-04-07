@@ -12,3 +12,4 @@
 - [Get movies details](https://developers.themoviedb.org/3/movies/get-movie-details)
 - [Get movies videos](https://developers.themoviedb.org/3/movies/get-movie-videos)
 - [Scrumpoker](https://www.scrumpoker-online.org/en/)
+ Додала селектори  ID на кнопки "Watch", "Queue", "add Watch", "add Queue" і слухачів.
