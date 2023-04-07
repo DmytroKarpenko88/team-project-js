@@ -1,14 +1,118 @@
 .header {
-    max-width: 320px;
+    max-width: 1216px;
+    padding-left: 32px;
+    padding-right: 32px;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 14px;
-    padding-bottom: 20px;
-    background-image: url('../images/header-image/red-mobile_1x.jpg');
+    padding-top: 16px;
+    padding-bottom: 30px;
+    background-image: url('../images/header-image/yellow-desktop_1x.jpg');
     background-repeat: no-repeat ;
     border-radius: 10px;
 }
 
+.header__main-nav {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    margin-bottom: 151px;
+
+}
+
+
+
 .header__list-buttons{
     display: flex;
+    margin-bottom: 8px;
 }
+
+.header__list-item:not(:last-child){
+    margin-right: 8px;
+}
+
+.header__buttn{
+    height: 34px;
+    border-radius: var(--btn-radius);
+    text-align: center;
+
+    &.black{
+        width: 87px;
+        background-color: var(--btn-bg-color);
+    }
+
+    &.white{
+        width: 113px;
+        background-color: var(--bg-cl);
+    }
+}
+
+
+
+.header__buttn-link{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+
+
+    &.black{
+        color: var(--btn-bg-color);
+    }
+
+    &.white{
+        color: var(--bg-cl);
+    }
+}
+
+// button
+
+.header__search-box{
+    width: 187px;
+    height: 34px;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--btn-radius);
+    background-color: var(--bg-cl);
+    padding-left: 16px;
+    padding-right:16px;
+}
+
+.header__input{
+    width:130px;
+    outline: 0;
+    border: 0;
+    border-radius: var(--btn-radius);
+    background-color: transparent;   
+    // padding-left: 14px;
+}
+
+.header__input::placeholder{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--btn-bg-color); 
+}
+
+.header__search-buttn{
+    outline: none;
+    border: none;
+    background-color: transparent;    
+    // padding-right: 14px;   
+}
+
+
+.header_logo-link{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 75px;
+    color: var(--bg-cl);
+    }
+
+
+
+
