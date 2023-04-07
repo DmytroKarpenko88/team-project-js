@@ -6,3 +6,7 @@
 @import './utils/variables';
 @import './utils/v-hidden';
 @import './utils/mixin';
+
+//base styles
+@import './base/base';
+@import './base/reset';
