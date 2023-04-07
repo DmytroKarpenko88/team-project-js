@@ -1,0 +1,2 @@
+!function(){var e={btnWatch:document.querySelector("#watch"),btnQueue:document.querySelector("#queue"),btnAddQueue:document.querySelector("#addQueue"),btnAddWatch:document.querySelector("#addWatch")};e.btnWatch.addEventListener("click",onWatchedBtn),e.btnQueue.addEventListener("click",onQueueBtn),e.btnAddQueue.addEventListener("click",onAddQueue),e.btnAddWatch.addEventListener("click",onAddWatch)}();
+//# sourceMappingURL=library.6d7d9003.js.map
