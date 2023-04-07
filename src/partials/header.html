@@ -3,39 +3,49 @@
         <nav class="header__main-nav">
             <ul class="header__list-buttons list">
                 <li class="header__list-item ">
-                    <button type="button" class="header__buttn black">
-                        <a href="./index.html" class="link header__buttn-link white">HOME</a>
+                    <a href="./index.html" class="link header__buttn-link ">
+                    <button type="button" class="header__buttn home">
+                        HOME
                     </button>
+                    </a>
+                    
                 </li>
                 <li class="header__list-item">
-                    <button type="button" class="header__buttn white">
-                        <a href="#" class="link header__buttn-link black">MY LIBRARY</a>
-                    </button>
+                    <a href="#" class="link header__buttn-link">
+                        <button type="button" class="header__buttn libr">
+                        MY LIBRARY
+                        </button>
+                    </a>
+                    
                 </li>
-            </ul>
-
+            </ul>    
 
             <div class="header__search-box">
-            <input class="header__input" type="search" name="" id="" placeholder="Movie Search">
-            <button class="header__search-buttn">
-                        <svg class="header_icon search" width="12" height="12">
-                            <use href="./images/icons-sprite.svg#icon-search"></use>
-                        </svg>
-            </button>
+                <div class="header__search">
+                    <input class="header__input" type="search" name="" id="" placeholder="Movie Search">
+                    <button class="header__search-buttn">
+                                <svg class="header__icon search" width="12" height="12">
+                                    <use href="./images/icons-sprite.svg#icon-search"></use>
+                                </svg>
+                    </button>
+                </div>
+                            
+       
+            <p class="header__message">Search result not successful. Enter the correct movie name.</p>
 
-            
             </div>
-        </nav>
 
-        <div class="header_logo">
-            <a href="./index.html" class="header_logo-link link">
-                <span>
-                    <svg class="header_icon film" width="50" height="50">
+        </nav>
+        
+        <div class="header__logo">
+            <a href="./index.html" class="header__logo-link link">
+               
+                    <svg class="header__icon film">
                         <use href="./images/icons-sprite.svg#icon-film"></use>
                     </svg>
-                </span>
-                Filmoteka</a>
+                
+                <p>Filmoteka</p>
+            </a>
         </div>
-
     </div>
 </section>
