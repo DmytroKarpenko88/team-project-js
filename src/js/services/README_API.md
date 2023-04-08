@@ -46,10 +46,14 @@ async function fn() {
     {
       id, // number - ідентифікатор фільму
       genres, // array[strings] - масив жанрів
-      poster, // string - шлях до картинки
+      poster, // (string|null) - шлях до картинки
       release, // number - рік релізу
       title, // string - назва
       overview, // string - Опис стрічки
+      popularity, // number
+      original_title, // string
+      vote_average, // number
+      vote_count, // number
     }
   ]
 }
