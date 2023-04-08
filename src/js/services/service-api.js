@@ -7,7 +7,13 @@ class ServiceApi {
 
   #BASE_URL = 'https://api.themoviedb.org/3';
   #BASE_IMG = 'https://image.tmdb.org/t/p/w500';
+  #BASE_YOUTUBE = 'https://www.youtube.com/watch?v=';
 
+  /**
+   * The main addition method which do request
+   * @param url {string} - unique part of URL
+   * @returns {Promise<any>}
+   */
   async getResource(url) {
     return await fetch(`${this.#BASE_URL}${url}api_key=${API_KEY}`)
       .then(res => res.json());
@@ -44,8 +50,14 @@ class ServiceApi {
     return this.transformListMovies(res);
   };
 
+  /**
+   * Looking for trailer via ID of movie
+   * @param movieId {number} - Identificator
+   * @returns {Promise<string>}
+   */
   getTrailer = async (movieId) => {
-    return await this.getResource(`/movie/${movieId}/videos?`);
+    const res = await this.getResource(`/movie/${movieId}/videos?`);
+    return this.transformDataTrailer(res);
   };
 
   getByGenres = async (genre) => {
@@ -69,7 +81,6 @@ class ServiceApi {
 
       const d = release_date && new Date(Date.parse(release_date));
       const release = release_date ? d.getFullYear() : null;
-      console.log("release:", release)
 
       return {
         id,
@@ -120,6 +131,10 @@ class ServiceApi {
     });
     localStorage.setItem('genres', JSON.stringify(objGenres));
   };
+  transformDataTrailer = (res) => {
+    const key = res['results'].find(item => item['site'] === "YouTube")['key'];
+    return `${this.#BASE_YOUTUBE}${key}`;
+  }
 }
 
 export const serviceApi = new ServiceApi();
