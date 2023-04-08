@@ -112,6 +112,7 @@ const renderMovieCards = async movies => {
       })
       .join('')
   );
+  console.log('movieGalleryMarkup:', movieGalleryMarkup);
   gallery.innerHTML = movieGalleryMarkup;
 };
 
