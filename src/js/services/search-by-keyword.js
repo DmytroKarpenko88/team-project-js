@@ -1,5 +1,5 @@
 import { serviceApi } from './service-api';
-import { renderMovieCards } from '../events/renderGalleryCard';
+import { renderMovieCard } from '../events/renderGalleryCard';
 import { pagination } from '../pagination';
 // import { loader }
 
@@ -20,7 +20,7 @@ function onSearchByKeyword(e) {
 
   serviceApi.searchMovie(query);
 
-  renderMovieCards(searchMovie());
+  renderMovieCard(searchMovie());
 
   // сповіщення, якщо будемо додавати (якщо будемо, то підключи, будь ласка, бібліотеку нотіфай)
   // функція, яка буде показувати лоадер
