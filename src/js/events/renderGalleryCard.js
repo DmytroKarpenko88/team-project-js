@@ -1,6 +1,4 @@
-import serviceApi from '../services/service-api';
-
-
+import { serviceApi } from '../services/service-api';
 
 const gallery = document.querySelector('.gallery');
 
@@ -9,7 +7,7 @@ serviceApi
   .getGenre()
   .then(({ genres }) => {
     localStorage.setItem('genre', JSON.stringify(genres));
-    // console.log(genres);
+    console.log(genres);
   })
   .catch(error => console.log(error));
 
