@@ -62,12 +62,25 @@ class ServiceApi {
 
   /* Adding methods */
   #transformListMovies = (res) => {
+    console.log(res);
     const {page, total_pages, results} = res;
 
     const totalPages = total_pages;
 
     const listMovies = results.map(item => {
-      const {id, poster_path, title, name, release_date, genre_ids, overview} = item;
+      const {
+        id,
+        poster_path,
+        title,
+        name,
+        release_date,
+        genre_ids,
+        overview,
+        popularity,
+        original_title,
+        vote_average,
+        vote_count
+      } = item;
       const keyGenres = JSON.parse(localStorage.getItem('genres'));
 
       const genres = Object.entries(keyGenres).filter(item => genre_ids.includes(+item[0])).map(item => item[1]);
@@ -84,6 +97,10 @@ class ServiceApi {
         release,
         title: title || name,
         overview,
+        popularity,
+        original_title,
+        vote_average,
+        vote_count,
       }
     });
 
