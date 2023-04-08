@@ -96,7 +96,7 @@ const renderMovieCards = async movies => {
           ? `${base_url}w440_and_h660_face${backdrop_path}`
           : 'https://dummyimage.com/395x574/000/fff.jpg&text=no+poster';
 
-        return `<li>
+        return `<li class="gallery__item">
         <a class="gallery__link" href="#">
           <img class="gallery__image" data-id="${id}" src="${poster_path}" alt="${title} movie poster" loading="lazy">
 
