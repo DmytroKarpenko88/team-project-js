@@ -8,9 +8,10 @@ closeButtonModal.addEventListener('click', onCloseButtonClick)
 backdrop.addEventListener('click', onBackdropClicl)
 
 
-function onOpenButtonClick()  {
+function onOpenButtonClick() {
   backdrop.classList.remove('is-hidden')
   window.addEventListener('keydown', closeModalByEscape)
+  console.log('csdc')
 }
 
 function onCloseButtonClick()  {
