@@ -8,3 +8,10 @@ const refs = {
  refs.btnQueue.addEventListener('click', onQueueBtn);
  refs.btnAddQueue.addEventListener('click', onAddQueue);
  refs.btnAddWatch.addEventListener('click', onAddWatch);
+
+ function onWatchedBtn() {
+
+    refs.watchedBtn.classList.add('is-active');
+    refs.queueBtn.classList.remove('is-active'); 
+  }
+
