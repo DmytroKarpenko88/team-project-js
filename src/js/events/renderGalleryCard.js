@@ -1,10 +1,8 @@
-import ServiceApi from '../services/service-api';
+import serviceApi from '../services/service-api';
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
 const gallery = document.querySelector('.gallery');
-
-const serviceApi = new ServiceApi();
 
 //  ЖАНРИ ДО LOCALSTORAGE
 serviceApi
