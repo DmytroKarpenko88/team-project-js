@@ -1,4 +1,6 @@
 .header {
+    position: relative;
+    content: '';
     margin-left: auto;
     margin-right: auto;
     max-width: 280px;
@@ -103,7 +105,7 @@
 
 }
 
-
+// navigation
 
 .header__main-nav {
 
@@ -127,6 +129,8 @@
 
 
 
+
+
 .header__list-buttons{
     display: flex;
     margin-bottom: 8px;
@@ -141,9 +145,10 @@
 }
 
 .header__buttn{
+    // display: flex;
     height: 34px;
     border-radius: var(--btn-radius);
-    text-align: center;
+    // text-align: center;
     background-color: var(--bg-cl);
     color: var(--btn-bg-color);
 
@@ -155,11 +160,17 @@
         width: 113px;        
     }
 
+   &.current-page{
+        background-color: var(--btn-bg-color);
+        color:  var(--bg-cl);
+   }
+
     &:hover,
     &:focus{
         background-color: var(--btn-bg-color);
         color:  var(--bg-cl);
     }
+
 
     @media screen and (min-width: 768px){
         height: 38px;
@@ -170,6 +181,7 @@
         &.libr{
             width: 109px;        
         }
+
     }
 
     @media screen and (min-width: 1280px){
@@ -181,6 +193,7 @@
         &.libr{
             width: 113px;        
         }
+
     }
 
     
@@ -196,7 +209,7 @@
 
 }
 
-// button
+// search box
 
 
 
@@ -246,6 +259,7 @@
 
     @media screen and (min-width: 1280px){
         width:130px;
+        padding-bottom: 5px;
     }
 }
 
@@ -271,7 +285,8 @@
     outline: none;
     border: none;
     background-color: transparent;  
-    padding: 0;    
+    padding: 0;
+    padding-bottom: 5px;    
 }
 
 .header__message{
@@ -287,6 +302,8 @@
     color: var(--bg-cl);
 }
 
+
+// logo
 .header__logo{
     text-align: center;
 }
@@ -332,6 +349,123 @@
         line-height: 75px;
     }
     }
+
+// ************My library*********
+
+    // header library
+
+.header__main-nav--libr {
+
+    margin-bottom: 258px;
+
+    @media screen and (min-width: 768px){
+        display: flex;
+        margin-bottom: 105px;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+
+    @media screen and (min-width: 1280px){
+        display: flex;
+        margin-bottom: 151px;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+
+}
+
+.header__buttons-libr {
+    
+
+    @media screen and (min-width: 768px){
+        display: flex;
+    }
+
+    @media screen and (min-width: 1280px){
+        display: flex;
+    }
+    // justify-content: space-between;
+}
+
+.header__buttn-libr{
+
+    
+
+    @media screen and (max-width:767px) {
+        position: absolute;
+        bottom: 24px;
+        left:44px
+    }
+
+    @media screen and (min-width:768px) {
+        margin-left: 115px;
+    }
+
+    @media screen and (min-width:1280px) {
+        margin-left: 519px;
+    }
+    
+}
+
+.header__buttn{    
+    height: 34px;
+    border-radius: var(--btn-radius);
+    background-color: var(--bg-cl);
+    color: var(--btn-bg-color);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+
+  
+
+    &.watch{
+        width:102px;
+        
+    }
+
+    &.queue{
+        width: 86px;
+    }
+
+    &.watch:hover,
+    &.watch:focus,
+    &.queue:hover,
+    &.queue:focus{
+        background-color: var(--accent-txt-cl);
+        color:  var(--bg-cl);
+    }
+
+    @media screen and (min-width: 768px){
+        height: 38px;
+       
+        &.watch{
+            width:102px;
+            
+        }
+    
+        &.queue{
+            width: 86px;
+        }
+    }
+
+    @media screen and (min-width: 1280px){
+        height: 42px;
+        &.watch{
+            width:120px;           
+        }
+    
+        &.queue{
+            width: 86px;
+        }
+    }
+
+    
+}
+
+
+
+// 
 
 
 
