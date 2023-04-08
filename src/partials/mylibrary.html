@@ -1,4 +1,4 @@
-<section class="header">
+<section class="header container">
     <div class="header__nav">
         <nav class="header__main-nav--libr">
             <div class="header__buttons-libr">   
@@ -52,14 +52,21 @@
                
 
             <div class="header__search-box">
-                <div class="header__search">
-                    <input class="header__input" type="search" name="" id="" placeholder="Movie Search">
+                <form class="header__search" id="search-form">
+                    <input
+                     
+                      type="text"
+                      name="searchQuery"
+                      autocomplete="off"
+                      class="header__input"
+                      placeholder="Movie Search"
+                    />
                     <button class="header__search-buttn">
-                                <svg class="header__icon search" width="12" height="12">
-                                    <use href="./images/icons-sprite.svg#icon-search"></use>
-                                </svg>
+                        <svg class="header__icon search" width="12" height="12">
+                            <use href="./images/icons-sprite.svg#icon-search"></use>
+                        </svg>
                     </button>
-                </div>
+                  </form>
                             
         
             <p class="header__message">Search result not successful. Enter the correct movie name.</p>
