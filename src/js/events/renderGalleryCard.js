@@ -70,6 +70,7 @@ export async function renderMovieCards(movies) {
           <div class="info-detail">
              <p class="info-detail__item">${movieGenres.join(', ')}</p>
              <p class="info-detail__item">${year}</p>
+           </p>
            </div>
          </div>
          </a>
