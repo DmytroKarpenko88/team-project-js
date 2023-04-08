@@ -65,9 +65,8 @@
 //   return movieGenres;
 // }
 
-import ServiceApi from '../services/service-api';
+import { serviceApi } from '../services/service-api';
 
-const serviceApi = new ServiceApi();
 const gallery = document.querySelector('.gallery');
 const renderMovieCards = async movies => {
   const movieGalleryMarkup = await Promise.all(
