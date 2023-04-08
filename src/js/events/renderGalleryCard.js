@@ -1,6 +1,6 @@
 import { serviceApi } from '../services/service-api';
 
-async function renderMoviesCard() {
+export async function renderMoviesCard() {
   try {
     const { listMovies } = await serviceApi.getListMovies('week');
     const movieCards = listMovies.map(
