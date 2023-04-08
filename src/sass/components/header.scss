@@ -1,4 +1,6 @@
 .header {
+    position: relative;
+    content: '';
     margin-left: auto;
     margin-right: auto;
     max-width: 280px;
@@ -103,7 +105,7 @@
 
 }
 
-
+// navigation
 
 .header__main-nav {
 
@@ -125,6 +127,63 @@
 
 }
 
+// header library
+
+.header__main-nav--libr {
+
+    margin-bottom: 258px;
+
+    @media screen and (min-width: 768px){
+        display: flex;
+        margin-bottom: 105px;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+
+    @media screen and (min-width: 1280px){
+        display: flex;
+        margin-bottom: 151px;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+
+}
+
+
+// 
+
+.header__buttons-libr {
+    
+
+    @media screen and (min-width: 768px){
+        display: flex;
+    }
+
+    @media screen and (min-width: 1280px){
+        display: flex;
+    }
+    // justify-content: space-between;
+}
+
+.header__buttn-libr{
+
+    
+
+    @media screen and (max-width:767px) {
+        position: absolute;
+        bottom: 24px;
+        left:44px
+    }
+
+    @media screen and (min-width:768px) {
+        margin-left: 115px;
+    }
+
+    @media screen and (min-width:1280px) {
+        margin-left: 519px;
+    }
+    
+}
 
 
 .header__list-buttons{
@@ -141,9 +200,10 @@
 }
 
 .header__buttn{
+    // display: flex;
     height: 34px;
     border-radius: var(--btn-radius);
-    text-align: center;
+    // text-align: center;
     background-color: var(--bg-cl);
     color: var(--btn-bg-color);
 
@@ -155,9 +215,34 @@
         width: 113px;        
     }
 
+    &.watch{
+        width:102px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 14px;
+        
+    }
+
+    &.queue{
+        width: 86px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 14px;
+    }
+
     &:hover,
     &:focus{
         background-color: var(--btn-bg-color);
+        color:  var(--bg-cl);
+    }
+
+    &.watch:hover,
+    &.watch:focus,
+    &.queue:hover,
+    &.queue:focus{
+        background-color: var(--accent-txt-cl);
         color:  var(--bg-cl);
     }
 
@@ -170,6 +255,15 @@
         &.libr{
             width: 109px;        
         }
+
+        &.watch{
+            width:102px;
+            
+        }
+    
+        &.queue{
+            width: 86px;
+        }
     }
 
     @media screen and (min-width: 1280px){
@@ -180,6 +274,15 @@
     
         &.libr{
             width: 113px;        
+        }
+
+        &.watch{
+            width:120px;
+            
+        }
+    
+        &.queue{
+            width: 86px;
         }
     }
 
@@ -196,7 +299,7 @@
 
 }
 
-// button
+// search box
 
 
 
@@ -287,6 +390,8 @@
     color: var(--bg-cl);
 }
 
+
+// logo
 .header__logo{
     text-align: center;
 }
