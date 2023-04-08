@@ -2,7 +2,7 @@ const API_KEY = '221af12348c3ca060963c8b12f5995d3';
 
 class ServiceApi {
   constructor() {
-    this.getGenre().then(this.setGenres);
+    this.#getGenre().then(this.#setGenres);
   }
 
   #BASE_URL = 'https://api.themoviedb.org/3';
@@ -15,9 +15,8 @@ class ServiceApi {
    * @returns {Promise<any>}
    */
   async getResource(url) {
-    return await fetch(`${this.#BASE_URL}${url}api_key=${API_KEY}`).then(res =>
-      res.json()
-    );
+    return await fetch(`${this.#BASE_URL}${url}api_key=${API_KEY}`)
+      .then(res => res.json());
   }
 
   /**
@@ -26,11 +25,9 @@ class ServiceApi {
    * @param page {number} - Number of page of pagination
    * @returns {Promise<{totalPages: (number|number), page, listMovies: *}>}
    */
-  getListMovies = async (period, page = 1) => {
-    const res = await this.getResource(
-      `/trending/movie/${period}?page=${page}&`
-    );
-    return this.transformListMovies(res);
+  getListMovies = async (period, page=1) => {
+    const res = await this.getResource(`/trending/movie/${period}?page=${page}&`);
+    return this.#transformListMovies(res);
   };
 
   /**
@@ -38,9 +35,9 @@ class ServiceApi {
    * @param movieId
    * @returns {Promise<{overview: string, original_title: *, genres: *, vote_average: *, popularity: *, title: *, vote_count: *, poster_path: string}>}
    */
-  getMovie = async movieId => {
+  getMovie = async (movieId) => {
     const res = await this.getResource(`/movie/${movieId}?`);
-    return await this.transformDataMovie(res);
+    return await this.#transformDataMovie(res);
   };
 
   /**
@@ -48,9 +45,9 @@ class ServiceApi {
    * @param query {string} - string for search
    * @returns {Promise<*>}
    */
-  searchMovie = async query => {
+  searchMovie = async (query) => {
     const res = await this.getResource(`/search/movie?query=${query}&`);
-    return this.transformListMovies(res);
+    return this.#transformListMovies(res);
   };
 
   /**
@@ -60,35 +57,20 @@ class ServiceApi {
    */
   getTrailer = async (movieId) => {
     const res = await this.getResource(`/movie/${movieId}/videos?`);
-    return this.transformDataTrailer(res);
-  };
-
-  getByGenres = async genre => {
-    const res = await this.getResource(`/movie/${movieId}/videos?`);
+    return this.#transformDataTrailer(res);
   };
 
   /* Adding methods */
-  transformListMovies = res => {
-    const { page, total_results, results } = res;
+  #transformListMovies = (res) => {
+    const {page, total_pages, results} = res;
 
-    const pages = total_results / results.length;
-    const totalPages = pages === Math.floor(pages) ? pages : Math.ceil(pages);
+    const totalPages = total_pages;
 
     const listMovies = results.map(item => {
-      const {
-        id,
-        poster_path,
-        title,
-        name,
-        release_date,
-        genre_ids,
-        overview,
-      } = item;
+      const {id, poster_path, title, name, release_date, genre_ids, overview} = item;
       const keyGenres = JSON.parse(localStorage.getItem('genres'));
 
-      const genres = Object.entries(keyGenres)
-        .filter(item => genre_ids.includes(+item[0]))
-        .map(item => item[1]);
+      const genres = Object.entries(keyGenres).filter(item => genre_ids.includes(+item[0])).map(item => item[1]);
 
       const poster = poster_path ? `${this.#BASE_IMG}${poster_path}` : null;
 
@@ -102,7 +84,7 @@ class ServiceApi {
         release,
         title: title || name,
         overview,
-      };
+      }
     });
 
     return {
@@ -111,10 +93,10 @@ class ServiceApi {
       listMovies,
     };
   };
-  getGenre = async () => {
+  #getGenre = async () => {
     return await this.getResource(`/genre/movie/list?`);
   };
-  transformDataMovie = async res => {
+  #transformDataMovie = async (res) => {
     const {
       title,
       vote_average,
@@ -122,8 +104,8 @@ class ServiceApi {
       popularity,
       original_title,
       genres,
-      overview = '',
-      poster_path = null,
+      overview="",
+      poster_path=null
     } = res;
 
     return {
@@ -134,20 +116,20 @@ class ServiceApi {
       original_title,
       genres: genres.map(item => item['name']),
       overview,
-      poster_path: `${this.config['base_url']}w440_and_h660_face${poster_path}`,
-    };
+      poster_path: `${this.#BASE_IMG}${poster_path}`,
+    }
   };
-  setGenres = ({ genres }) => {
+  #setGenres = ({genres}) => {
     const objGenres = {};
-    genres.forEach(({ id, name }) => {
+    genres.forEach(({id, name}) => {
       objGenres[id] = name;
     });
     localStorage.setItem('genres', JSON.stringify(objGenres));
   };
-  transformDataTrailer = (res) => {
+  #transformDataTrailer = (res) => {
     const key = res['results'].find(item => item['site'] === "YouTube")['key'];
     return `${this.#BASE_YOUTUBE}${key}`;
-  }
+  };
 }
 
 export const serviceApi = new ServiceApi();
