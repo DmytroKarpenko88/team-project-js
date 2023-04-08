@@ -69,6 +69,7 @@ class ServiceApi {
 
       const d = release_date && new Date(Date.parse(release_date));
       const release = release_date ? d.getFullYear() : null;
+      console.log("release:", release)
 
       return {
         id,

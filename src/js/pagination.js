@@ -1,8 +1,8 @@
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
-import ServiceApi from './services/service-api';
+import {serviceApi} from './services/service-api';
 
-const serviceApi = new ServiceApi();
+
 
 const container = document.querySelector('#pagination');
 const options = {
@@ -34,11 +34,14 @@ const options = {
 
 export  const pagination = new Pagination(container, options);
 
-pagination.on('afterMove', (event) => {
+
+ pagination.on('afterMove', (event) => {
 
     const currentPage = event.page;
     console.log(currentPage);
     serviceApi.getListMovies(currentPage)
-    
+    return currentPage
 });
+
+
 
