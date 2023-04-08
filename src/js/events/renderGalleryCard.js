@@ -1,6 +1,9 @@
 import { serviceApi } from '../services/service-api';
 
-serviceApi.getListMovies('week').then(res => renderMoviesCard(res.listMovies));
+serviceApi
+  .getListMovies('week')
+  .then(res => renderMoviesCard(res.listMovies))
+  .catch(error => console.log(error));
 
 export function renderMoviesCard(movies) {
   const movieCards = movies.map(
