@@ -34,8 +34,11 @@ const options = {
 
 export  const pagination = new Pagination(container, options);
 
-pagination.on('beforeMove', (event) => {
+pagination.on('afterMove', (event) => {
+
     const currentPage = event.page;
     console.log(currentPage);
     serviceApi.getListMovies(currentPage)
+    
 });
+
