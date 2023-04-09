@@ -1,11 +1,11 @@
 .header {
     position: relative;
     content: '';
+    margin-top: 20px;
+    @media screen and (min-width:768px) {
+        margin-top: 32px;
+    }
     
-    
-
-    
-
 }
 
 // navigation
@@ -16,6 +16,7 @@
     padding-left: 14px;
     padding-right: 14px;     
     padding-top: 14px;
+    
     border-radius: 10px;
     
     background-size: cover;
@@ -86,7 +87,8 @@
         max-width: 1216px;
         height: 316px;
         padding-left: 32px;
-        padding-right: 32px;        
+        padding-right: 32px; 
+        padding-bottom: 32px;       
         padding-top: 16px;
         border-radius: 15px;
         background: linear-gradient(273.67deg, rgba(0, 0, 0, 0.49) -2.09%, rgba(0, 0, 0, 0) 99.83%),
@@ -254,7 +256,10 @@
 
 .header__input{
     width:210px;
-    padding-bottom: 5px;
+    // padding-bottom: 5px;
+    font-size: 12px;
+    line-height: 1.16;
+    text-transform: capitalize;
     outline: 0;
     border: 0;
     border-radius: var(--btn-radius);
@@ -264,6 +269,8 @@
 
     @media screen and (min-width: 768px){
         width:120px;
+        font-size: 14px;
+        line-height: 16px;
     }
 
     @media screen and (min-width: 1280px){
@@ -276,7 +283,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    line-height: 14px;
+    line-height: 1.16;
     color: var(--btn-bg-color); 
 
     @media screen and (min-width: 768px){
