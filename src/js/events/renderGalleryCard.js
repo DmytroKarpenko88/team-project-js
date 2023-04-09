@@ -33,7 +33,7 @@ export function renderCardWithGenres(movie) {
 }
 
 serviceApi
-  .getListMovies('week')
+  .getListMovies('day')
   .then(res => {
     setFilmsToLocalStorage(res.listMovies);
     renderListMovies(res.listMovies);
@@ -46,13 +46,13 @@ export function renderListMovies(list) {
   gallery.innerHTML = movieCards.join('');
 }
 
-function setFilmsToLocalStorage(list) {
+export function setFilmsToLocalStorage(list) {
   const localListMovies = {};
-    list.forEach(item => {
-      const {id, ...props} = item;
-      localListMovies[id] = props;
-    });
-    localStorage.setItem('listMovies', JSON.stringify(localListMovies));
+  list.forEach(item => {
+    const { id, ...props } = item;
+    localListMovies[id] = props;
+  });
+  localStorage.setItem('listMovies', JSON.stringify(localListMovies));
 }
 
 // export function renderMoviesCard(movies) {
