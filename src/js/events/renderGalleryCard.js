@@ -23,7 +23,7 @@ export function renderCardWithGenres(movie) {
               <h3 class="info__item">${title}</h3>
                <div class="info-detail">
                 <p class="info-detail__item">${genresToShow.join(', ')}</p>
-                 <p class="info-detail__item"> ${year} <span class="film-rating">${vote_average?.toFixed(
+  <p class="info-detail__item">${year}<span class="info-detail__rating">&#9733;</span><span class="film-rating">${vote_average?.toFixed(
     1
   )}</span></p>
                </div>
