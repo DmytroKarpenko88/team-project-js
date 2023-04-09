@@ -1,5 +1,5 @@
 import { serviceApi } from './service-api';
-import { renderMoviesCard } from '../events/renderGalleryCard';
+import { renderCardWithGenres } from '../events/renderGalleryCard';
 import { pagination } from '../pagination';
 // import { loader }
 
