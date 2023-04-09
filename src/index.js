@@ -10,4 +10,4 @@ import './js/events/scrollUp';
 
 import './js/services/search-by-keyword';
 import './js/events/filter';
-
+import './js/team';
