@@ -1,5 +1,8 @@
 import { serviceApi } from './service-api';
-import { renderListMovies } from '../events/renderGalleryCard';
+import {
+  renderListMovies,
+  setFilmsToLocalStorage,
+} from '../events/renderGalleryCard';
 import { pagination } from '../pagination';
 // import { loader }
 
@@ -21,7 +24,7 @@ async function onSearchByKeyword(e) {
 
   const res = await serviceApi.searchMovie(query);
   console.log(res);
-
+  setFilmsToLocalStorage(res.listMovies);
   renderListMovies(res['listMovies']);
 
   if (page === 1) {
