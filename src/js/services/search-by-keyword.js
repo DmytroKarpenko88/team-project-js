@@ -1,5 +1,5 @@
 import { serviceApi } from './service-api';
-import { renderCardWithGenres } from '../events/renderGalleryCard';
+import { renderListMovies } from '../events/renderGalleryCard';
 import { pagination } from '../pagination';
 // import { loader }
 
@@ -22,7 +22,7 @@ async function onSearchByKeyword(e) {
   const res = await serviceApi.searchMovie(query);
   console.log(res);
 
-  renderMoviesCard(res.listMovies);
+  renderListMovies(res['listMovies']);
 
   if (page === 1) {
     pag.style.display = 'visible';
