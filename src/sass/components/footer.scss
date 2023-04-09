@@ -34,7 +34,7 @@
   }
 }
 
-.footer__wrap--item {
+.footer__wrap-item {
   font-weight: 400;
   font-size: 14px;
   line-height: 1.14;
@@ -45,19 +45,18 @@
   }
 }
 
-.footer__wrap--icon {
+.footer__wrap-icon {
   width: 14px;
   height: 13px;
   margin-right: 5px;
   margin-left: 3px;
-  animation: heartbeat 1250ms cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
 }
 
 .foter__list-item:not(:last-child) {
   margin-right: 5px;
 }
 
-.footer__wrap--link {
+.footer__wrap-link {
   font-weight: 400;
   font-size: 14px;
   line-height: 1.14;

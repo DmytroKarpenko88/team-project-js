@@ -1,7 +1,7 @@
 import Pagination from 'tui-pagination';
-import 'tui-pagination/dist/tui-pagination.css';
+// import 'tui-pagination/dist/tui-pagination.css';
 import {serviceApi} from './services/service-api';
-
+import {renderListMovies} from './events/renderGalleryCard'
 
 
 const container = document.querySelector('#pagination');
@@ -36,11 +36,13 @@ export  const pagination = new Pagination(container, options);
 
 
  pagination.on('afterMove', (event) => {
-
     const currentPage = event.page;
     console.log(currentPage);
-    serviceApi.getListMovies(currentPage)
-    return currentPage
+    serviceApi
+  .getListMovies('week', currentPage)
+  .then(res => renderListMovies(res.listMovies))
+  .catch(error => console.log(error));
+   
 });
 
 
