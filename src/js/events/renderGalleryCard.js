@@ -20,6 +20,7 @@ export function renderMoviesCard(movies) {
         1
       )}</span></p>
              </div>
+
            </div>
           </a>
          </li>`;
