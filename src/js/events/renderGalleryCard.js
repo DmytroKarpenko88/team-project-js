@@ -3,14 +3,14 @@ import { serviceApi } from '../services/service-api';
 export function renderCardWithGenres(movie) {
   const { id, poster, title, genres, release, vote_average } = movie;
   const posterUrl = poster
-    ? `https://www.themoviedb.org/t/p/w500${poster}`
+    ? poster
     : 'https://dummyimage.com/395x574/000/fff.jpg&text=no+poster';
 
   const genresToShow = genres.slice(0, 2);
   if (genres.length > 2) {
     genresToShow.push('Others');
   }
-  //   const year = release_date ? new Date(release_date).getFullYear() : ' ';
+  const year = release ? release : null;
 
   // let year = '';
   // if (typeof release !== 'undefined' && release.length > 4) {
@@ -23,7 +23,7 @@ export function renderCardWithGenres(movie) {
               <h3 class="info__item">${title}</h3>
                <div class="info-detail">
                 <p class="info-detail__item">${genresToShow.join(', ')}</p>
-                 <p class="info-detail__item"> ${release} <span class="film-rating">${vote_average?.toFixed(
+                 <p class="info-detail__item"> ${year} <span class="film-rating">${vote_average?.toFixed(
     1
   )}</span></p>
                </div>
@@ -34,12 +34,14 @@ export function renderCardWithGenres(movie) {
 
 serviceApi
   .getListMovies('week')
-  .then(res => {
-    const movieCards = res.listMovies.map(movie => renderCardWithGenres(movie));
-    const gallery = document.querySelector('.gallery');
-    gallery.innerHTML = movieCards.join('');
-  })
+  .then(res => renderListMovies(res.listMovies))
   .catch(error => console.log(error));
+
+export function renderListMovies(list) {
+  const movieCards = list.map(movie => renderCardWithGenres(movie));
+  const gallery = document.querySelector('.gallery');
+  gallery.innerHTML = movieCards.join('');
+}
 
 // export function renderMoviesCard(movies) {
 //   const movieCards = movies.map(
