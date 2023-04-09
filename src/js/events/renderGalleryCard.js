@@ -17,7 +17,7 @@ export function renderCardWithGenres(movie) {
   //   year = release.slice(0, 4);
   // }
   return `<li class="gallery__item">
-             <a class="gallery__link" href="#" data-id="${id}">
+             <a class="gallery__link" href="#" data-modal-open data-id="${id}">
               <img class="gallery__image" src="${posterUrl}" alt="${title} movie poster" loading="lazy">
              <div class="info">
               <h3 class="info__item">${title}</h3>
