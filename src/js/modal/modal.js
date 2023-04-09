@@ -1,6 +1,7 @@
 const backdrop = document.querySelector('[data-modal]')
 const openButtonModal = document.querySelector('[data-modal-open]')
 const closeButtonModal = document.querySelector('[data-modal-close]')
+const body = document.querySelector('body')
 
 
 openButtonModal.addEventListener('click', onOpenButtonClick)
@@ -11,12 +12,14 @@ backdrop.addEventListener('click', onBackdropClicl)
 function onOpenButtonClick() {
   backdrop.classList.remove('is-hidden')
   window.addEventListener('keydown', closeModalByEscape)
-  console.log('csdc')
+  body.style.overflow = 'hidden'
+
 }
 
 function onCloseButtonClick()  {
   backdrop.classList.add('is-hidden')
   window.removeEventListener('keydown', closeModalByEscape)
+  body.style.overflow = 'scroll'
 }
 
 
