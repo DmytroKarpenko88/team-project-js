@@ -30,6 +30,7 @@
 .gallery__item {
   display: flex;
   max-width: 280px;
+  position: relative;
 
   &:not(:last-child) {
     @media screen and (max-width: 767px) {
@@ -76,7 +77,7 @@
   @media screen and (min-width: $tablet) {
     min-width: 336px;
     height: auto;
-     }
+  }
   @media screen and (min-width: $desktop) {
     min-width: 394px;
     height: auto;
@@ -99,7 +100,7 @@
     font-weight: 500;
     font-size: 12px;
 
-    color:var(--main-txt-cl);
+    color: var(--main-txt-cl);
 
     @media screen and (min-width: $tablet) {
       line-height: calc(16px / 12px);
@@ -148,4 +149,48 @@
 
 .film-rating {
   color: var(--main-txt-cl);
+}
+
+.btn-gallery__delete {
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 300ms ease-in-out;
+  position: absolute;
+  border-radius: 20%;
+  right: 5px;
+  bottom: 8px;
+
+  @media screen and (min-width: $tablet) {
+    display: inline-block;
+    right: 6px;
+    bottom: 7px;
+  }
+  @media screen and (min-width: $desktop) {
+    display: inline-block;
+    right: 6px;
+    bottom: 6px;
+    min-width: 35px;
+    min-height: 35px;
+  }
+}
+
+.btn-gallery__delete:hover {
+  background-color: #d64543;
+  transform: scale(1.2);
+}
+
+.btn__img {
+  @media screen and (max-width: 767px) {
+    min-width: 20px;
+    min-height: 20px;
+  }
+
+  @media screen and (min-width: $tablet) {
+    min-width: 25px;
+    min-height: 25px;
+  }
+  @media screen and (min-width: $desktop) {
+    min-width: 35px;
+    min-height: 35px;
+  }
 }

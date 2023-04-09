@@ -2,6 +2,7 @@ const backdrop = document.querySelector('[data-modal]')
 // const openButtonModal = document.querySelector('[data-modal-open]')
 const openButtonModal = document.querySelector('.gallery');
 const closeButtonModal = document.querySelector('[data-modal-close]')
+const body = document.querySelector('body');
 
 
 openButtonModal.addEventListener('click', onOpenButtonClick)
@@ -15,6 +16,7 @@ function onOpenButtonClick(e) {
   if (currentMovie) {
     backdrop.classList.remove('is-hidden');
     window.addEventListener('keydown', closeModalByEscape);
+    body.style.overflow = 'hidden';
     renderPopupBody(currentMovie.dataset.id);
   }
 }
@@ -22,6 +24,7 @@ function onOpenButtonClick(e) {
 function onCloseButtonClick()  {
   backdrop.classList.add('is-hidden')
   window.removeEventListener('keydown', closeModalByEscape)
+  body.style.overflow = 'auto';
 }
 
 
@@ -38,7 +41,7 @@ function closeModalByEscape(event) {
      onCloseButtonClick()
    }
 }
- 
+
 function renderPopupBody(id) {
   console.log(id);
   const dataMovie = JSON.parse(localStorage.getItem('listMovies'));
