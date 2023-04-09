@@ -27,6 +27,11 @@ weekBtn.addEventListener('click', async () => {
 });
 
 // Render initial movies
-const initialPeriod = 'day';
-const initialMovies = await serviceApi.getListMovies(initialPeriod);
-renderListMovies(initialMovies.listMovies);
+async function initialize() {
+  // Render initial movies
+  const initialPeriod = 'day';
+  const initialMovies = await serviceApi.getListMovies(initialPeriod);
+  renderListMovies(initialMovies.listMovies);
+}
+
+initialize();

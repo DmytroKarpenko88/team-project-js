@@ -79,58 +79,113 @@ localStorage.setItem('queueMovies', queueString);
 // =========================================================
 
 const storedWatchedMovies = JSON.parse(localStorage.getItem('watchedMovies'));
-console.log('storedWatchedMovies:', storedWatchedMovies);
 
 const itemsPerPage = 10;
 const totalPages = Math.ceil(storedWatchedMovies.length / itemsPerPage);
 const currentPage = 1;
-function displayMovies(page) {
-  moviesList.innerHTML = '';
 
-  // Обчислюємо початковий та кінцевий індекси елементів для поточної сторінки
-  const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
+const prevButton = document.querySelector('#prevButton');
+const firstPageButton = document.querySelector('#firstPageButton');
+const prev5Button = document.querySelector('#prev5Button');
+const pageNumberButtons = document.querySelectorAll('.pageNumberButton');
+const next5Button = document.querySelector('#next5Button');
+const totalPagesButton = document.querySelector('#totalPagesButton');
+const nextButton = document.querySelector('#nextButton');
 
-  // Виводимо фільми на поточній сторінці
-  for (
-    const i = startIndex;
-    i < endIndex && i < storedWatchedMovies.length;
-    i++
-  ) {
-    const movie = storedWatchedMovies[i];
-    const listItem = document.createElement('li');
-    listItem.textContent = movie.title;
-    moviesList.appendChild(listItem);
+prevButton.addEventListener('click', goToPrevPage);
+firstPageButton.addEventListener('click', goToFirstPage);
+prev5Button.addEventListener('click', goToPrev5Pages);
+next5Button.addEventListener('click', goToNext5Pages);
+nextButton.addEventListener('click', goToNextPage);
+
+function goToPrevPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    updatePagination();
+  }
+}
+
+function goToFirstPage() {
+  if (currentPage !== 1) {
+    currentPage = 1;
+    updatePagination();
+  }
+}
+
+function goToPrev5Pages() {
+  if (currentPage > 5) {
+    currentPage -= 5;
+    updatePagination();
+  } else {
+    goToFirstPage();
+  }
+}
+
+function goToNext5Pages() {
+  if (currentPage + 5 <= totalPages) {
+    currentPage += 5;
+    updatePagination();
+  } else {
+    goToLastPage();
+  }
+}
+
+function goToNextPage() {
+  if (currentPage < totalPages) {
+    currentPage++;
+    updatePagination();
+  }
+}
+
+function goToPage(event) {
+  currentPage = parseInt(event.target.textContent);
+  updatePagination();
+}
+
+function goToLastPage() {
+  currentPage = totalPages;
+  updatePagination();
+}
+
+pageNumberButtons.forEach(button => {
+  button.addEventListener('click', goToPage);
+});
+
+function updatePagination() {
+  if (currentPage === 1) {
+    prevButton.classList.add('disabled');
+    firstPageButton.classList.add('disabled');
+  } else {
+    prevButton.classList.remove('disabled');
+    firstPageButton.classList.remove('disabled');
   }
 
-  // Виводимо пагінацію
-  // const pagination = document.querySelector('.pagination');
+  if (currentPage === totalPages) {
+    nextButton.classList.add('disabled');
+  } else {
+    nextButton.classList.remove('disabled');
+  }
 
-  // pagination.innerHTML = '';
-
-  // Додаємо кнопки "Попередня" та "Наступна" до пагінації
-  const prevButton = document.createElement('button');
-  prevButton.textContent = 'Попередня';
-  prevButton.addEventListener('click', function () {
-    if (currentPage > 1) {
-      currentPage--;
-      displayMovies(currentPage);
+  pageNumberButtons.forEach(button => {
+    const pageNumber = parseInt(button.textContent);
+    if (pageNumber === currentPage) {
+      button.classList.add('active');
+    } else {
+      button.classList.remove('active');
     }
   });
-  pagination.appendChild(prevButton);
 
-  const nextButton = document.createElement('button');
-  nextButton.textContent = 'Наступна';
-  nextButton.addEventListener('click', function () {
-    if (currentPage < totalPages) {
-      currentPage++;
-      displayMovies(currentPage);
-    }
-  });
-  pagination.appendChild(nextButton);
+  totalPagesButton.textContent = totalPages;
 
-  // Виводимо номер поточної сторінки та загальну кількість сторінок
-  const pageInfo = document.createElement('');
-  pageInfo.textContent = 'Сторінка ' + currentPage + ' з ' + totalPages;
-  pagination.appendChild(pageInfo);
+  if (currentPage > 5) {
+    prev5Button.style.display = 'inline-block';
+  } else {
+    prev5Button.style.display = 'none';
+  }
+
+  if (currentPage + 4 < totalPages) {
+    next5Button.style.display = 'inline-block';
+  } else {
+    next5Button.style.display = 'none';
+  }
 }
