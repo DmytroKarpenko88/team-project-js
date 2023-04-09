@@ -32,8 +32,10 @@ export function renderCardWithGenres(movie) {
            </li>`;
 }
 
+const currentPeriod = document.querySelector('.movie-switcher__button.active').dataset.period || 'day';
+
 serviceApi
-  .getListMovies('day')
+  .getListMovies(currentPeriod)
   .then(res => {
     setFilmsToLocalStorage(res.listMovies);
     renderListMovies(res.listMovies);
