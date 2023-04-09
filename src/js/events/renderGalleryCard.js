@@ -32,20 +32,6 @@ export function renderCardWithGenres(movie) {
            </li>`;
 }
 
-serviceApi
-  .getListMovies('week')
-  .then(res => {
-    const movieCards = res.listMovies.map(movie => renderCardWithGenres(movie));
-    const gallery = document.querySelector('.gallery');
-    gallery.innerHTML = movieCards.join('');
-  })
-  .catch(error => console.log(error));
-
-// serviceApi
-//   .getListMovies('week')
-//   .then(res => renderMoviesCard(res.listMovies))
-//   .catch(error => console.log(error));
-
 // export function renderMoviesCard(movies) {
 //   const movieCards = movies.map(
 //     ({ id, genres, poster, release, title, vote_average }) => {
