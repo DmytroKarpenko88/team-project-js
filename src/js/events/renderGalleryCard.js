@@ -3,14 +3,14 @@ import { serviceApi } from '../services/service-api';
 export function renderCardWithGenres(movie) {
   const { id, poster, title, genres, release, vote_average } = movie;
   const posterUrl = poster
-    ? `https://www.themoviedb.org/t/p/w500${poster}`
+    ? poster
     : 'https://dummyimage.com/395x574/000/fff.jpg&text=no+poster';
 
   const genresToShow = genres.slice(0, 2);
   if (genres.length > 2) {
     genresToShow.push('Others');
   }
-  //   const year = release_date ? new Date(release_date).getFullYear() : ' ';
+  const year = release ? release : null;
 
   // let year = '';
   // if (typeof release !== 'undefined' && release.length > 4) {
@@ -23,7 +23,7 @@ export function renderCardWithGenres(movie) {
               <h3 class="info__item">${title}</h3>
                <div class="info-detail">
                 <p class="info-detail__item">${genresToShow.join(', ')}</p>
-                 <p class="info-detail__item"> ${release} <span class="film-rating">${vote_average?.toFixed(
+                 <p class="info-detail__item"> ${year} <span class="film-rating">${vote_average?.toFixed(
     1
   )}</span></p>
                </div>
@@ -34,55 +34,38 @@ export function renderCardWithGenres(movie) {
 
 serviceApi
   .getListMovies('week')
-  .then(res => {
-    const movieCards = res.listMovies.map(movie => renderCardWithGenres(movie));
-    const gallery = document.querySelector('.gallery');
-    gallery.innerHTML = movieCards.join('');
-  })
+  .then(res => renderListMovies(res.listMovies))
   .catch(error => console.log(error));
+
+export function renderListMovies(list) {
+  const movieCards = list.map(movie => renderCardWithGenres(movie));
+  const gallery = document.querySelector('.gallery');
+  gallery.innerHTML = movieCards.join('');
+}
 
 // export function renderMoviesCard(movies) {
 //   const movieCards = movies.map(
 //     ({ id, genres, poster, release, title, vote_average }) => {
 //       const posterUrl = `${poster}`;
 //       return `<li class="gallery__item">
-//              <a class="gallery__link" href="#">
-//               <img class="gallery__image" data-id="${id}" src="${posterUrl}" alt="${title} movie poster" loading="lazy">
-//              <div class="info">
-//               <h3 class="info__item">${title}</h3>
-//                <div class="info-detail">
-//                 <p class="info-detail__item">${genres.join(', ')}</p>
-//                  <p class="info-detail__item">${release} <span class="film-rating">${vote_average?.toFixed(
+//            <a class="gallery__link" href="#">
+//             <img class="gallery__image" data-id="${id}" src="${posterUrl}" alt="${title} movie poster" loading="lazy">
+//            <div class="info">
+//             <h3 class="info__item">${title}</h3>
+//              <div class="info-detail">
+//               <p class="info-detail__item">${genres.join(', ')}</p>
+//                <p class="info-detail__item">${release} <span class="film-rating">${vote_average?.toFixed(
 //         1
 //       )}</span></p>
-//                </div>
 //              </div>
-//             </a>
-//            </li>`;
+//            </div>
+//           </a>
+//          </li>`;
 //     }
 //   );
 
 //   const gallery = document.querySelector('.gallery');
 //   gallery.innerHTML = movieCards.join('');
-// }
-
-// serviceApi
-//   .getGenre(genres)
-//   .then(res => getMovieGenresList(res.genres))
-//   .catch(error => console.log(error));
-
-// export function getMovieGenresList(genresIdsList) {
-//   let movieGenres = genres.reduce((acc, { id, name }) => {
-//     if (genresIdsList.includes(id)) {
-//       acc.push(name);
-//     }
-//     return acc;
-//   }, []);
-//   if (movieGenres.length > 3) {
-//     movieGenres = movieGenres.slice(0, 2);
-//     movieGenres.push('Other');
-//   }
-//   return movieGenres;
 // }
 
 // export async function renderMoviesCard() {

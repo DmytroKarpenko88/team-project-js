@@ -11,13 +11,43 @@
 }
 
 .team__modal-list {
+  list-style: none;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  display: flex;
 }
 
-.team-modal__title {
+.team__modal_-title {
   text-align: center;
   margin-bottom: 30px;
   font-size: 30px;
+}
+
+.team__modal-item {
+  width: 200px;
+  margin-bottom: 25px;
+}
+
+.team__modal-item div {
+  display: flex;
+  justify-content: center;
+}
+
+.team__modal-pic {
+  min-width: 100%;
+}
+
+.team__modal-role {
+  text-align: center;
+  font-size: 16px;
+}
+
+.team__modal-link {
+  width: 30px;
+}
+
+.team__modal-title {
+  font-size: 30px;
+  margin-bottom: 30px;
+  text-align: center;
 }
