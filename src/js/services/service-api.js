@@ -2,12 +2,18 @@ const API_KEY = '221af12348c3ca060963c8b12f5995d3';
 
 class ServiceApi {
   constructor() {
-    this.getGenre().then(this.setGenres);
+    this.#getGenre().then(this.#setGenres);
   }
 
   #BASE_URL = 'https://api.themoviedb.org/3';
   #BASE_IMG = 'https://image.tmdb.org/t/p/w500';
+  #BASE_YOUTUBE = 'https://www.youtube.com/watch?v=';
 
+  /**
+   * The main addition method which do request
+   * @param url {string} - unique part of URL
+   * @returns {Promise<any>}
+   */
   async getResource(url) {
     return await fetch(`${this.#BASE_URL}${url}api_key=${API_KEY}`)
       .then(res => res.json());
@@ -21,7 +27,7 @@ class ServiceApi {
    */
   getListMovies = async (period, page=1) => {
     const res = await this.getResource(`/trending/movie/${period}?page=${page}&`);
-    return this.transformListMovies(res);
+    return this.#transformListMovies(res);
   };
 
   /**
@@ -31,7 +37,7 @@ class ServiceApi {
    */
   getMovie = async (movieId) => {
     const res = await this.getResource(`/movie/${movieId}?`);
-    return await this.transformDataMovie(res);
+    return await this.#transformDataMovie(res);
   };
 
   /**
@@ -41,26 +47,40 @@ class ServiceApi {
    */
   searchMovie = async (query) => {
     const res = await this.getResource(`/search/movie?query=${query}&`);
-    return this.transformListMovies(res);
+    return this.#transformListMovies(res);
   };
 
+  /**
+   * Looking for trailer via ID of movie
+   * @param movieId {number} - Identificator
+   * @returns {Promise<string>}
+   */
   getTrailer = async (movieId) => {
-    return await this.getResource(`/movie/${movieId}/videos?`);
-  };
-
-  getByGenres = async (genre) => {
     const res = await this.getResource(`/movie/${movieId}/videos?`);
-  }
+    return this.#transformDataTrailer(res);
+  };
 
   /* Adding methods */
-  transformListMovies = (res) => {
-    const {page, total_results, results} = res;
+  #transformListMovies = (res) => {
+    console.log(res);
+    const {page, total_pages, results} = res;
 
-    const pages = total_results / results.length;
-    const totalPages = pages === Math.floor(pages) ? pages : Math.ceil(pages);
+    const totalPages = total_pages;
 
     const listMovies = results.map(item => {
-      const {id, poster_path, title, name, release_date, genre_ids, overview} = item;
+      const {
+        id,
+        poster_path,
+        title,
+        name,
+        release_date,
+        genre_ids,
+        overview,
+        popularity,
+        original_title,
+        vote_average,
+        vote_count
+      } = item;
       const keyGenres = JSON.parse(localStorage.getItem('genres'));
 
       const genres = Object.entries(keyGenres).filter(item => genre_ids.includes(+item[0])).map(item => item[1]);
@@ -69,7 +89,6 @@ class ServiceApi {
 
       const d = release_date && new Date(Date.parse(release_date));
       const release = release_date ? d.getFullYear() : null;
-      console.log("release:", release)
 
       return {
         id,
@@ -78,6 +97,10 @@ class ServiceApi {
         release,
         title: title || name,
         overview,
+        popularity,
+        original_title,
+        vote_average,
+        vote_count,
       }
     });
 
@@ -87,10 +110,10 @@ class ServiceApi {
       listMovies,
     };
   };
-  getGenre = async () => {
+  #getGenre = async () => {
     return await this.getResource(`/genre/movie/list?`);
   };
-  transformDataMovie = async (res) => {
+  #transformDataMovie = async (res) => {
     const {
       title,
       vote_average,
@@ -110,15 +133,19 @@ class ServiceApi {
       original_title,
       genres: genres.map(item => item['name']),
       overview,
-      poster_path: `${this.config['base_url']}w440_and_h660_face${poster_path}`,
+      poster_path: `${this.#BASE_IMG}${poster_path}`,
     }
   };
-  setGenres = ({genres}) => {
+  #setGenres = ({genres}) => {
     const objGenres = {};
     genres.forEach(({id, name}) => {
       objGenres[id] = name;
     });
     localStorage.setItem('genres', JSON.stringify(objGenres));
+  };
+  #transformDataTrailer = (res) => {
+    const key = res['results'].find(item => item['site'] === "YouTube")['key'];
+    return `${this.#BASE_YOUTUBE}${key}`;
   };
 }
 

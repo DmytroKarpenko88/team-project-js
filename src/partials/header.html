@@ -1,5 +1,5 @@
-<section class="header">
-    <div class="header__nav">
+<section class="header container">
+    <div class="header__nav "> 
         <nav class="header__main-nav">
             <ul class="header__list-buttons list">
                 <li class="header__list-item ">
@@ -8,7 +8,7 @@
                         HOME
                     </button>
                     </a>
-                    
+                     
                 </li>
                 <li class="header__list-item">
                     <a href="./library.html" class="link header__buttn-link">
@@ -21,14 +21,21 @@
             </ul>    
 
             <div class="header__search-box">
-                <div class="header__search">
-                    <input class="header__input" type="search" name="" id="" placeholder="Movie Search">
+               
+                <form class="header__search" id="search-form">  
+                    <input
+                      type="text"
+                      name="searchQuery"
+                      autocomplete="off"   
+                      class="header__input"
+                      placeholder="Movie search"
+                    />
                     <button class="header__search-buttn">
-                                <svg class="header__icon search" width="12" height="12">
-                                    <use href="./images/icons-sprite.svg#icon-search"></use>
-                                </svg>
+                        <svg class="header__icon search" >
+                            <use href="./images/icons-sprite.svg#icon-search"></use>
+                        </svg>
                     </button>
-                </div>
+                  </form> 
                             
         
             <p class="header__message">Search result not successful. Enter the correct movie name.</p>

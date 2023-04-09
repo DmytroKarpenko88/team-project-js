@@ -1,28 +1,36 @@
 import { serviceApi } from './service-api';
-import { renderMovieCards } from '../events/renderGalleryCard';
+import { renderListMovies } from '../events/renderGalleryCard';
 import { pagination } from '../pagination';
 // import { loader }
 
-const searchForm = document.querySelector('.header__input');
+const searchForm = document.querySelector('#search-form');
+const pag = document.querySelector('#pagination');
 
 searchForm.addEventListener('submit', onSearchByKeyword);
 
 let query;
 
-function onSearchByKeyword(e) {
+async function onSearchByKeyword(e) {
   e.preventDefault();
 
-  query = e.target.value.trim();
+  query = e.target.searchQuery.value.trim();
   if (!query) {
     return;
   }
   let page = 1;
 
-  serviceApi.searchMovie(query);
+  const res = await serviceApi.searchMovie(query);
+  console.log(res);
 
-  renderMovieCards(searchMovie());
+  renderListMovies(res['listMovies']);
 
-  // сповіщення, якщо будемо додавати (якщо будемо, то підключи, будь ласка, бібліотеку нотіфай)
+  if (page === 1) {
+    pag.style.display = 'visible';
+  } else {
+    pag.style.display = 'block';
+  }
+
+  pagination.on('afterMove', res);
+
   // функція, яка буде показувати лоадер
-  // підключаємо пагінацію
 }

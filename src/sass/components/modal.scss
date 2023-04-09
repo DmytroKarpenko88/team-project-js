@@ -38,7 +38,7 @@
     padding: 40px 12px;
   }
 
-  background-color: var(--ptimary-backgrond-color);
+  background-color: #ffffff;
 }
 
 .backdrop.is-hidden .modal {
@@ -71,7 +71,7 @@
 
   @media screen and (min-width: 1200px) {
     font-size: 30px;
-    line-height: 1.16;
+    line-height: 1.11;
   }
 }
 
@@ -134,6 +134,7 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 1.66;
+  flex-basis: 50%;
 
   text-transform: uppercase;
 
@@ -179,6 +180,7 @@
   color: #b92f2c;
   background-color: #ffffff;
   border: none;
+  padding: 14px 24px;
 
   outline: 1px solid #000000;
 }
@@ -193,4 +195,17 @@
   @media screen and (min-width: 1200px) {
     width: 375px;
   }
+}
+
+.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.button-modal {
+  background-color: #ffffff;
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
