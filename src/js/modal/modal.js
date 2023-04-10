@@ -151,6 +151,5 @@ function toggleStatus(dataAttr, typeList) {
 
   localStorage.setItem(typeList, JSON.stringify(list));
 
-  console.log(el);
   el.textContent = getButtonText(currentID, typeList);
 }
