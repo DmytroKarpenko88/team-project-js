@@ -6,7 +6,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, ref, set, push, child } from 'firebase/database';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -58,10 +58,11 @@ const actionCodeSettings = {
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
 
-let email = 'user@mail.com';
+let email = 'user3@mail.com';
 let password = 223456;
+let userName = 'Dmytro';
 
-// createUser(email, password);
+createUser(email, password, userName);
 function createUser(email, password) {
   createUserWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
@@ -105,15 +106,19 @@ console.log('Firebase');
 const database = getDatabase(app);
 console.log('🚀 ~ file: firebase.js:95 ~ database:', database);
 
-function writeUserData(userId, name, email, imageUrl) {
-  const db = getDatabase();
-  console.log('🚀 ~ file: firebase.js:110 ~ writeUserData ~ db:', db);
-  set(ref(db, 'users/' + userId), {
+function writeUserData(name, email) {
+  // const userId = auth.currentUser.uid;
+
+  // Get a key for a new Post.
+  const userId = push(child(ref(database), 'users')).key;
+
+  set(ref(database, 'users/' + userId), {
     username: name,
     email: email,
-    profile_picture: imageUrl,
   });
 }
+
+writeUserData(userName, email);
 
 // const db = getDatabase();
 // const starCountRef = ref(db, 'posts/' + postId + '/starCount');

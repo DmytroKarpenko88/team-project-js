@@ -19,12 +19,12 @@ modalBackdrop.firstElementChild.classList.add('team-modal');
 modalBackdrop.firstElementChild.classList.remove('modal-open');
 
 function renderTeamModal() {
-  modalBackdrop.firstElementChild.innerHTML = '';
+  // modalBackdrop.firstElementChild.innerHTML = '';
   teamListModal.innerHTML = '';
   teamTitle.innerHTML = '';
   teamTitle.classList.add('team__modal-title');
   teamTitle.insertAdjacentHTML('beforeend', 'GoIT team 5');
-  modalBackdrop.firstElementChild.insertAdjacentElement('beforeend', teamTitle);
+  // modalBackdrop.firstElementChild.insertAdjacentElement('beforeend', teamTitle);
 
   modalBackdrop.firstElementChild.insertAdjacentElement(
     'beforeend',
