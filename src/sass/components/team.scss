@@ -10,38 +10,63 @@
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.team__modal-list {
-  list-style: none;
+.team-modal {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  align-items: center;
 }
 
-.team__modal_-title {
+.team__modal-list {
+  width: 278px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  display: flex;
+
+  @media screen and (min-width: 768px) {
+    width: 490px;
+    gap: 30px;
+    margin-bottom: 35px;
+  }
+}
+
+.team__modal-title {
   text-align: center;
+  font-size: 23px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 35px;
+  color: brown;
   margin-bottom: 30px;
-  font-size: 30px;
 }
 
 .team__modal-item {
-  width: 200px;
-  margin-bottom: 25px;
-}
-
-.team__modal-item div {
-  display: flex;
+  width: 230px;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .team__modal-pic {
-  min-width: 100%;
+  height: auto;
+  width: 100px;
+  border-radius: 50px;
+  position: relative;
 }
 
-.team__modal-role {
+.team__modal-member {
   text-align: center;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 600;
+
+  @media screen and (min-width: 768px) {
+    font-size: 19px;
+  }
 }
 
+.team__modal-member:hover,
+.team__modal-member:focus {
+  color: red;
+}
 .team__modal-link {
   width: 30px;
 }
@@ -49,5 +74,4 @@
 .team__modal-title {
   font-size: 30px;
   margin-bottom: 30px;
-  text-align: center;
 }
