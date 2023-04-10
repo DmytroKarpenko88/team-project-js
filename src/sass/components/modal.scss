@@ -1,7 +1,4 @@
 .backdrop {
-  @media screen and (max-width: 479px) {
-    padding: 20px;
-  }
   position: fixed;
   top: 0;
   left: 0;
@@ -15,23 +12,18 @@
   z-index: 100;
 }
 .modal {
-  padding: 48px 20px;
-
-  @media screen and (min-width: 320px) {
-    top: 50%;
-    left: 50%;
+  @media screen and (max-width: 767.7px) {
+    height: 100vh;
+    overflow-y: auto;
+    padding: 48px 20px 40px 20px;
+    position: fixed;
     width: 280px;
   }
 
   @media screen and (min-width: 768px) {
     padding: 40px 72px 40px 36px;
     width: 704px;
-    height: 552px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1);
-    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   @media screen and (min-width: 1200px) {
@@ -40,6 +32,10 @@
     padding: 40px 12px;
   }
 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #ffffff;
 }
 
@@ -62,7 +58,7 @@
   line-height: 1.15;
   text-transform: uppercase;
 
-  margin-bottom: 20px;
+  margin-bottom: 21px;
 
   color: #000000;
 
@@ -77,10 +73,20 @@
   }
 }
 
+@media screen and (max-width: 767.7px) {
+  .modal-photo-container {
+    margin-bottom: 20px;
+  }
+}
+
 .statistic-container {
   display: flex;
-  gap: 85px;
   margin-bottom: 20px;
+  gap: 39px;
+
+  @media screen and (min-width: 1200px) {
+    gap: 85px;
+  }
 }
 
 .statistics-name {
@@ -163,30 +169,46 @@
   cursor: pointer;
 
   border-radius: 100px;
-
-  @media screen and (min-width: 1200px) {
-    padding: 14px 32px;
-  }
-  padding: 12px 18px;
+  border: none;
 }
 
 .btn-add-watched {
+  @media screen and (min-width: 320px) {
+    padding: 10px 12px;
+  }
+  @media screen and (min-width: 768px) {
+    padding: 12px 18px;
+  }
+  @media screen and (min-width: 1200px) {
+    padding: 14px 32px;
+  }
+
+  padding: 12px 18px;
+
   background-color: #b92f2c;
   color: #ffffff;
-  border: none;
 }
 
 .btn-add-queue {
+  @media screen and (min-width: 320px) {
+    padding: 10px 14px;
+  }
+  @media screen and (min-width: 768px) {
+    padding: 12px 18px;
+  }
+  @media screen and (min-width: 1200px) {
+    padding: 14px 24px;
+  }
+
   color: #b92f2c;
   background-color: #ffffff;
-  border: none;
   padding: 14px 24px;
 
   outline: 1px solid #000000;
 }
 
 .statistick-img {
-  @media screen and (min-width: 480px) {
+  @media screen and (min-width: 320px) {
     width: 264px;
   }
   @media screen and (min-width: 768px) {
