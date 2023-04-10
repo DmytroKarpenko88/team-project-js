@@ -1,7 +1,7 @@
 const modalCloseBtn = `
 <button class="modal__btn-close btn__close-modal">
       <svg
-        
+
       </svg>
     </button>
 `;

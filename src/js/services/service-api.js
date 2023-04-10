@@ -62,7 +62,6 @@ class ServiceApi {
 
   /* Adding methods */
   #transformListMovies = (res) => {
-    console.log(res);
     const {page, total_pages, results} = res;
 
     const totalPages = total_pages;
