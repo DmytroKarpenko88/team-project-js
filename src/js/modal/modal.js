@@ -148,7 +148,6 @@ function getButtonText(id, typeList) {
 
 function toggleStatus(dataAttr, typeList) {
   if (!dataAttr) return;
-  console.log(dataAttr);
   const el = document.querySelector(`[${dataAttr}]`);
 
   const currentID = el.closest('.content-modal').dataset.id;
