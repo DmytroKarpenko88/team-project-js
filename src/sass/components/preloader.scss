@@ -1,0 +1,91 @@
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--main-txt-cl);
+  z-index: 9999;
+  opacity: 1;
+  transition: all $time-cubic;
+  &--hiden {
+    opacity: 0;
+  }
+}
+.loading__text-before,
+.loading__text-after {
+  @include position-center;
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+}
+
+.loading__text-after {
+  top: -77px;
+  & span {
+    display: inline-block;
+    margin: 0 5px;
+    color: var(--btn-txt-cl);
+    font-family: 'Quattrocento Sans', sans-serif;
+
+    @for $i from 0 through 8 {
+      &:nth-child(#{$i + 1}) {
+        filter: blur(0px);
+        animation: blur-text 1.5s (#{$i/7}) + s infinite linear alternate;
+      }
+    }
+  }
+}
+
+.loading__text-before span {
+  display: inline-block;
+  margin: 0 5px;
+  color: var(--btn-txt-cl);
+  font-family: 'Quattrocento Sans', sans-serif;
+
+  @for $i from 0 through 6 {
+    &:nth-child(#{$i + 1}) {
+      filter: blur(0px);
+      animation: blur-text 1.5s (#{$i/5}) + s infinite linear alternate;
+    }
+  }
+}
+@keyframes animation {
+  0% {
+    stroke-dasharray: 1 98;
+    stroke-dashoffset: -105;
+  }
+
+  50% {
+    stroke-dasharray: 80 10;
+    stroke-dashoffset: -160;
+  }
+
+  100% {
+    stroke-dasharray: 1 98;
+    stroke-dashoffset: -300;
+  }
+}
+
+@keyframes blur-text {
+  0% {
+    filter: blur(0px);
+  }
+
+  100% {
+    filter: blur(4px);
+  }
+}
+@keyframes myFilmAnime {
+  0% {
+    stroke-dasharray: 140 540;
+    stroke-dashoffset: -474;
+    stroke-width: 8px;
+  }
+
+  100% {
+    stroke-dasharray: 760;
+    stroke-dashoffset: 0;
+    stroke-width: 2px;
+  }
+}
