@@ -77,20 +77,32 @@ function renderPopupBody(id) {
       <div class="content-modal" data-id='${id}'>
         <h2 class="modal-title">${title}</h2>
         <div class="statistic-container">
-          <ul class="list">
-            <li class="statistics-name">Vote / Votes</li>
-            <li class="statistics-name">Popularity</li>
-            <li class="statistics-name">Original Title</li>
-            <li class="statistics-name">Genre</li>
-          </ul>
-          <ul class="list">
-            <li class="statistics-value">
-              <span class="statistic-vote">${vote_average}</span>/<span class="statistic-votes">${vote_count}</span>
-            </li>
-            <li class="statistics-value">${popularity}</li>
-            <li class="statistics-value">${original_title}</li>
-            <li class="statistics-value">${genres.join(', ')}</li>
-          </ul>
+           <ul class="list">
+              <li>
+                <div class="statistic-wraper">
+                  <p class="first-item-statistic">Vote / Votes</p>
+                  <p><span class="statistic-vote">${vote_average}</span>/<span class="statistic-votes">${vote_count}</span></p>
+                </div>
+              </li>
+              <li>
+                <div class="statistic-wraper">
+                  <p class="first-item-statistic">Popularity</p>
+                  <p>${popularity}</p>
+                </div>
+              </li>
+              <li>
+                <div class="statistic-wraper">
+                  <p class="first-item-statistic">Original Title</p>
+                  <p>${original_title}</p>
+                </div>
+              </li>
+              <li>
+                <div class="statistic-wraper">
+                  <p class="first-item-statistic">Genre</p>
+                  <p>${genres.join(', ')}</p>
+                </div>
+              </li>
+            </ul>
         </div>
         <h3 class="content-modal-title">About</h3>
         <p class="content-modal">${overview}</p>
