@@ -1,5 +1,8 @@
 import { serviceApi } from '../services/service-api';
-import { renderListMovies } from '../events/renderGalleryCard';
+import {
+  renderListMovies,
+  setFilmsToLocalStorage,
+} from '../events/renderGalleryCard';
 
 const dayBtn = document.querySelector('#dayBtn');
 const weekBtn = document.querySelector('#weekBtn');
@@ -12,6 +15,7 @@ dayBtn.addEventListener('click', async () => {
   // Get movies for selected period and render them
   const period = 'day';
   const movies = await serviceApi.getListMovies(period);
+  setFilmsToLocalStorage(movies.listMovies);
   renderListMovies(movies.listMovies);
 });
 
@@ -23,6 +27,7 @@ weekBtn.addEventListener('click', async () => {
   // Get movies for selected period and render them
   const period = 'week';
   const movies = await serviceApi.getListMovies(period);
+  setFilmsToLocalStorage(movies.listMovies);
   renderListMovies(movies.listMovies);
 });
 
