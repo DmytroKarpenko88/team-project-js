@@ -7,7 +7,7 @@ const modalCloseBtn = `
 `;
 
 const teamListModal = document.createElement('ul');
-const teamTitle = document.createElement('h1');
+const teamTitle = document.createElement('h2');
 
 function onModalTeam(e) {
   e.preventDefault();
@@ -16,7 +16,7 @@ function onModalTeam(e) {
 renderTeamModal();
 openModal();
 modalBackdrop.firstElementChild.classList.add('team-modal');
-modalBackdrop.firstElementChild.classList.remove('modal');
+modalBackdrop.firstElementChild.classList.remove('modal-open');
 
 function renderTeamModal() {
   modalBackdrop.firstElementChild.innerHTML = '';
