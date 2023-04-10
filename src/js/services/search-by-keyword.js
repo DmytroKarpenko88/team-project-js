@@ -20,12 +20,27 @@ async function onSearchByKeyword(e) {
   if (!query) {
     return;
   }
-  
+
   const res = await serviceApi.searchMovie(query);
   console.log(res);
   setFilmsToLocalStorage(res.listMovies);
   renderListMovies(res['listMovies']);
+
   
+  pagination.reset(res.total_pages);
+  pagination.on('afterMove', event => {
+    const currentPage = event.page;
+    if (onSearchByKeyword) {
+      serviceApi.searchMovie(query, currentPage).then(res => {
+        return renderListMovies(res['listMovies']);
+      });
+    } else {
+      serviceApi
+        .getListMovies('week', currentPage)
+        .then(res => renderListMovies(res.listMovies));
+    }
+    window.scrollTo(0, 0);
+  });
 
   // функція, яка буде показувати лоадер
 }
