@@ -2,6 +2,7 @@ import { serviceApi } from '../services/service-api';
 
 export function renderCardWithGenres(movie) {
   const { id, poster, title, genres, release, vote_average } = movie;
+
   const posterUrl = poster
     ? poster
     : 'https://dummyimage.com/395x574/000/fff.jpg&text=no+poster';
