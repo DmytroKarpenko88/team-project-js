@@ -1,4 +1,5 @@
 import { serviceApi } from '../services/service-api';
+import { pagination } from '../pagination';
 import {
   renderListMovies,
   setFilmsToLocalStorage,
@@ -17,6 +18,20 @@ dayBtn.addEventListener('click', async () => {
   const movies = await serviceApi.getListMovies(period);
   setFilmsToLocalStorage(movies.listMovies);
   renderListMovies(movies.listMovies);
+
+  pagination.reset(movies.total_pages);
+
+  pagination.on('afterMove', (event) => {
+    const currentPage = event.page;
+    serviceApi
+  .getListMovies(period, currentPage)
+  .then(res => {
+    setFilmsToLocalStorage(res.listMovies);
+    renderListMovies(res.listMovies);
+  })
+  .catch(error => console.log(error));
+   window.scrollTo(0, 0)
+  });
 });
 
 weekBtn.addEventListener('click', async () => {
@@ -29,6 +44,20 @@ weekBtn.addEventListener('click', async () => {
   const movies = await serviceApi.getListMovies(period);
   setFilmsToLocalStorage(movies.listMovies);
   renderListMovies(movies.listMovies);
+
+  pagination.reset(movies.total_pages);
+
+  pagination.on('afterMove', (event) => {
+    const currentPage = event.page;
+    serviceApi
+  .getListMovies(period, currentPage)
+  .then(res => {
+    setFilmsToLocalStorage(res.listMovies);
+    renderListMovies(res.listMovies);
+  })
+  .catch(error => console.log(error));
+   window.scrollTo(0, 0)
+  });
 });
 
 // Render initial movies
