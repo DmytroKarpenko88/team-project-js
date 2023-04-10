@@ -45,8 +45,8 @@ class ServiceApi {
    * @param query {string} - string for search
    * @returns {Promise<*>}
    */
-  searchMovie = async (query) => {
-    const res = await this.getResource(`/search/movie?query=${query}&`);
+  searchMovie = async (query, page=1) => {
+    const res = await this.getResource(`/search/movie?query=${query}&page=${page}&`);
     return this.#transformListMovies(res);
   };
 

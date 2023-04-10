@@ -27,17 +27,17 @@
     #076585 10%,
     #67a2b6 10%,
     #fff 50%
-  ); 
+  );
 }
 
 .library-gallery__image {
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     max-width: 350px;
   }
-  @media screen and (min-width: $tablet){
+  @media screen and (min-width: $tablet) {
     max-width: 550px;
   }
-  @media screen and (min-width: $desktop){
+  @media screen and (min-width: $desktop) {
     max-width: 750px;
   }
 }
@@ -45,20 +45,20 @@
 .library-gallery__text {
   margin-top: 10px;
   text-transform: uppercase;
-color: var(--accent-txt-cl);
+  color: var(--accent-txt-cl);
 
-  @media screen and (max-width: 767px){
+  @media screen and (max-width: 767px) {
     font-style: 500;
     font-size: 20px;
     line-height: 1.05;
   }
-  @media screen and (min-width: $tablet){
+  @media screen and (min-width: $tablet) {
     font-style: 600;
     font-size: 25px;
     line-height: 1.05;
   }
-  @media screen and (min-width: $desktop){
-  font-size: 50px;
-  line-height: 1.2;
+  @media screen and (min-width: $desktop) {
+    font-size: 50px;
+    line-height: 1.2;
   }
 }

@@ -1,5 +1,8 @@
 import { serviceApi } from './service-api';
-import { renderListMovies } from '../events/renderGalleryCard';
+import {
+  renderListMovies,
+  setFilmsToLocalStorage,
+} from '../events/renderGalleryCard';
 import { pagination } from '../pagination';
 // import { loader }
 
@@ -17,20 +20,27 @@ async function onSearchByKeyword(e) {
   if (!query) {
     return;
   }
-  let page = 1;
 
   const res = await serviceApi.searchMovie(query);
   console.log(res);
-
+  setFilmsToLocalStorage(res.listMovies);
   renderListMovies(res['listMovies']);
 
-  if (page === 1) {
-    pag.style.display = 'visible';
-  } else {
-    pag.style.display = 'block';
-  }
-
-  pagination.on('afterMove', res);
+  
+  pagination.reset(res.total_pages);
+  pagination.on('afterMove', event => {
+    const currentPage = event.page;
+    if (onSearchByKeyword) {
+      serviceApi.searchMovie(query, currentPage).then(res => {
+        return renderListMovies(res['listMovies']);
+      });
+    } else {
+      serviceApi
+        .getListMovies('week', currentPage)
+        .then(res => renderListMovies(res.listMovies));
+    }
+    window.scrollTo(0, 0);
+  });
 
   // функція, яка буде показувати лоадер
 }

@@ -2,6 +2,7 @@ import { serviceApi } from '../services/service-api';
 
 export function renderCardWithGenres(movie) {
   const { id, poster, title, genres, release, vote_average } = movie;
+
   const posterUrl = poster
     ? poster
     : 'https://dummyimage.com/395x574/000/fff.jpg&text=no+poster';
@@ -17,8 +18,8 @@ export function renderCardWithGenres(movie) {
   //   year = release.slice(0, 4);
   // }
   return `<li class="gallery__item">
-             <a class="gallery__link" href="#">
-              <img class="gallery__image" data-id="${id}" src="${posterUrl}" alt="${title} movie poster" loading="lazy">
+             <a class="gallery__link" href="#" data-modal-open data-id="${id}">
+              <img class="gallery__image" src="${posterUrl}" alt="${title} movie poster" loading="lazy">
              <div class="info">
               <h3 class="info__item">${title}</h3>
                <div class="info-detail">
@@ -32,15 +33,29 @@ export function renderCardWithGenres(movie) {
            </li>`;
 }
 
+const currentPeriod = document.querySelector('.movie-switcher__button.active').dataset.period || 'day';
+
 serviceApi
-  .getListMovies('week')
-  .then(res => renderListMovies(res.listMovies))
+  .getListMovies(currentPeriod)
+  .then(res => {
+    setFilmsToLocalStorage(res.listMovies);
+    renderListMovies(res.listMovies);
+  })
   .catch(error => console.log(error));
 
 export function renderListMovies(list) {
   const movieCards = list.map(movie => renderCardWithGenres(movie));
   const gallery = document.querySelector('.gallery');
   gallery.innerHTML = movieCards.join('');
+}
+
+export function setFilmsToLocalStorage(list) {
+  const localListMovies = {};
+  list.forEach(item => {
+    const { id, ...props } = item;
+    localListMovies[id] = props;
+  });
+  localStorage.setItem('listMovies', JSON.stringify(localListMovies));
 }
 
 // export function renderMoviesCard(movies) {
