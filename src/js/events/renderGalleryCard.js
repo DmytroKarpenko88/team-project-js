@@ -32,10 +32,10 @@ export function renderCardWithGenres(movie) {
            </li>`;
 }
 
-serviceApi
-  .getListMovies('week')
-  .then(res => renderListMovies(res.listMovies))
-  .catch(error => console.log(error));
+// serviceApi
+//   .getListMovies('week')
+//   .then(res => renderListMovies(res.listMovies))
+//   .catch(error => console.log(error));
 
 export function renderListMovies(list) {
   const movieCards = list.map(movie => renderCardWithGenres(movie));

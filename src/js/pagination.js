@@ -31,18 +31,17 @@ const options = {
     }
   };
 
-
+console.log()
 export  const pagination = new Pagination(container, options);
 
 
  pagination.on('afterMove', (event) => {
     const currentPage = event.page;
-    console.log(currentPage);
     serviceApi
   .getListMovies('week', currentPage)
   .then(res => renderListMovies(res.listMovies))
   .catch(error => console.log(error));
-   
+   window.scrollTo(0, 0)
 });
 
 

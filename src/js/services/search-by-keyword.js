@@ -17,20 +17,12 @@ async function onSearchByKeyword(e) {
   if (!query) {
     return;
   }
-  let page = 1;
-
+  
   const res = await serviceApi.searchMovie(query);
-  console.log(res);
-
+  // console.log(res)
+  
   renderListMovies(res['listMovies']);
-
-  if (page === 1) {
-    pag.style.display = 'visible';
-  } else {
-    pag.style.display = 'block';
-  }
-
-  pagination.on('afterMove', res);
+  
 
   // функція, яка буде показувати лоадер
 }
