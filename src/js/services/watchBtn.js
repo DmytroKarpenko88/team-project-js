@@ -1,6 +1,9 @@
-import libraryPageNotCard from '../events/libraryPageNotCard'
+
+
+import {libraryPageNotCard} from '../events/libraryPageNotCard'
 libraryPageNotCard()
 
+import smoothScroll from '../events/scrollUp';
 
 const refs = {
   btnWatched: document.querySelector('#btn__watched'),
@@ -48,6 +51,19 @@ function onLibrary() {
     refs.home.classList.add('header__library');
   }
 
+  function onCheckButtonLibrary() {
+    const refs = {
+      btnWatched: document.querySelector('#btn__watched'),
+      btnQueue: document.querySelector('#btn__queue'),
+    };
+  
+    if (refs.btnWatched.classList.contains('#btn__watched')) {
+      renderWatched();
+    } else {
+      renderQueue();
+    }
+  }
+
   const addToStorage = (key, value) => {
     try {
       if (typeof value === 'string') {
@@ -75,3 +91,24 @@ function onLibrary() {
       console.error(error);
     }
   };
+
+
+  const checkStorageLibrary = () => {
+    if (getFromStorage('dataFilmsByWatched')) {
+      dataFilmsByWatched = getFromStorage('dataFilmsByWatched');
+    }
+  
+    if (getFromStorage('dataFilmsByQueue')) {
+      dataFilmsByQueue = getFromStorage('dataFilmsByQueue');
+    }
+  };
+  const movieIsInWatchedInModal = refBtnWatched => {
+    if (getFromStorage('dataFilmsByWatched')) {
+      dataFilmsByWatched = getFromStorage('dataFilmsByWatched');
+      if (dataFilmsByWatched.includes(currentId )) {
+        refBtnWatched.classList.add('movie-data__button_active');
+        refBtnWatched.textContent = checkLanguageBtnW(currentId);
+      }
+    }
+  };
+

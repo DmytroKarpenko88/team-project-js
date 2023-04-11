@@ -7,7 +7,6 @@ import { pagination } from '../pagination';
 // import { loader }
 
 const searchForm = document.querySelector('#search-form');
-const pag = document.querySelector('#pagination');
 
 searchForm.addEventListener('submit', onSearchByKeyword);
 
@@ -26,21 +25,22 @@ async function onSearchByKeyword(e) {
   setFilmsToLocalStorage(res.listMovies);
   renderListMovies(res['listMovies']);
 
-  
   pagination.reset(res.total_pages);
+  pagination.off();
+  // pagination.setTotalItems(res.total_results);
   pagination.on('afterMove', event => {
     const currentPage = event.page;
-    if (onSearchByKeyword) {
+    
       serviceApi.searchMovie(query, currentPage).then(res => {
+        if(res.page > res.totalPages) {
+          alert(`Sorry, this is last page ${res.totalPages}`)
+          return
+        }
         return renderListMovies(res['listMovies']);
       });
-    } else {
-      serviceApi
-        .getListMovies('week', currentPage)
-        .then(res => renderListMovies(res.listMovies));
-    }
+     
     window.scrollTo(0, 0);
   });
-
+ return totalItems = res.total_results;
   // функція, яка буде показувати лоадер
 }

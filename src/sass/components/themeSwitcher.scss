@@ -108,6 +108,10 @@ body.dark-theme {
     color: var(--btn-txt-cl);
   }
 
+  .tui-page-btn {
+    color: white;
+  }
+
   & .footer {
     background: linear-gradient(
       180deg,
