@@ -20,12 +20,15 @@
     <script type="module" src="./library.js"></script>
   </head>
   <body>
+    <div class="wrapper">
+      <include src="./partials/mylibrary.html"></include>
+
+      <main>
+        <include src="./partials/pagination.html"></include>
+        <!-- <include src="./partials/pagination-library.html"></include> -->
+      </main>
+      <include src="./partials/footer.html"></include>
+    </div>
     <!-- ❗️❗️❗️ Add partials like so for every page -->
-    <include src="./partials/mylibrary.html"></include>
-    <main>
-      <include src="./partials/pagination.html"></include>
-      <!-- <include src="./partials/pagination-library.html"></include> -->
-    </main>
-    <include src="./partials/footer.html"></include>
   </body>
 </html>
