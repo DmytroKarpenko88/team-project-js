@@ -1,29 +1,53 @@
+import libraryPageNotCard from '../events/libraryPageNotCard'
+libraryPageNotCard()
 
 
 const refs = {
-    btnWatch: document.querySelector('#watch'),
-    btnQueue: document.querySelector('#queue'),
-    btnAddQueue: document.querySelector('#addQueue'),
-    btnAddWatch: document.querySelector('#addWatch'),
+  btnWatched: document.querySelector('#btn__watched'),
+  btnQueue: document.querySelector('#btn__queue'),
 };
- refs.btnWatch.addEventListener('click', onBtnWatched);
- refs.btnQueue.addEventListener('click', onQueueBtn);
- refs.btnAddQueue.addEventListener('click', onAddQueue);
- refs.btnAddWatch.addEventListener('click', onAddWatch);
+ refs.btnWatched.addEventListener('click', onClickBtn);
+ refs.btnQueue.addEventListener('click', onClickBtn);
 
- function onBtnWatched(event) {
-    if (event.target === refs.btnWatch) {
-      event.target.classList.add('btn__library--active');
-      refs.btnQueue.classList.remove('btn__library--active');
+
+function onLibrary() {
+  const reference = {
+    btnList: document.querySelector('.libr'),
+  };
+  refs.filterContainer.classList.add('is-hidden');
+  reference.btnList.classList.remove('visually-hidden');
+  refs.filterWrapper.classList.add('visually-hidden');
+  reference.btnList.addEventListener('click', onClickBtn);
+
+  renderPageLibrary();
+  onCheckButtonLibrary();
+}
+
+ function onClickBtn(event) {
+    if (event.target === refs.btnWatched) {
+      event.target.classList.add('.current-page');
+      refs.btnQueue.classList.remove('.current-page');
       smoothScroll();
       renderWatched();
     } else if (event.target === refs.btnQueue) {
-      event.target.classList.add('btn__library--active');
-      refs.btnWatched.classList.remove('btn__library--active');
+      event.target.classList.add('.current-page');
+      refs.btnWatched.classList.remove('.current-page');
       smoothScroll();
       renderQueue();
     }
   };
+
+  function renderPageLibrary() {
+    const refs = {
+      home: document.querySelector('.header__nav '),
+      btnHome: document.querySelector('.home'),
+      btnLibrary: document.querySelector('#btn__watched'),
+      header: document.querySelector('.header'),
+    };
+  
+    refs.home.classList.add('header__library');
+  }
+
   const addToStorage = (key, value) => {
     try {
       if (typeof value === 'string') {
