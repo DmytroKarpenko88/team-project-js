@@ -1,3 +1,5 @@
+import { serviceApi } from '../services/service-api';
+
 const backdrop = document.querySelector('[data-modal]')
 const openButtonModal = document.querySelector('.gallery');
 const closeButtonModal = document.querySelector('[data-modal-close]')
@@ -33,6 +35,7 @@ function onOpenButtonClick(e) {
 function onCloseButtonClick()  {
   backdrop.classList.add('is-hidden')
   window.removeEventListener('keydown', closeModalByEscape)
+  document.querySelector('.modal-content-container').innerHTML = '';
   body.style.overflow = 'auto';
 }
 
@@ -49,10 +52,21 @@ function closeModalByEscape(event) {
   }
 }
 
+function renderTrailer(key) {
+  const blockTrailer = document.querySelector('.js-modalTrailer');
+  blockTrailer.innerHTML = `
+    <iframe width="560" height="240" src="https://www.youtube.com/embed/${key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  `;
+}
+
 function renderPopupBody(id) {
   dataMovie = JSON.parse(localStorage.getItem('listMovies'))[id];
   localStorage.getItem(LIST_WATCHED) || localStorage.setItem(LIST_WATCHED, JSON.stringify({}));
   localStorage.getItem(LIST_QUEUE) || localStorage.setItem(LIST_QUEUE, JSON.stringify({}));
+
+  serviceApi.getTrailer(id)
+    .then(renderTrailer)
+    .catch(err => console.log(err));
 
   const {
     poster,
@@ -110,6 +124,7 @@ function renderPopupBody(id) {
           <button class="modal-btn btn-add-watched" data-btn-watch>${getButtonText(id, LIST_WATCHED)}</button>
           <button class="modal-btn btn-add-queue" data-btn-queue>${getButtonText(id, LIST_QUEUE)}</button>
         </div>
+        <div class='modal-trailer js-modalTrailer'></div>
       </div>
     `;
   }
