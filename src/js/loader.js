@@ -1,5 +1,7 @@
 const loader = document.querySelector('.loader');
 
-window.addEventListener('load', () => {
+if (loader) {
+  window.addEventListener('load', () => {
     loader.classList.add('done');
-});
+  });
+}

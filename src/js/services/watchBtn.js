@@ -1,114 +1,51 @@
 
 
-import {libraryPageNotCard} from '../events/libraryPageNotCard'
-libraryPageNotCard()
+import {libraryPageNotCard} from '../events/libraryPageNotCard';
+libraryPageNotCard();
 
-import smoothScroll from '../events/scrollUp';
+import { renderListMovies } from '../events/renderGalleryCard';
+// import smoothScroll from '../events/scrollUp';
 
-const refs = {
-  btnWatched: document.querySelector('#btn__watched'),
-  btnQueue: document.querySelector('#btn__queue'),
-};
- refs.btnWatched.addEventListener('click', onClickBtn);
- refs.btnQueue.addEventListener('click', onClickBtn);
+const LIST_WATCHED = 'watchedMovies';
+const LIST_QUEUE = 'listQueue';
 
+const blkCtrlLib = document.querySelector('.js-blockCtrlLib');
 
-function onLibrary() {
-  const reference = {
-    btnList: document.querySelector('.libr'),
-  };
-  refs.filterContainer.classList.add('is-hidden');
-  reference.btnList.classList.remove('visually-hidden');
-  refs.filterWrapper.classList.add('visually-hidden');
-  reference.btnList.addEventListener('click', onClickBtn);
-
-  renderPageLibrary();
-  onCheckButtonLibrary();
+if (blkCtrlLib) {
+  blkCtrlLib.addEventListener('click', onClickBtn);
 }
 
- function onClickBtn(event) {
-    if (event.target === refs.btnWatched) {
-      event.target.classList.add('.current-page');
-      refs.btnQueue.classList.remove('.current-page');
-      smoothScroll();
-      renderWatched();
-    } else if (event.target === refs.btnQueue) {
-      event.target.classList.add('.current-page');
-      refs.btnWatched.classList.remove('.current-page');
-      smoothScroll();
-      renderQueue();
-    }
-  };
+export function getArrayFromObjMovies(fieldLocalStorage) {
+  const objMovies = JSON.parse(localStorage.getItem(fieldLocalStorage));
+  return Object.entries(objMovies).map(item => ({id: +item[0], ...item[1]}));
+}
 
-  function renderPageLibrary() {
-    const refs = {
-      home: document.querySelector('.header__nav '),
-      btnHome: document.querySelector('.home'),
-      btnLibrary: document.querySelector('#btn__watched'),
-      header: document.querySelector('.header'),
-    };
+function onClickBtn(event) {
+  event.preventDefault();
+  const target = event.target;
 
-    refs.home.classList.add('header__library');
+  let type = null;
+  let listMovies = null;
+
+  if (target.closest('#btn__watched')) {
+    type = LIST_WATCHED;
+  }
+  if (target.closest('#btn__queue')) {
+    type = LIST_QUEUE;
   }
 
-  function onCheckButtonLibrary() {
-    const refs = {
-      btnWatched: document.querySelector('#btn__watched'),
-      btnQueue: document.querySelector('#btn__queue'),
-    };
-
-    if (refs.btnWatched.classList.contains('#btn__watched')) {
-      renderWatched();
-    } else {
-      renderQueue();
+  if (type) {
+    switch (type) {
+      case LIST_WATCHED:
+        listMovies = getArrayFromObjMovies(LIST_WATCHED);
+        break;
+      case LIST_QUEUE:
+        listMovies = getArrayFromObjMovies(LIST_QUEUE);
+        break;
     }
   }
 
-  const addToStorage = (key, value) => {
-    try {
-      if (typeof value === 'string') {
-        localStorage.setItem(key, value);
-      } else {
-        localStorage.setItem(key, JSON.stringify(value));
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  renderListMovies(listMovies);
+};
 
-  const getFromStorage = key => {
-    try {
-      return JSON.parse(localStorage.getItem(key));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const removeFromStorage = key => {
-    try {
-      localStorage.removeItem(key);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-
-  const checkStorageLibrary = () => {
-    if (getFromStorage('dataFilmsByWatched')) {
-      dataFilmsByWatched = getFromStorage('dataFilmsByWatched');
-    }
-
-    if (getFromStorage('dataFilmsByQueue')) {
-      dataFilmsByQueue = getFromStorage('dataFilmsByQueue');
-    }
-  };
-  const movieIsInWatchedInModal = refBtnWatched => {
-    if (getFromStorage('dataFilmsByWatched')) {
-      dataFilmsByWatched = getFromStorage('dataFilmsByWatched');
-      if (dataFilmsByWatched.includes(currentId )) {
-        refBtnWatched.classList.add('movie-data__button_active');
-        refBtnWatched.textContent = checkLanguageBtnW(currentId);
-      }
-    }
-  };
 

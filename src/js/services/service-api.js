@@ -145,9 +145,7 @@ class ServiceApi {
     localStorage.setItem('genres', JSON.stringify(objGenres));
   };
   #transformDataTrailer = (res) => {
-    console.log('transformDataTrailer', res);
     const key = res['results'].find(item => item['site'] === "YouTube")['key'];
-    // return `${this.#BASE_YOUTUBE}${key}`;
     return key;
   };
 }

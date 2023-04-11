@@ -1,4 +1,6 @@
 import { serviceApi } from '../services/service-api';
+import { renderListMovies } from '../events/renderGalleryCard';
+import { getArrayFromObjMovies } from '../services/watchBtn';
 
 const backdrop = document.querySelector('[data-modal]')
 const openButtonModal = document.querySelector('.gallery');
@@ -14,10 +16,11 @@ const LIST_WATCHED = 'watchedMovies';
 const LIST_QUEUE = 'listQueue';
 
 let dataMovie = null;
+const isLibraryPage = document.body.classList.contains('library-page');
 
 openButtonModal.addEventListener('click', onOpenButtonClick)
 closeButtonModal.addEventListener('click', onCloseButtonClick)
-backdrop.addEventListener('click', onBackdropClicl)
+backdrop.addEventListener('click', onBackdropClick)
 modal.addEventListener('click', handleClickModal);
 
 function onOpenButtonClick(e) {
@@ -39,7 +42,7 @@ function onCloseButtonClick()  {
   body.style.overflow = 'auto';
 }
 
-function onBackdropClicl(event) {
+function onBackdropClick(event) {
   if (event.currentTarget === event.target) {
     onCloseButtonClick()
   }
@@ -134,10 +137,21 @@ function handleClickModal(e) {
   const target = e.target;
   if (target.closest('[data-btn-watch]')) {
     toggleStatus('data-btn-watch', LIST_WATCHED);
+    if (isLibraryPage) {
+      rerenderLibMovies(LIST_WATCHED);
+    }
   }
   if (target.closest('[data-btn-queue]')) {
     toggleStatus('data-btn-queue', LIST_QUEUE);
+    if (isLibraryPage) {
+      rerenderLibMovies(LIST_QUEUE);
+    }
   }
+}
+
+function rerenderLibMovies(typeList) {
+  onCloseButtonClick();
+  renderListMovies(getArrayFromObjMovies(typeList));
 }
 
 function isIncluded(idMovie, listLocalStorage) {
