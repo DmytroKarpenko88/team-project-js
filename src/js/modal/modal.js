@@ -1,3 +1,7 @@
+import { serviceApi } from '../services/service-api';
+import { renderListMovies } from '../events/renderGalleryCard';
+import { getArrayFromObjMovies } from '../services/watchBtn';
+
 const backdrop = document.querySelector('[data-modal]')
 const openButtonModal = document.querySelector('.gallery');
 const closeButtonModal = document.querySelector('[data-modal-close]')
@@ -12,10 +16,11 @@ const LIST_WATCHED = 'watchedMovies';
 const LIST_QUEUE = 'listQueue';
 
 let dataMovie = null;
+const isLibraryPage = document.body.classList.contains('library-page');
 
 openButtonModal.addEventListener('click', onOpenButtonClick)
 closeButtonModal.addEventListener('click', onCloseButtonClick)
-backdrop.addEventListener('click', onBackdropClicl)
+backdrop.addEventListener('click', onBackdropClick)
 modal.addEventListener('click', handleClickModal);
 
 function onOpenButtonClick(e) {
@@ -33,10 +38,11 @@ function onOpenButtonClick(e) {
 function onCloseButtonClick()  {
   backdrop.classList.add('is-hidden')
   window.removeEventListener('keydown', closeModalByEscape)
+  document.querySelector('.modal-content-container').innerHTML = '';
   body.style.overflow = 'auto';
 }
 
-function onBackdropClicl(event) {
+function onBackdropClick(event) {
   if (event.currentTarget === event.target) {
     onCloseButtonClick()
   }
@@ -49,10 +55,21 @@ function closeModalByEscape(event) {
   }
 }
 
+function renderTrailer(key) {
+  const blockTrailer = document.querySelector('.js-modalTrailer');
+  blockTrailer.innerHTML = `
+    <iframe width="560" height="240" src="https://www.youtube.com/embed/${key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  `;
+}
+
 function renderPopupBody(id) {
   dataMovie = JSON.parse(localStorage.getItem('listMovies'))[id];
   localStorage.getItem(LIST_WATCHED) || localStorage.setItem(LIST_WATCHED, JSON.stringify({}));
   localStorage.getItem(LIST_QUEUE) || localStorage.setItem(LIST_QUEUE, JSON.stringify({}));
+
+  serviceApi.getTrailer(id)
+    .then(renderTrailer)
+    .catch(err => console.log(err));
 
   const {
     poster,
@@ -110,6 +127,7 @@ function renderPopupBody(id) {
           <button class="modal-btn btn-add-watched" data-btn-watch>${getButtonText(id, LIST_WATCHED)}</button>
           <button class="modal-btn btn-add-queue" data-btn-queue>${getButtonText(id, LIST_QUEUE)}</button>
         </div>
+        <div class='modal-trailer js-modalTrailer'></div>
       </div>
     `;
   }
@@ -119,10 +137,21 @@ function handleClickModal(e) {
   const target = e.target;
   if (target.closest('[data-btn-watch]')) {
     toggleStatus('data-btn-watch', LIST_WATCHED);
+    if (isLibraryPage) {
+      rerenderLibMovies(LIST_WATCHED);
+    }
   }
   if (target.closest('[data-btn-queue]')) {
     toggleStatus('data-btn-queue', LIST_QUEUE);
+    if (isLibraryPage) {
+      rerenderLibMovies(LIST_QUEUE);
+    }
   }
+}
+
+function rerenderLibMovies(typeList) {
+  onCloseButtonClick();
+  renderListMovies(getArrayFromObjMovies(typeList));
 }
 
 function isIncluded(idMovie, listLocalStorage) {
