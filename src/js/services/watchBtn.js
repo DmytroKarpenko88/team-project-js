@@ -1,4 +1,4 @@
-import libraryPageNotCard from '../events/libraryPageNotCard'
+import {libraryPageNotCard} from '../events/libraryPageNotCard'
 libraryPageNotCard()
 
 
