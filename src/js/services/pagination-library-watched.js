@@ -1,13 +1,15 @@
 import Pagination from 'tui-pagination';
-// import 'tui-pagination/dist/tui-pagination.css';
-import serviceApi from './services/service-api'
 
-const container = document.querySelector('#pagination');
+const listWatched = JSON.parse(localStorage.getItem('watchedMovies'));
+
+const totalItems = listWatched ? Object.keys(listWatched).length : 0;
+const currentPage = 1;
+
 const options = {
-  totalItems: 20000,
-  itemsPerPage: 20,
+  totalItems: totalItems,
+  itemsPerPage: 4,
   visiblePages: 5,
-  page: 1,
+  page: currentPage,
   centerAlign: true,
   firstItemClassName: 'tui-first-child',
   lastItemClassName: 'tui-last-child',
@@ -30,9 +32,20 @@ const options = {
   },
 };
 
-const pagination = new Pagination(container, options);
+pagination.on('beforeMove', function (eventData) {
+  const newPage = eventData.page;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  pagination.setTotalItems(totalPages * itemsPerPage);
+});
 
-export {pagination}
+pagination.movePageTo(currentPage);
 
-
-
+pagination.on('afterMove', function (eventData) {
+  const newPage = eventData.page;
+  const startIndex = (newPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const objectsToDisplay = listWatched
+    ? Object.values(listWatched).slice(startIndex, endIndex)
+    : [];
+  updateList(objectsToDisplay);
+});
