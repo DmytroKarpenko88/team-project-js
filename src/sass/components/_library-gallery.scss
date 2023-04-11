@@ -44,18 +44,17 @@
 
 .library-gallery__text {
   margin-top: 10px;
-  font-family: var(--main-font);
+
+  text-transform: uppercase;
   color: var(--accent-txt-cl);
 
   @media screen and (max-width: 767px) {
-    font-weight: 500;
-    font-style: normal;
+    font-style: 500;
     font-size: 20px;
     line-height: 1.05;
   }
   @media screen and (min-width: $tablet) {
-    font-weight: 700;
-    font-style: normal;
+    font-style: 600;
     font-size: 25px;
     line-height: 1.05;
   }

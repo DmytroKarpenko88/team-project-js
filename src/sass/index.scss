@@ -12,9 +12,17 @@
 @import './base/reset';
 
 //components
-@import './components/header';
+@import './components/_header';
 @import './components/footer';
 @import './components/pagination';
 @import './components/container';
+@import './components/library-gallery';
+@import './components/modal';
+@import './components/scrollUp';
 @import './components/container-gallery';
-// @import './components/library-gallery';
+@import './components/team';
+@import './components/loader';
+@import './components/filter';
+@import './components/themeSwitcher';
+@import './components/preloader.scss';
+

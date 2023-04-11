@@ -1,28 +1,46 @@
 import { serviceApi } from './service-api';
-import { renderMovieCards } from '../events/renderGalleryCard';
+import {
+  renderListMovies,
+  setFilmsToLocalStorage,
+} from '../events/renderGalleryCard';
 import { pagination } from '../pagination';
 // import { loader }
 
-const searchForm = document.querySelector('.header__input');
+const searchForm = document.querySelector('#search-form');
+const pag = document.querySelector('#pagination');
 
 searchForm.addEventListener('submit', onSearchByKeyword);
 
 let query;
 
-function onSearchByKeyword(e) {
+async function onSearchByKeyword(e) {
   e.preventDefault();
 
-  query = e.target.value.trim();
+  query = e.target.searchQuery.value.trim();
   if (!query) {
     return;
   }
-  let page = 1;
 
-  serviceApi.searchMovie(query);
+  const res = await serviceApi.searchMovie(query);
+  console.log(res);
+  setFilmsToLocalStorage(res.listMovies);
+  renderListMovies(res['listMovies']);
 
-  renderMovieCards(searchMovie());
+  
+  pagination.reset(res.total_pages);
+  pagination.on('afterMove', event => {
+    const currentPage = event.page;
+    if (onSearchByKeyword) {
+      serviceApi.searchMovie(query, currentPage).then(res => {
+        return renderListMovies(res['listMovies']);
+      });
+    } else {
+      serviceApi
+        .getListMovies('week', currentPage)
+        .then(res => renderListMovies(res.listMovies));
+    }
+    window.scrollTo(0, 0);
+  });
 
-  // сповіщення, якщо будемо додавати (якщо будемо, то підключи, будь ласка, бібліотеку нотіфай)
   // функція, яка буде показувати лоадер
-  // підключаємо пагінацію
 }

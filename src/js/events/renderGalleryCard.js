@@ -1,166 +1,134 @@
-import serviceApi from '../services/service-api';
+import { serviceApi } from '../services/service-api';
+import { pagination } from '../pagination';
+export function renderCardWithGenres(movie) {
+  const { id, poster, title, genres, release, vote_average } = movie;
+  const posterUrl = poster
+    ? poster
+    : 'https://dummyimage.com/395x574/000/fff.jpg&text=no+poster';
 
+  const genresToShow = genres.slice(0, 2);
+  if (genres.length > 2) {
+    genresToShow.push('Others');
+  }
+  const year = release ? release : null;
 
+  // let year = '';
+  // if (typeof release !== 'undefined' && release.length > 4) {
+  //   year = release.slice(0, 4);
+  // }
+  return `<li class="gallery__item">
+             <a class="gallery__link" href="#" data-modal-open data-id="${id}">
+              <img class="gallery__image" src="${posterUrl}" alt="${title} movie poster" loading="lazy">
+             <div class="info">
+              <h3 class="info__item">${title}</h3>
+               <div class="info-detail">
+                <p class="info-detail__item">${genresToShow.join(', ')}</p>
+  <p class="info-detail__item">${year}<span class="info-detail__rating">&#9733;</span><span class="film-rating">${vote_average?.toFixed(
+    1
+  )}</span></p>
+               </div>
+             </div>
+            </a>
+           </li>`;
+}
 
-const gallery = document.querySelector('.gallery');
+const currentPeriod = document.querySelector('.movie-switcher__button.active').dataset.period || 'day';
 
-//  ЖАНРИ ДО LOCALSTORAGE
 serviceApi
-  .getGenre()
-  .then(({ genres }) => {
-    localStorage.setItem('genre', JSON.stringify(genres));
-    // console.log(genres);
+  .getListMovies(currentPeriod)
+  .then(res => {
+    setFilmsToLocalStorage(res.listMovies);
+    renderListMovies(res.listMovies);
   })
   .catch(error => console.log(error));
 
-// ВІДОБРАЖЕННЯ РОЗМІТКИ
-serviceApi
-  .getListMovies()
-  .then(movies => {
-    renderMovieCards(movies.listMovies);
-    localStorage.setItem('movie', JSON.stringify(movies));
-    console.log(movies);
+  pagination.on('afterMove', (event) => {
+    const currentPage = event.page;
+    serviceApi
+  .getListMovies(currentPeriod, currentPage)
+  .then(res => {
+    setFilmsToLocalStorage(res.listMovies);
+    renderListMovies(res.listMovies);
   })
-  .catch(error => {
-    console.log(error.message);
+  .catch(error => console.log(error));
+   window.scrollTo(0, 0)
   });
 
-// Get a list of movie genres by ID
-export const getMovieGenresList = async genresIdsList => {
-  const genres = await serviceApi.getGenre();
-  const { genres: allGenres } = genres;
-
-  let movieGenres = allGenres.reduce((acc, { id, name }) => {
-    if (genresIdsList.includes(id)) {
-      acc.push(name);
-    }
-    return acc;
-  }, []);
-  if (movieGenres.length > 3) {
-    movieGenres = movieGenres.slice(0, 2);
-    movieGenres.push('Other');
-  }
-  return movieGenres;
-};
-
-// Якщо не приходить зображення
-function setPosters(poster_path) {
-  if (poster_path === null || poster_path === undefined) {
-    return 'https://dummyimage.com/395x574/000/fff.jpg&text=no+poster';
-  }
-  return `${BASE_IMG_URL}${poster_path}`;
+export function renderListMovies(list) {
+  const movieCards = list.map(movie => renderCardWithGenres(movie));
+  const gallery = document.querySelector('.gallery');
+  gallery.innerHTML = movieCards.join('');
 }
 
-export async function renderMovieCards(movies) {
-  const movieGalleryMarkup = await Promise.all(
-    movies.map(
-      async ({ id, title, name, genre_ids, release_date, poster_path }) => {
-        let year = '';
-        if (typeof release_date !== 'undefined' && release_date.length > 4) {
-          year = release_date.slice(0, 4);
-        }
-        const movieGenres = await getMovieGenresList(genre_ids);
-        return `<li class="gallery__item">        <a class="gallery__link" href="#">
-          <img class="gallery__image" data-id="${id}" src="${setPosters(
-          poster_path
-        )}" alt="${title} movie poster" loading="lazy">
-
-        <div class="info">
-          <h3 class="info__item">${title || name}</h3>
-          <div class="info-detail">
-             <p class="info-detail__item">${movieGenres.join(', ')}</p>
-             <p class="info-detail__item">${year}</p>
-           </p>
-           </div>
-         </div>
-         </a>
-       </li>`;
-      }
-    )
-  );
-  console.log(movieGalleryMarkup);
-  return insertMoviesMarkup(movieGalleryMarkup.join(''));
-
-  // Функція для вставки розмітки в контейнер
-  function insertMoviesMarkup(filmsMarkup) {
-    if (gallery) {
-      gallery.insertAdjacentHTML('beforeend', filmsMarkup);
-    }
-    console.log('filmsMarkup:', filmsMarkup);
-  }
+export function setFilmsToLocalStorage(list) {
+  const localListMovies = {};
+  list.forEach(item => {
+    const { id, ...props } = item;
+    localListMovies[id] = props;
+  });
+  localStorage.setItem('listMovies', JSON.stringify(localListMovies));
 }
 
-// const renderMovieCards = async movies => {
-//   const movieGalleryMarkup = await Promise.all(
-//     movies
-//       .map(async movie => {
-//         const { id, title, genre_ids, release_date, backdrop_path } = movie;
-//         const genres = await serviceApi.getGenre();
-//         const config = await serviceApi.getConfig();
-//         const { allGenres } = genres;
-//         const { base_url } = config.images;
-
-//         let movieGenresList = '';
-//         if (allGenres) {
-//           movieGenresList = allGenres
-//             .filter(item => genre_ids.includes(item['id']))
-//             .map(item => item['name'])
-//             .join(', ');
-//         }
-
-//         let year = '';
-//         if (typeof release_date !== 'undefined' && release_date.length > 4) {
-//           year = release_date.slice(0, 4);
-//         }
-
-//         const poster_path = backdrop_path
-//           ? `${base_url}w440_and_h660_face${backdrop_path}`
-//           : 'https://dummyimage.com/395x574/000/fff.jpg&text=no+poster';
-
-//         return `<li class="gallery__item">
-//         <a class="gallery__link" href="#">
-//           <img class="gallery__image" data-id="${id}" src="${poster_path}" alt="${title} movie poster" loading="lazy">
-
-//         <div class="info">
-//           <h3 class="info__item">${title}</h3>
-//           <div class="info-detail">
-//             <p class="info-detail__item">${movieGenresList}</p>
-//             <p class="info-detail__item">${year}</p>
-//           </div>
-//         </div>
-//         </a>
-//       </li>`;
-//       })
-//       .join('')
-//   );
-//   console.log('movieGalleryMarkup:', movieGalleryMarkup);
-//   gallery.innerHTML = movieGalleryMarkup;
-// };
-
-// // Get a list of movie genres by ID
-// export const getMovieGenresList = async genresIdsList => {
-//   const genres = await serviceApi.getGenre();
-//   const { allGenres } = genres;
-
-//   let movieGenres = allGenres.reduce((acc, { id, name }) => {
-//     if (genresIdsList.includes(id)) {
-//       acc.push(name);
+// export function renderMoviesCard(movies) {
+//   const movieCards = movies.map(
+//     ({ id, genres, poster, release, title, vote_average }) => {
+//       const posterUrl = `${poster}`;
+//       return `<li class="gallery__item">
+//            <a class="gallery__link" href="#">
+//             <img class="gallery__image" data-id="${id}" src="${posterUrl}" alt="${title} movie poster" loading="lazy">
+//            <div class="info">
+//             <h3 class="info__item">${title}</h3>
+//              <div class="info-detail">
+//               <p class="info-detail__item">${genres.join(', ')}</p>
+//                <p class="info-detail__item">${release} <span class="film-rating">${vote_average?.toFixed(
+//         1
+//       )}</span></p>
+//              </div>
+//            </div>
+//           </a>
+//          </li>`;
 //     }
-//     return acc;
-//   }, []);
-//   if (movieGenres.length > 3) {
-//     movieGenres = movieGenres.slice(0, 2);
-//     movieGenres.push('Other');
-//   }
-//   return movieGenres;
-// };
+//   );
 
-// serviceApi
-//   .getListMovies()
-//   .then(movies => {
-//     renderMovieCards(movies.listMovies);
-//     console.log(movies);
-//   })
-//   .catch(error => {
-//     console.log(error.message);
-//   });
+//   const gallery = document.querySelector('.gallery');
+//   gallery.innerHTML = movieCards.join('');
+// }
+
+// export async function renderMoviesCard() {
+//   try {
+//     const { listMovies } = await serviceApi.getListMovies('week');
+//     const movieCards = listMovies.map(
+//       ({ id, genres, poster, release, title, vote_average }) => {
+//         return `<li class="gallery__item">
+//          <a class="gallery__link" href="#">
+//           <img class="gallery__image" data-id="${id}" src="${poster}" alt="${title} movie poster" loading="lazy">
+//          <div class="info">
+//           <h3 class="info__item">${title}</h3>
+//            <div class="info-detail">
+//             <p class="info-detail__item">${genres.join(', ')}</p>
+//              <p class="info-detail__item">${release} <span class="film-rating">${vote_average?.toFixed(
+//           1
+//         )}</span></p>
+//            </div>
+//          </div>
+//         </a>
+//        </li>`;
+//       }
+//     );
+
+//     const gallery = document.querySelector('.gallery');
+//     gallery.innerHTML = movieCards.join('');
+//   } catch (error) {
+//     console.error(error.message);
+//   }
+// }
+
+// renderMoviesCard();
+
+// Функция для получения списка жанров по id
+// async function getGenresByIds(genreIds) {
+//   const keyGenres = JSON.parse(localStorage.getItem('genres'));
+//   // Используем метод map для преобразования каждого id жанра в жанр из localStorage
+//   const genres = genreIds.map(id => keyGenres[id]).filter(genre => genre);
+//   return genres || [];
+// }
