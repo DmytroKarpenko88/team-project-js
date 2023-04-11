@@ -23,36 +23,36 @@ export function renderCardWithGenres(movie) {
               <h3 class="info__item">${title}</h3>
                <div class="info-detail">
                 <p class="info-detail__item">${genresToShow.join(', ')}</p>
-  <p class="info-detail__item">${year}<span class="info-detail__rating">&#9733;</span><span class="film-rating">${vote_average?.toFixed(
-    1
-  )}</span></p>
+   <p class="info-detail__item">${year}
+  <span class="film-rating film-rating--${getClassByRate(vote_average)}">
+    ${Number(vote_average).toFixed(1)}</span></p>
                </div>
              </div>
             </a>
            </li>`;
 }
 
-const currentPeriod = document.querySelector('.movie-switcher__button.active').dataset.period || 'day';
+// const currentPeriod = document.querySelector('.movie-switcher__button.active').dataset.period ||'day';
 
-serviceApi
-  .getListMovies(currentPeriod)
-  .then(res => {
-    setFilmsToLocalStorage(res.listMovies);
-    renderListMovies(res.listMovies);
-  })
-  .catch(error => console.log(error));
+// serviceApi
+//   .getListMovies(currentPeriod)
+//   .then(res => {
+//     setFilmsToLocalStorage(res.listMovies);
+//     renderListMovies(res.listMovies);
+//   })
+//   .catch(error => console.log(error));
 
-  pagination.on('afterMove', (event) => {
-    const currentPage = event.page;
-    serviceApi
-  .getListMovies(currentPeriod, currentPage)
-  .then(res => {
-    setFilmsToLocalStorage(res.listMovies);
-    renderListMovies(res.listMovies);
-  })
-  .catch(error => console.log(error));
-   window.scrollTo(0, 0)
-  });
+  // pagination.on('afterMove', (event) => {
+  //   const currentPage = event.page;
+  //   serviceApi
+  // .getListMovies(currentPeriod, currentPage)
+  // .then(res => {
+  //   setFilmsToLocalStorage(res.listMovies);
+  //   renderListMovies(res.listMovies);
+  // })
+  // .catch(error => console.log(error));
+  //  window.scrollTo(0, 0)
+  // });
 
 export function renderListMovies(list) {
   const movieCards = list.map(movie => renderCardWithGenres(movie));
@@ -67,6 +67,16 @@ export function setFilmsToLocalStorage(list) {
     localListMovies[id] = props;
   });
   localStorage.setItem('listMovies', JSON.stringify(localListMovies));
+}
+
+function getClassByRate(vote) {
+  if (vote >= 8) {
+    return 'green';
+  } else if (vote > 6) {
+    return 'orange';
+  } else {
+    return 'red';
+  }
 }
 
 // export function renderMoviesCard(movies) {
