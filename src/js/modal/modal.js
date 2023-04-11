@@ -107,9 +107,7 @@ function renderPopupBody(id) {
         <h3 class="content-modal-title">About</h3>
         <p class="content-modal">${overview}</p>
         <div class="modal-btn-container">
-<!--          <button class="modal-btn btn-add-watched" data-btn-watch>add to Watched</button>-->
           <button class="modal-btn btn-add-watched" data-btn-watch>${getButtonText(id, LIST_WATCHED)}</button>
-<!--          <button class="modal-btn btn-add-queue" data-btn-queue>add to queue</button>-->
           <button class="modal-btn btn-add-queue" data-btn-queue>${getButtonText(id, LIST_QUEUE)}</button>
         </div>
       </div>

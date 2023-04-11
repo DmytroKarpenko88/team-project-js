@@ -62,9 +62,10 @@ class ServiceApi {
 
   /* Adding methods */
   #transformListMovies = (res) => {
-    const {page, total_pages, results} = res;
+    const {page, total_pages, results, total_results} = res;
 
     const totalPages = total_pages;
+    const totalResults = total_results
 
     const listMovies = results.map(item => {
       const {
@@ -106,6 +107,7 @@ class ServiceApi {
     return {
       page,
       totalPages,
+      totalResults,
       listMovies,
     };
   };
