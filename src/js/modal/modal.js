@@ -98,13 +98,13 @@ function renderPopupBody(id) {
               <li>
                 <div class="statistic-wraper">
                   <p class="first-item-statistic">Vote / Votes</p>
-                  <p><span class="statistic-vote">${vote_average}</span>/<span class="statistic-votes">${vote_count}</span></p>
+                  <p><span class="statistic-vote">${Number(vote_average).toFixed(1)}</span>/<span class="statistic-votes">${vote_count}</span></p>
                 </div>
               </li>
               <li>
                 <div class="statistic-wraper">
                   <p class="first-item-statistic">Popularity</p>
-                  <p>${popularity}</p>
+                  <p>${Number(popularity).toFixed(1)}</p>
                 </div>
               </li>
               <li>

@@ -9,7 +9,7 @@ import { pagination } from '../pagination';
 const searchForm = document.querySelector('#search-form');
 
 searchForm.addEventListener('submit', onSearchByKeyword);
-
+let totalResults;
 let query;
 
 async function onSearchByKeyword(e) {
@@ -24,23 +24,24 @@ async function onSearchByKeyword(e) {
   console.log(res);
   setFilmsToLocalStorage(res.listMovies);
   renderListMovies(res['listMovies']);
-
-  pagination.reset(res.total_pages);
+  
+  
+  pagination._options.totalItems = res.totalResults;
+  pagination.reset(res.totalResults);
   pagination.off();
-  // pagination.setTotalItems(res.total_results);
+  
   pagination.on('afterMove', event => {
     const currentPage = event.page;
     
-      serviceApi.searchMovie(query, currentPage).then(res => {
-        if(res.page > res.totalPages) {
-          alert(`Sorry, this is last page ${res.totalPages}`)
-          return
-        }
-        return renderListMovies(res['listMovies']);
+      serviceApi.searchMovie(query, currentPage)
+      .then(res => {return renderListMovies(res['listMovies']);
       });
      
     window.scrollTo(0, 0);
   });
- return totalItems = res.total_results;
+  
   // функція, яка буде показувати лоадер
 }
+
+export {totalResults}
+
