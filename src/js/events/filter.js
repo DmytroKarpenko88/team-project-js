@@ -5,18 +5,17 @@ import {
   setFilmsToLocalStorage,
 } from '../events/renderGalleryCard';
 
-
-
 async function onPagination(period) {
   const movies = await serviceApi.getListMovies(period);
  
   setFilmsToLocalStorage(movies.listMovies);
   renderListMovies(movies.listMovies);
 
-  // pagination.setTotalItem(movies.total_results)
-  // pagination.movePageTo(movies.page);
-  pagination.reset(movies.total_pages);
+  pagination._options.totalItems = movies.totalResults;
+ 
+  pagination.reset(movies.totalResults);
   pagination.off();
+  
   pagination.on('afterMove', (event) => {
     const currentPage = event.page;
     serviceApi
@@ -46,7 +45,6 @@ dayBtn.addEventListener('click', function onClickDay() {
   onPagination(period)  
 });
 
-
 weekBtn.addEventListener('click', function onClickWeek() {
   weekBtn.classList.add('active');
   dayBtn.classList.remove('active');
@@ -59,7 +57,6 @@ weekBtn.addEventListener('click', function onClickWeek() {
   }
   onPagination(period);  
 });
-
 
 // Render initial movies
 async function initialize() {
