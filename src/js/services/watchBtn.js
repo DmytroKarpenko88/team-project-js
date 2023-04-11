@@ -1,5 +1,7 @@
-//import libraryPageNotCard from '../events/libraryPageNotCard'
-//libraryPageNotCard()
+
+
+import {libraryPageNotCard} from '../events/libraryPageNotCard'
+libraryPageNotCard()
 
 import smoothScroll from '../events/scrollUp';
 
@@ -90,6 +92,7 @@ function onLibrary() {
     }
   };
 
+
   const checkStorageLibrary = () => {
     if (getFromStorage('dataFilmsByWatched')) {
       dataFilmsByWatched = getFromStorage('dataFilmsByWatched');
@@ -108,3 +111,4 @@ function onLibrary() {
       }
     }
   };
+
