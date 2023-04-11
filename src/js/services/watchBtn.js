@@ -47,7 +47,7 @@ function onLibrary() {
       btnLibrary: document.querySelector('#btn__watched'),
       header: document.querySelector('.header'),
     };
-  
+
     refs.home.classList.add('header__library');
   }
 
@@ -56,7 +56,7 @@ function onLibrary() {
       btnWatched: document.querySelector('#btn__watched'),
       btnQueue: document.querySelector('#btn__queue'),
     };
-  
+
     if (refs.btnWatched.classList.contains('#btn__watched')) {
       renderWatched();
     } else {
@@ -97,7 +97,7 @@ function onLibrary() {
     if (getFromStorage('dataFilmsByWatched')) {
       dataFilmsByWatched = getFromStorage('dataFilmsByWatched');
     }
-  
+
     if (getFromStorage('dataFilmsByQueue')) {
       dataFilmsByQueue = getFromStorage('dataFilmsByQueue');
     }
