@@ -1,6 +1,5 @@
 import Pagination from 'tui-pagination';
 // import 'tui-pagination/dist/tui-pagination.css';
-import serviceApi from './services/service-api'
 
 const container = document.querySelector('#pagination');
 const options = {
@@ -30,9 +29,11 @@ const options = {
   },
 };
 
+
+
 const pagination = new Pagination(container, options);
 
-export {pagination}
+export {pagination};
 
 
 
