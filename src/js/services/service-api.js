@@ -62,14 +62,12 @@ class ServiceApi {
 
   /* Adding methods */
   #transformListMovies = (res) => {
-    console.log('transformListMovies', res);
     const {page, total_pages, results, total_results} = res;
 
     const totalPages = total_pages;
     const totalResults = total_results
 
     const listMovies = results.map(item => {
-      console.log('item', item);
       const {
         id,
         poster_path,
