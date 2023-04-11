@@ -32,29 +32,27 @@ export function renderCardWithGenres(movie) {
            </li>`;
 }
 
-const currentPeriod =
-  document.querySelector('.movie-switcher__button.active').dataset.period ||
-  'day';
+// const currentPeriod = document.querySelector('.movie-switcher__button.active').dataset.period ||'day';
 
-serviceApi
-  .getListMovies(currentPeriod)
-  .then(res => {
-    setFilmsToLocalStorage(res.listMovies);
-    renderListMovies(res.listMovies);
-  })
-  .catch(error => console.log(error));
+// serviceApi
+//   .getListMovies(currentPeriod)
+//   .then(res => {
+//     setFilmsToLocalStorage(res.listMovies);
+//     renderListMovies(res.listMovies);
+//   })
+//   .catch(error => console.log(error));
 
-  pagination.on('afterMove', (event) => {
-    const currentPage = event.page;
-    serviceApi
-  .getListMovies(currentPeriod, currentPage)
-  .then(res => {
-    setFilmsToLocalStorage(res.listMovies);
-    renderListMovies(res.listMovies);
-  })
-  .catch(error => console.log(error));
-   window.scrollTo(0, 0)
-  });
+  // pagination.on('afterMove', (event) => {
+  //   const currentPage = event.page;
+  //   serviceApi
+  // .getListMovies(currentPeriod, currentPage)
+  // .then(res => {
+  //   setFilmsToLocalStorage(res.listMovies);
+  //   renderListMovies(res.listMovies);
+  // })
+  // .catch(error => console.log(error));
+  //  window.scrollTo(0, 0)
+  // });
 
 export function renderListMovies(list) {
   const movieCards = list.map(movie => renderCardWithGenres(movie));
