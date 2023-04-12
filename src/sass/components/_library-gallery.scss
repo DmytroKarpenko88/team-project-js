@@ -34,6 +34,10 @@
     #67a2b6 10%,
     #fff 50%
   );
+
+  body.dark-theme & {
+    background-image: none;
+  }
 }
 
 .library-gallery__image {
