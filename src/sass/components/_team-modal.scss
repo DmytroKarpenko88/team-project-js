@@ -1,0 +1,113 @@
+.basicLightbox {
+    overflow: scroll;
+  }
+  
+  .team-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  
+    margin: -20px;
+    height: auto;
+    
+    @media screen and (max-width: ($tablet - 1)) {
+      margin-top: 70px;
+    }
+  
+    width: 480px;
+  
+    background-color: #ffffff;
+    border-radius: 15px;
+  
+    @media screen and (min-width: $tablet) {
+      width: 600px;
+  
+      border-radius: 25px;
+    }
+  
+    @media screen and (min-width: $desktop) {
+      margin: -30px;
+      padding: 15px;
+      width: 800px;
+    }
+  }
+  
+  .team-card {
+    position: relative;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    margin: 20px;
+  
+    width: calc((100% - 80px) / 2);
+  
+    @media screen and (min-width: $tablet) {
+      width: calc((100% - 160px) / 4);
+    }
+  
+    @media screen and (min-width: $desktop) {
+      margin: 10px;
+  
+      width: calc((100% - 240px) / 4);
+    }
+  }
+  
+  .team-image {
+    margin-bottom: 10px;
+  
+    width: 100%;
+  
+    border-radius: 50%;
+    box-shadow: 5px 5px 11px -2px #000000;
+  }
+  
+  .team-name {
+    margin-bottom: 5px;
+    flex-direction: column;
+    width: 115px;
+  
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    text-align: center;
+  }
+  
+  .team-role {
+    font-family: 'Roboto', sans-serif;
+  
+    @media screen and (min-width: $tablet) {
+      font-size: 16px;
+    }
+  
+    color: #b92f2c;
+  }
+  
+  .team-git {
+    position: absolute;
+  
+    top: 200;
+    right: 10px;
+  
+    @media screen and (min-width: $tablet) {
+      top: 100px;
+      right: -10px;
+
+    }
+  
+    @media screen and (min-width: $desktop) {
+      top: 120px;
+      right: -10px;
+
+    }
+  
+    transform: scale(1);
+    @include transition(transform);
+  
+    &:hover,
+    &:focus {
+      transform: scale(1.5);
+    }
+  }
+  
