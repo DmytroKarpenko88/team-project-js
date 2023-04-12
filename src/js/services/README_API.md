@@ -42,6 +42,7 @@ async function fn() {
 {
   page: number // Поточна сторінка пагінації
   totalPages: number // Загальна кількість сторінок
+  totalResults: number // Загальна кількість фільмів
   listMovies: [ // Масив об'єктів
     {
       id, // number - ідентифікатор фільму

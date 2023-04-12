@@ -7,7 +7,7 @@ class ServiceApi {
 
   #BASE_URL = 'https://api.themoviedb.org/3';
   #BASE_IMG = 'https://image.tmdb.org/t/p/w500';
-  #BASE_YOUTUBE = 'https://www.youtube.com/watch?v=';
+  // #BASE_YOUTUBE = 'https://www.youtube.com/watch?v=';
 
   /**
    * The main addition method which do request
@@ -146,7 +146,7 @@ class ServiceApi {
   };
   #transformDataTrailer = (res) => {
     const key = res['results'].find(item => item['site'] === "YouTube")['key'];
-    return `${this.#BASE_YOUTUBE}${key}`;
+    return key;
   };
 }
 
