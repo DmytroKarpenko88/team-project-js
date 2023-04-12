@@ -112,7 +112,7 @@
 //   }
 
 .backdrop-modal.modal-open {
-  position: fixed;
+  // position: fixed;
   height: 100vh;
   width: 100vw;
   background: rgba(0, 0, 0, 0.8);
@@ -135,14 +135,14 @@
   background: rgb(194, 190, 190);
   max-width: 90%;
   @media screen and (min-width: $tablet) {
-    position: absolute;
+    // position: absolute;
     top: 0;
     max-width: 90%;
   }
   @media screen and (min-width: $desktop) {
-    position: absolute;
+    // position: absolute;
     top: 0;
-    left: 28%;
+    // left: 28%;
     max-width: 900px;
   }
 }

@@ -514,11 +514,10 @@ const markup = `
       `;
 //
 const container = document.querySelector('.js-team-modal');
-// const markup2 = `<img src="${kirillUrl}"/>`;
-
-container.addEventListener('click', openModal);
 
 const modal = basicLightbox.create(markup);
+
+container.addEventListener('click', openModal);
 
 function openModal(e) {
   modal.show();
