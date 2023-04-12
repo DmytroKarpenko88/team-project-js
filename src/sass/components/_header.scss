@@ -467,7 +467,6 @@ screen and (min-resolution: 3dppx) {
     margin-right: 8px;
     backface-visibility: visible !important;
 	animation: flip 4s ease infinite;
-    z-index: 0;
 
     @media screen and (min-width: 768px){
         width: 40px;
@@ -487,24 +486,24 @@ screen and (min-resolution: 3dppx) {
 
         0% {
             transform: perspective(200px) rotateY(0);
-            animation-timing-function: ease-out;
+            animation-timing-function: ease;
         }
         40% {
             transform: perspective(200px) rotateY(170deg);
-            animation-timing-function: ease-out;
+            animation-timing-function: ease;
         }
         50% {
             transform: perspective(200px)  rotateY(190deg) ;
-            animation-timing-function: ease-out;
+            animation-timing-function: ease;
         }
         80% {
             transform: perspective(200px) rotateY(360deg) ;
-            animation-timing-function: ease-out;
+            animation-timing-function: ease;
         }
         100% {
             transform: perspective(200px) scale(1);
-            animation-timing-function: ease-out;
-            z-index: 0;
+            animation-timing-function: ease;
+            
         }
     }
         
