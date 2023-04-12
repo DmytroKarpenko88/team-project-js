@@ -2,26 +2,24 @@
 
 import {libraryPageNotCard} from '../events/libraryPageNotCard';
 
-
-
-// libraryPageNotCard();
-
 import { renderListMovies } from '../events/renderGalleryCard';
 // import smoothScroll from '../events/scrollUp';
 
 const LIST_WATCHED = 'watchedMovies';
 const LIST_QUEUE = 'listQueue';
 const baseActive = LIST_WATCHED;
-
 const blkCtrlLib = document.querySelector('.js-blockCtrlLib');
+const blkLibraryEmpty = document.querySelector('.library-gallery');
 
 localStorage.getItem(LIST_WATCHED) || localStorage.setItem(LIST_WATCHED, JSON.stringify({}));
 localStorage.getItem(LIST_QUEUE) || localStorage.setItem(LIST_QUEUE, JSON.stringify({}));
 
+blkCtrlLib && setActiveButton(baseActive);
+
 if (blkCtrlLib && Object.keys(JSON.parse(localStorage.getItem(baseActive))).length > 0) {
   const listMovies = getArrayFromObjMovies(baseActive);
-  setActiveButton(baseActive);
   renderListMovies(listMovies);
+  blkLibraryEmpty.classList.remove('active');
 } else {
   libraryPageNotCard();
 }
@@ -80,7 +78,16 @@ function onClickBtn(event) {
     }
   }
 
-  renderListMovies(listMovies);
+  console.log(type, listMovies);
+
+  if (listMovies.length > 0) {
+    renderListMovies(listMovies);
+    blkLibraryEmpty.classList.remove('active');
+  } else {
+    libraryPageNotCard();
+  }
+
+  // renderListMovies(listMovies);
 };
 
 
