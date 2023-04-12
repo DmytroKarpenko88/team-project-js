@@ -1,22 +1,27 @@
 .theme-switch {
   position: absolute;
-  top: 297px;
+  top: 23%;
+  right: 0%;
   display: flex;
   align-items: center;
-  padding-left: 206px;
-  margin-bottom: 32px;
-  @media screen and (min-width: $tablet) {
-    padding-left: 545px;
-  }
+  transform: translateX(-50%);
 
-  @media screen and (min-width: $desktop) {
-    padding-left: 810px;
-    margin-bottom: 10px;
+  @media screen and(min-width: 321px) and (max-width: 767px) {
+    top: 23%;
+    right: 0%;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    top: 81%;
+    left: 68%;
+  }
+  @media screen and (min-width: 1280px) {
+    right: 30%;
+    top: 79%;
   }
 }
 
 .theme-switch__icon {
-  color: var(--accent-txt-cl);
+  color: var(--main-txt-cl);
   height: 14px;
   width: 14px;
   transition: color var(--duration) var(--timing-function);
