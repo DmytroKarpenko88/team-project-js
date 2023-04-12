@@ -100,7 +100,7 @@ const markup = `<div class="team-wrapper">
     <img src="${marynaUrl}" alt="Maryna" class="team-image">
     <p class="team-name">Maryna Molchanova</p>
     <p class="team-role">Developer</p>
-    <a href="https://www.linkedin.com/me?trk=p_mwlite_feed_updates-secondary_nav" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
+    <a href="https://www.linkedin.com/in/maryna-molchanova-7a0772227/" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
       <use href="${spriteUrl}#linkedin"></use>
     </svg></a>
 </div>
