@@ -467,6 +467,7 @@ screen and (min-resolution: 3dppx) {
     margin-right: 8px;
     backface-visibility: visible !important;
 	animation: flip 4s ease infinite;
+    z-index: 0;
 
     @media screen and (min-width: 768px){
         width: 40px;
