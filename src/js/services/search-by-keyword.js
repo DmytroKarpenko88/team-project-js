@@ -4,7 +4,7 @@ import {
   setFilmsToLocalStorage,
 } from '../events/renderGalleryCard';
 import { pagination } from '../pagination';
-// import { loader }
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const searchForm = document.querySelector('#search-form');
 
@@ -17,7 +17,7 @@ async function onSearchByKeyword(e) {
 
   query = e.target.searchQuery.value.trim();
   if (!query) {
-    return;
+    return Notify.failure('Please, type something');
   }
 
   try {
@@ -25,7 +25,6 @@ async function onSearchByKeyword(e) {
 
     setFilmsToLocalStorage(res.listMovies);
     renderListMovies(res['listMovies']);
-
 
     pagination._options.totalItems = res.totalResults;
     pagination.reset(res.totalResults);
@@ -37,16 +36,13 @@ async function onSearchByKeyword(e) {
   pagination.on('afterMove', event => {
     const currentPage = event.page;
 
-      serviceApi.searchMovie(query, currentPage)
-      .then(res => {return renderListMovies(res['listMovies']);
+    serviceApi
+      .searchMovie(query, currentPage)
+      .then(res => {
+        return renderListMovies(res['listMovies']);
       })
       .catch(console.error);
 
     window.scrollTo(0, 0);
   });
-
-  // функція, яка буде показувати лоадер
 }
-
-
-
