@@ -485,23 +485,23 @@ screen and (min-resolution: 3dppx) {
     @keyframes flip {
 
         0% {
-            transform: perspective(200px) rotateY(0);
+            transform:  rotateY(0);
             animation-timing-function: ease;
         }
         40% {
-            transform: perspective(200px) rotateY(170deg);
+            transform: rotateY(170deg);
             animation-timing-function: ease;
         }
         50% {
-            transform: perspective(200px)  rotateY(190deg) ;
+            transform:  rotateY(190deg) ;
             animation-timing-function: ease;
         }
         80% {
-            transform: perspective(200px) rotateY(360deg) ;
+            transform:  rotateY(360deg) ;
             animation-timing-function: ease;
         }
         100% {
-            transform: perspective(200px) scale(1);
+            transform:  scale(1);
             animation-timing-function: ease;
             
         }
