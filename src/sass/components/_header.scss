@@ -473,31 +473,32 @@ screen and (min-resolution: 3dppx) {
         margin-right: 16px;
     }
 
-   
-
-    @keyframes flip {
+      @keyframes flip {
         0% {
-            transform:  rotateY(0);
+            transform: perspective(200px) rotateY(0);
             animation-timing-function: ease-out;
         }
         40% {
-            transform:  translateZ(150px) rotateY(170deg);
+            transform: perspective(200px) rotateY(170deg);
             animation-timing-function: ease-out;
         }
         50% {
-            transform:  translateZ(150px) rotateY(190deg) scale(1);
-            animation-timing-function: ease-in;
+            transform: perspective(200px)  rotateY(190deg) ;
+            animation-timing-function: ease-out;
         }
         80% {
-            transform:  rotateY(360deg) scale(1);
-            animation-timing-function: ease-in;
+            transform: perspective(200px) rotateY(360deg) ;
+            animation-timing-function: ease-out;
         }
         100% {
-            transform: scale(1);
-            animation-timing-function: ease-in;
+            transform: perspective(200px) scale(1);
+            animation-timing-function: ease-out;
         }
     }
+        
+      
 
+   
 
     
 }
