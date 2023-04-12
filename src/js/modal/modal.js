@@ -64,8 +64,6 @@ function renderTrailer(key) {
 
 function renderPopupBody(id) {
   dataMovie = JSON.parse(localStorage.getItem('listMovies'))[id];
-  localStorage.getItem(LIST_WATCHED) || localStorage.setItem(LIST_WATCHED, JSON.stringify({}));
-  localStorage.getItem(LIST_QUEUE) || localStorage.setItem(LIST_QUEUE, JSON.stringify({}));
 
   serviceApi.getTrailer(id)
     .then(renderTrailer)

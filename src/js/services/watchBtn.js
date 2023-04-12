@@ -15,6 +15,9 @@ const baseActive = LIST_WATCHED;
 
 const blkCtrlLib = document.querySelector('.js-blockCtrlLib');
 
+localStorage.getItem(LIST_WATCHED) || localStorage.setItem(LIST_WATCHED, JSON.stringify({}));
+localStorage.getItem(LIST_QUEUE) || localStorage.setItem(LIST_QUEUE, JSON.stringify({}));
+
 if (blkCtrlLib && Object.keys(JSON.parse(localStorage.getItem(baseActive))).length > 0) {
   const listMovies = getArrayFromObjMovies(baseActive);
   setActiveButton(baseActive);
