@@ -1,6 +1,8 @@
-
+import { pagination } from './pagination-library-queue';
 
 import {libraryPageNotCard} from '../events/libraryPageNotCard';
+
+// libraryPageNotCard();
 
 import { renderListMovies } from '../events/renderGalleryCard';
 // import smoothScroll from '../events/scrollUp';
@@ -17,15 +19,26 @@ const baseActive = LIST_WATCHED;
 const blkCtrlLib = document.querySelector('.js-blockCtrlLib');
 const blkLibraryEmpty = document.querySelector('.library-gallery');
 
-localStorage.getItem(LIST_WATCHED) || localStorage.setItem(LIST_WATCHED, JSON.stringify({}));
-localStorage.getItem(LIST_QUEUE) || localStorage.setItem(LIST_QUEUE, JSON.stringify({}));
-
-blkCtrlLib && setActiveButton(baseActive);
-
 if (blkCtrlLib && Object.keys(JSON.parse(localStorage.getItem(baseActive))).length > 0) {
   const listMovies = getArrayFromObjMovies(baseActive);
-  renderListMovies(listMovies);
-  blkLibraryEmpty.classList.remove('active');
+  const itemsPerPage = pagination._options.itemsPerPage;
+    const start =  itemsPerPage;
+    const end = start + itemsPerPage;
+    const itemsForPage = listMovies.slice(start, end);
+  setActiveButton(baseActive);
+  renderListMovies(itemsForPage);
+  pagination._options.totalItems = listMovies.length;
+  pagination.reset(listMovies.length);
+  pagination.off();  
+  pagination.on('afterMove', (event) => {
+    const currentPage = event.page;
+    const itemsPerPage = pagination._options.itemsPerPage;
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const itemsForPage = listMovies.slice(start, end);
+    renderListMovies(itemsForPage);
+    console.log(itemsForPage);
+});
 } else {
   libraryPageNotCard();
 }
@@ -77,23 +90,31 @@ function onClickBtn(event) {
     switch (type) {
       case LIST_WATCHED:
         listMovies = getArrayFromObjMovies(LIST_WATCHED);
+        
         break;
       case LIST_QUEUE:
         listMovies = getArrayFromObjMovies(LIST_QUEUE);
+        
         break;
     }
   }
-
-  console.log(type, listMovies);
-
-  if (listMovies.length > 0) {
-    renderListMovies(listMovies);
-    blkLibraryEmpty.classList.remove('active');
-  } else {
-    libraryPageNotCard();
-  }
-
-  // renderListMovies(listMovies);
+  const itemsPerPage = pagination._options.itemsPerPage;
+    const start =  itemsPerPage;
+    const end = start + itemsPerPage;
+    const itemsForPage = listMovies.slice(start, end);
+  renderListMovies(itemsForPage);
+  pagination._options.totalItems = listMovies.length;
+  pagination.reset(listMovies.length);
+  pagination.off();  
+  pagination.on('afterMove', (event) => {
+    const currentPage = event.page;
+    const itemsPerPage = pagination._options.itemsPerPage;
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const itemsForPage = listMovies.slice(start, end);
+    renderListMovies(itemsForPage);
+    console.log(itemsForPage);
+});
 };
 
 
