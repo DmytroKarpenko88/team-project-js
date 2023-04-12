@@ -16,9 +16,6 @@ async function onSearchByKeyword(e) {
   e.preventDefault();
 
   query = e.target.searchQuery.value.trim();
-  if (!query) {
-    return Notify.failure('Please, type something');
-  }
 
   try {
     const res = await serviceApi.searchMovie(query);
@@ -29,6 +26,18 @@ async function onSearchByKeyword(e) {
     pagination._options.totalItems = res.totalResults;
     pagination.reset(res.totalResults);
     pagination.off();
+
+    if (!query) {
+      return Notify.failure(
+        'Sorry, we didn`t find anything. Please, type something'
+      );
+    } else if (res.totalResults < 1) {
+      return Notify.failure(
+        'Sorry, we didn`t find anything. Please, try again'
+      );
+    } else if (res.totalResults > 1) {
+      return Notify.success(`Hooray, we found ${res.totalResults} films`);
+    }
   } catch (err) {
     console.error(err.message);
   }
