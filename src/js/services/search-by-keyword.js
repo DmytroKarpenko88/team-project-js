@@ -20,26 +20,31 @@ async function onSearchByKeyword(e) {
     return;
   }
 
-  const res = await serviceApi.searchMovie(query);
-  console.log(res);
-  setFilmsToLocalStorage(res.listMovies);
-  renderListMovies(res['listMovies']);
-  
-  
-  pagination._options.totalItems = res.totalResults;
-  pagination.reset(res.totalResults);
-  pagination.off();
-  
+  try {
+    const res = await serviceApi.searchMovie(query);
+
+    setFilmsToLocalStorage(res.listMovies);
+    renderListMovies(res['listMovies']);
+
+
+    pagination._options.totalItems = res.totalResults;
+    pagination.reset(res.totalResults);
+    pagination.off();
+  } catch (err) {
+    console.error(err.message);
+  }
+
   pagination.on('afterMove', event => {
     const currentPage = event.page;
-    
+
       serviceApi.searchMovie(query, currentPage)
       .then(res => {return renderListMovies(res['listMovies']);
-      });
-     
+      })
+      .catch(console.error);
+
     window.scrollTo(0, 0);
   });
-  
+
   // функція, яка буде показувати лоадер
 }
 

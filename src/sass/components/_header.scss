@@ -3,14 +3,14 @@
     content: '';
     margin-top: 20px;
 
-    
+
 
     @media screen and (min-width:768px) {
         margin-top: 32px;
     }
 
-    
-    
+
+
 }
 
 // navigation
@@ -20,11 +20,11 @@
     max-width: 280px;
     margin-left: auto;
     margin-right: auto;
-    height: 460px;  
+    height: 460px;
     padding-left: 14px;
-    padding-right: 14px;     
-    padding-top: 14px;    
-    border-radius: 10px;    
+    padding-right: 14px;
+    padding-top: 14px;
+    border-radius: 10px;
     background-size:contain;
     background-repeat: no-repeat ;
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)),
@@ -63,11 +63,11 @@
 @media  screen and  (min-device-pixel-ratio: 2),
 screen and  (-webkit-min-device-pixel-ratio: 2),
 screen and  (min-resolution: 192dpi),
-screen and  (min-resolution: 2dppx) {            
-    background: url('../images/header-image/yellow-mobile_@2x.jpg'),           
-    url('../images/header-image/orange-mobile_@2x.jpg'),           
-    url('../images/header-image/red-mobile_@2x.jpg'),           
-    url('../images/header-image/pink-mobile_@2x.jpg'),           
+screen and  (min-resolution: 2dppx) {
+    background: url('../images/header-image/yellow-mobile_@2x.jpg'),
+    url('../images/header-image/orange-mobile_@2x.jpg'),
+    url('../images/header-image/red-mobile_@2x.jpg'),
+    url('../images/header-image/pink-mobile_@2x.jpg'),
     url('../images/header-image/blue-mobile_@2x.jpg');
 }
 
@@ -75,18 +75,18 @@ screen and  (min-resolution: 2dppx) {
 @media  screen and (min-device-pixel-ratio: 3),
 screen and (-webkit-min-device-pixel-ratio: 3),
 screen and (min-resolution: 288dpi),
-screen and (min-resolution: 3dppx) {                         
+screen and (min-resolution: 3dppx) {
     background: url('../images/header-image/yellow-mobile_@4x.jpg'),
     url('../images/header-image/orange-mobile_@4x.jpg'),
     url('../images/header-image/red-mobile_@4x.jpg'),
     url('../images/header-image/pink-mobile_@4x.jpg'),
     url('../images/header-image/blue-mobile_@4x.jpg');
-    
 
-   
+
+
 }
-    
-    
+
+
 // width 768px
     @media screen and (min-width: 768px) {
         max-width: 704px;
@@ -94,7 +94,7 @@ screen and (min-resolution: 3dppx) {
         margin-left: auto;
         margin-right: auto;
         padding-left: 16px;
-        padding-right: 16px;        
+        padding-right: 16px;
         padding-top: 16px;
         border-radius: 15px;
         background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)),
@@ -105,18 +105,18 @@ screen and (min-resolution: 3dppx) {
                            url('../images/header-image/blue-tablet_1x.jpg');
         background-size: cover;
         animation: change 35s infinite ease-in-out;
-        
+
 
 
         @keyframes change {
             0% {
                 background-image: url('../images/header-image/yellow-tablet_1x.jpg');
             }
-        
+
             25% {
                 background-image: url('../images/header-image/orange-tablet_1x.jpg');
             }
-        
+
             50% {
                 background-image: url('../images/header-image/red-tablet_1x.jpg');
             }
@@ -124,20 +124,20 @@ screen and (min-resolution: 3dppx) {
             75% {
                 background-image: url('../images/header-image/pink-tablet_1x.jpg');
             }
-    
+
             100% {
                 background-image: url('../images/header-image/blue-tablet_1x.jpg');
             }
         }
-       
+
         @media  screen and  (min-device-pixel-ratio: 2),
                 screen and  (-webkit-min-device-pixel-ratio: 2),
                 screen and  (min-resolution: 192dpi),
-                screen and  (min-resolution: 2dppx) {            
-                    background: url('../images/header-image/yellow-tablet_@2x.jpg'),           
-                    url('../images/header-image/orange-tablet_@2x.jpg'),           
-                    url('../images/header-image/red-tablet_@2x.jpg'),           
-                    url('../images/header-image/pink-tablet_@2x.jpg'),           
+                screen and  (min-resolution: 2dppx) {
+                    background: url('../images/header-image/yellow-tablet_@2x.jpg'),
+                    url('../images/header-image/orange-tablet_@2x.jpg'),
+                    url('../images/header-image/red-tablet_@2x.jpg'),
+                    url('../images/header-image/pink-tablet_@2x.jpg'),
                     url('../images/header-image/blue-tablet_@2x.jpg');
     }
 
@@ -145,7 +145,7 @@ screen and (min-resolution: 3dppx) {
         @media  screen and (min-device-pixel-ratio: 3),
                 screen and (-webkit-min-device-pixel-ratio: 3),
                 screen and (min-resolution: 288dpi),
-                screen and (min-resolution: 3dppx) {                //         
+                screen and (min-resolution: 3dppx) {                //
                     background: url('../images/header-image/yellow-tablet_@4x.jpg'),
                     url('../images/header-image/orange-tablet_@4x.jpg'),
                     url('../images/header-image/red-tablet_@4x.jpg'),
@@ -164,8 +164,8 @@ screen and (min-resolution: 3dppx) {
         margin-right: auto;
         height: 316px;
         padding-left: 32px;
-        padding-right: 32px; 
-        padding-bottom: 32px;       
+        padding-right: 32px;
+        padding-bottom: 32px;
         padding-top: 16px;
         border-radius: 15px;
         background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)),
@@ -177,17 +177,17 @@ screen and (min-resolution: 3dppx) {
         background-size:cover;
         animation: change 35s  infinite  ease-in-out ;
 
-        
+
 
                 @keyframes change {
                     0%, 30%, 65% {
                         background: url('../images/header-image/yellow-desktop_1x.jpg');
                     }
-                
+
                     5%, 40%, 70% {
                         background: url('../images/header-image/orange-desktop_1x.jpg');
                     }
-                
+
                     15%, 45%, 80% {
                         background: url('../images/header-image/red-desktop_1x.jpg');
                     }
@@ -195,45 +195,45 @@ screen and (min-resolution: 3dppx) {
                     20%, 50%, 90%  {
                         background: url('../images/header-image/pink-desktop_1x.jpg');
                     }
-            
+
                     25%, 60%, 100% {
                         background: url('../images/header-image/blue-desktop_1x.jpg');
                     }
 
-                   
+
                 }
 
                 @media  screen and  (min-device-pixel-ratio: 2),
                         screen and  (-webkit-min-device-pixel-ratio: 2),
                         screen and  (min-resolution: 192dpi),
-                        screen and  (min-resolution: 2dppx) {                       
+                        screen and  (min-resolution: 2dppx) {
                     background: url('../images/header-image/yellow-desktop_@2x.jpg'),
                      url('../images/header-image/orange-desktop_@2x.jpg'),
                      url('../images/header-image/red-desktop_@2x.jpg'),
                      url('../images/header-image/pink-desktop_@2x.jpg'),
-                     url('../images/header-image/blue-desktop_@2x.jpg');                    
+                     url('../images/header-image/blue-desktop_@2x.jpg');
                 }
 
 
                 @media screen and (min-device-pixel-ratio: 3),
                     screen and (-webkit-min-device-pixel-ratio: 3),
                     screen and (min-resolution: 288dpi),
-                    screen and (min-resolution: 3dppx) {                       
+                    screen and (min-resolution: 3dppx) {
                             background: url('../images/header-image/yellow-desktop_@4x.jpg'),
                              url('../images/header-image/orange-desktop_@4x.jpg'),
                              url('../images/header-image/red-desktop_@4x.jpg'),
                              url('../images/header-image/pink-desktop_@4x.jpg'),
                             url('../images/header-image/blue-desktop_@4x.jpg');
-                           
+
                 }
             }
-                
+
         }
 
 
 
 
-    
+
 
 
 
@@ -283,12 +283,18 @@ screen and (min-resolution: 3dppx) {
     background-color: var(--bg-cl);
     color: var(--btn-bg-color);
 
+    &.active {
+      background-color: var(--btn-bg-color);
+      color:  var(--bg-cl);
+      cursor: initial;
+    }
+
     &.home{
-        width: 87px;        
+        width: 87px;
     }
 
     &.libr{
-        width: 113px;        
+        width: 113px;
     }
 
    &.current-page{
@@ -306,11 +312,11 @@ screen and (min-resolution: 3dppx) {
     @media screen and (min-width: 768px){
         height: 38px;
         &.home{
-            width: 83px;        
+            width: 83px;
         }
-    
+
         &.libr{
-            width: 109px;        
+            width: 109px;
         }
 
     }
@@ -318,16 +324,16 @@ screen and (min-resolution: 3dppx) {
     @media screen and (min-width: 1280px){
         height: 42px;
         &.home{
-            width: 99px;        
+            width: 99px;
         }
-    
+
         &.libr{
-            width: 117px;        
+            width: 117px;
         }
 
     }
 
-    
+
 }
 
 
@@ -363,7 +369,7 @@ screen and (min-resolution: 3dppx) {
         padding-left: 16px;
         padding-right:16px;
     }
-    
+
 
     @media screen and (min-width: 1280px) {
         width: 187px;
@@ -384,8 +390,8 @@ screen and (min-resolution: 3dppx) {
     outline: 0;
     border: 0;
     border-radius: var(--btn-radius);
-    background-color: transparent;   
-    
+    background-color: transparent;
+
 
 
     @media screen and (min-width: 768px){
@@ -405,7 +411,7 @@ screen and (min-resolution: 3dppx) {
     font-weight: 400;
     font-size: 12px;
     line-height: 1.16;
-    color: var(--btn-bg-color); 
+    color: var(--btn-bg-color);
 
     @media screen and (min-width: 768px){
         font-size: 14px;
@@ -421,9 +427,9 @@ screen and (min-resolution: 3dppx) {
 .header__search-buttn{
     outline: none;
     border: none;
-    background-color: transparent;  
+    background-color: transparent;
     padding: 0;
-    // padding-bottom: 5px;    
+    // padding-bottom: 5px;
 }
 
 .header__icon.search{
@@ -473,38 +479,44 @@ screen and (min-resolution: 3dppx) {
         margin-right: 16px;
     }
 
-   
+
+
 
     @keyframes flip {
+
         0% {
-            transform:  rotateY(0);
-            animation-timing-function: ease-out;
+            transform: perspective(200px) rotateY(0);
+            animation-timing-function: ease;
         }
         40% {
-            transform:  translateZ(150px) rotateY(170deg);
-            animation-timing-function: ease-out;
+            transform: perspective(200px) rotateY(170deg);
+            animation-timing-function: ease;
         }
         50% {
-            transform:  translateZ(150px) rotateY(190deg) scale(1);
-            animation-timing-function: ease-in;
+            transform: perspective(200px)  rotateY(190deg) ;
+            animation-timing-function: ease;
         }
         80% {
-            transform:  rotateY(360deg) scale(1);
-            animation-timing-function: ease-in;
+            transform: perspective(200px) rotateY(360deg) ;
+            animation-timing-function: ease;
         }
         100% {
-            transform: scale(1);
-            animation-timing-function: ease-in;
+            transform: perspective(200px) scale(1);
+            animation-timing-function: ease;
+            
         }
     }
-
-
-    
+        
+      
 }
+   
 
 
-.header__logo-link{ 
-    display: flex;   
+
+
+
+.header__logo-link{
+    display: flex;
     justify-content: center;
     font-family: 'Roboto';
     font-style: normal;
@@ -553,7 +565,7 @@ screen and (min-resolution: 3dppx) {
 }
 
 .header__buttons-libr {
-    
+
 
     @media screen and (min-width: 768px){
         display: flex;
@@ -567,7 +579,7 @@ screen and (min-resolution: 3dppx) {
 
 .header__buttn-libr{
 
-    
+
 
     @media screen and (max-width:767px) {
         position: absolute;
@@ -582,10 +594,10 @@ screen and (min-resolution: 3dppx) {
     @media screen and (min-width:1280px) {
         margin-left: 519px;
     }
-    
+
 }
 
-.header__buttn{    
+.header__buttn{
     height: 34px;
     border-radius: var(--btn-radius);
     background-color: var(--bg-cl);
@@ -595,33 +607,33 @@ screen and (min-resolution: 3dppx) {
     font-size: 12px;
     line-height: 14px;
 
-  
+
 
     &.watch{
         width:102px;
-        
+
     }
 
     &.queue{
         width: 86px;
     }
 
-    &.watch:hover,
-    &.watch:focus,
-    &.queue:hover,
-    &.queue:focus{
+    &.watch:hover:not(.active),
+    &.watch:focus:not(.active),
+    &.queue:hover:not(.active),
+    &.queue:focus:not(.active){
         background-color: var(--accent-txt-cl);
         color:  var(--bg-cl);
     }
 
     @media screen and (min-width: 768px){
         height: 38px;
-       
+
         &.watch{
             width:102px;
-            
+
         }
-    
+
         &.queue{
             width: 86px;
         }
@@ -630,20 +642,20 @@ screen and (min-resolution: 3dppx) {
     @media screen and (min-width: 1280px){
         height: 42px;
         &.watch{
-            width:120px;           
+            width:120px;
         }
-    
+
         &.queue{
             width: 86px;
         }
     }
 
-    
+
 }
 
 
 
-// 
+//
 
 
 

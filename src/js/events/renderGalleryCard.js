@@ -14,23 +14,28 @@ export function renderCardWithGenres(movie) {
   // if (typeof release !== 'undefined' && release.length > 4) {
   //   year = release.slice(0, 4);
   // }
-  return `<li class="gallery__item">
-             <a class="gallery__link" href="#" data-modal-open data-id="${id}">
-              <img class="gallery__image" src="${posterUrl}" alt="${title} movie poster" loading="lazy">
-             <div class="info">
-              <h3 class="info__item">${title}</h3>
-               <div class="info-detail">
-                <p class="info-detail__item">${genresToShow.join(', ')}</p>
-   <p class="info-detail__item">${year}
-  <span class="film-rating film-rating--${getClassByRate(vote_average)}">
-    ${Number(vote_average).toFixed(1)}</span></p>
-               </div>
-             </div>
-            </a>
-           </li>`;
+  return `
+    <li class="gallery__item">
+      <a class="gallery__link" href="#" data-modal-open data-id="${id}">
+        <img class="gallery__image" src="${posterUrl}" alt="${title} movie poster" loading="lazy">
+        <div class="info">
+          <h3 class="info__item">${title}</h3>
+          <div class="info-detail">
+            <p class="info-detail__item">${genresToShow.join(', ')}</p>
+            <p class="info-detail__item">${year}
+              <span class="film-rating film-rating--${getClassByRate(vote_average)}">
+                ${Number(vote_average).toFixed(1)}
+              </span>
+            </p>
+          </div>
+        </div>
+      </a>
+    </li>
+  `;
 }
 
 export function renderListMovies(list) {
+
   const movieCards = list.map(movie => renderCardWithGenres(movie));
   const gallery = document.querySelector('.gallery');
   gallery.innerHTML = movieCards.join('');
