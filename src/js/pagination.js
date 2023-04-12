@@ -1,14 +1,9 @@
 import Pagination from 'tui-pagination';
 // import 'tui-pagination/dist/tui-pagination.css';
-import { serviceApi } from './services/service-api';
-import {
-  renderListMovies,
-  setFilmsToLocalStorage,
-} from './events/renderGalleryCard';
 
 const container = document.querySelector('#pagination');
 const options = {
-  totalItems: 20000,
+  totalItems: 0,
   itemsPerPage: 20,
   visiblePages: 5,
   page: 1,
@@ -34,15 +29,9 @@ const options = {
   },
 };
 
-console.log()
-export  const pagination = new Pagination(container, options);
+export const pagination = new Pagination(container, options);
 
 
- pagination.on('afterMove', (event) => {
-    const currentPage = event.page;
-    serviceApi
-  .getListMovies('week', currentPage)
-  .then(res => renderListMovies(res.listMovies))
-  .catch(error => console.log(error));
-   window.scrollTo(0, 0)
-});
+
+
+
