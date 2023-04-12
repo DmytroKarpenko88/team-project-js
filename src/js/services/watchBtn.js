@@ -7,11 +7,17 @@ import {libraryPageNotCard} from '../events/libraryPageNotCard';
 import { renderListMovies } from '../events/renderGalleryCard';
 // import smoothScroll from '../events/scrollUp';
 
+const classTheme = localStorage.getItem('active-theme') === 'dark-theme'
+  ? 'dark-theme'
+  : 'light-theme';
+
+document.body.classList.add(classTheme);
+
 const LIST_WATCHED = 'watchedMovies';
 const LIST_QUEUE = 'listQueue';
 const baseActive = LIST_WATCHED;
-
 const blkCtrlLib = document.querySelector('.js-blockCtrlLib');
+const blkLibraryEmpty = document.querySelector('.library-gallery');
 
 if (blkCtrlLib && Object.keys(JSON.parse(localStorage.getItem(baseActive))).length > 0) {
   const listMovies = getArrayFromObjMovies(baseActive);
