@@ -129,10 +129,9 @@ const markup = `
 <div class="backdrop-modal modal-open">
   <div class="team-modal">
     <h2 class="team__modal-title">GoIT team 5</h2>
-
-    <button class="modale__btn-close btn__close-modal">
-      <svg class="modal__btn-icon" width="18" height="18">
-        <use href="./images/icons-sprite.svg#icon-close"></use>
+    <button type="button" class="button-modal" data-modal-close>
+      <svg class="modal-svg" width="20" height="20">
+        <use class="modal-icon" href="./images/icons-sprite.svg#icon-close"></use>
       </svg>
     </button>
     <div class="team__modal-leader">
@@ -482,11 +481,10 @@ const markup = `
       `;
 //
 const container = document.querySelector('.js-team-modal');
-// const markup2 = `<img src="${kirillUrl}"/>`;
-
-container.addEventListener('click', openModal);
 
 const modal = basicLightbox.create(markup);
+
+container.addEventListener('click', openModal);
 
 function openModal(e) {
   modal.show();
