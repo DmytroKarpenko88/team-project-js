@@ -13,5 +13,5 @@ import './js/events/filter';
 import './js/events/themeSwitcher';
 import './js/events/preloader';
 
-import './js/teamLightbox';
+import './js/teamModal';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
