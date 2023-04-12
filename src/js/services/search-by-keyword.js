@@ -48,5 +48,5 @@ async function onSearchByKeyword(e) {
   // функція, яка буде показувати лоадер
 }
 
-export {totalResults}
+
 
