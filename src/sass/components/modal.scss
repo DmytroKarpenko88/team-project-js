@@ -155,6 +155,7 @@
 .modal-btn-container {
   display: flex;
   gap: 8px;
+  margin-bottom: 16px;
 }
 
 .content-modal-title {
@@ -233,4 +234,10 @@
   position: absolute;
   top: 8px;
   right: 8px;
+}
+
+.modal-trailer {
+  iframe {
+    max-width: 100%;
+  }
 }
