@@ -325,11 +325,11 @@
     padding: 10px 22px;
   }
 
-  // &.active {
-  //   background-color: var(--btn-bg-color);
-  //   color: var(--bg-cl);
-  //   cursor: initial;
-  // }
+  &.active {
+    background-color: var(--btn-bg-color);
+    color: var(--bg-cl);
+    cursor: initial;
+  }
 
 
 
