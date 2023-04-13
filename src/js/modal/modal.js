@@ -67,6 +67,8 @@ function closeModalByEscape(event) {
 }
 
 function renderTrailer(key) {
+  if (!key) return;
+
   const blockTrailer = document.querySelector('.js-modalTrailer');
   blockTrailer.innerHTML = `
     <iframe width="560" height="240" src="https://www.youtube.com/embed/${key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -74,14 +76,11 @@ function renderTrailer(key) {
 }
 
 function renderPopupBody(id) {
-  console.log('id', id);
   dataMovie = JSON.parse(localStorage.getItem('listMovies'))[id];
-
-  console.log('dataMovie', dataMovie);
 
   serviceApi.getTrailer(id)
     .then(renderTrailer)
-    .catch(err => console.log(err));
+    .catch(err => {});
 
   const {
     poster,
