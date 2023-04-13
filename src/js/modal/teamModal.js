@@ -125,13 +125,16 @@ const markup = `<div class="team-wrapper">
 */
 
 //
+
+/*
 const markup = `
-<div class="backdrop-modal modal-open">
+<div class="team-wrapper backdrop-modal modal-open is-hiden"  data-modal-team>
   <div class="team-modal">
-    <h2 class="team__modal-title">GoIT team 5</h2>
-    <button type="button" class="button-modal" data-modal-close>
-      <svg class="modal-svg" width="20" height="20">
-        <use class="modal-icon" href="./images/icons-sprite.svg#icon-close"></use>
+    <h2 class="team__modal-title">13 JEDIS OF JS</h2>
+
+    <button class="modale__btn-close btn__close-modal">
+      <svg class="modal__btn-icon" width="18" height="18">
+        <use href="./images/icons-sprite.svg#icon-close"></use>
       </svg>
     </button>
     <div class="team__modal-leader">
@@ -225,10 +228,10 @@ const markup = `
       <li class="team__modal-item">
         <img
           class="team__modal-pic"
-          src="/src/images/team.images/Halyna_Tulchii.png"
+          src="/src/images/team.images/maria-shymanska.jpg"
           alt="Developer"
         />
-        <p class="team__modal-member">Halyna Tulchii</p>
+        <p class="team__modal-member">Maria Shymanska</p>
         <p class="team__modal-role">Developer</p>
         <div class="social-icon">
           <a
@@ -242,6 +245,35 @@ const markup = `
           </a>
           <a
             href="https://www.linkedin.com/in/maria-shymanska-aa8277251/"
+            class="team__modal-link"
+            target="_blank"
+          >
+            <svg class="icon-linkedin" width="25" height="25">
+              <use href="/src/images/icons-sprite.svg#icon-linkedin"></use>
+            </svg>
+          </a>
+        </div>
+      </li>
+      <li class="team__modal-item">
+        <img
+          class="team__modal-pic"
+          src="/src/images/team.images/Halyna_Tulchii.png"
+          alt="Developer"
+        />
+        <p class="team__modal-member">Halyna Tulchii</p>
+        <p class="team__modal-role">Developer</p>
+        <div class="social-icon">
+          <a
+            href="https://github.com/AliaTulchii"
+            class="team__modal-link"
+            target="_blank"
+          >
+            <svg class="icon-github" width="25" height="25">
+              <use href="/src/images/icons-sprite.svg#icon-github"></use>
+            </svg>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/halyna-tulchii-869569271/"
             class="team__modal-link"
             target="_blank"
           >
@@ -477,7 +509,8 @@ const markup = `
     </li>
   </ul>
 </div>
-</div>
+
+</div> 
       `;
 //
 const container = document.querySelector('.js-team-modal');
@@ -496,5 +529,47 @@ function openModal(e) {
       modal.close();
       window.removeEventListener('keydown', closeModalHandler);
     }
+  }
+} */
+
+const backdropTeam = document.querySelector('[data-modal-team]');
+const openButtonModal = document.querySelector('.js-team-modal');
+const closeButtonModal = document.querySelector('[data-modal-team-close]');
+const body = document.querySelector('body');
+const modal = document.querySelector('.modal');
+
+openButtonModal.addEventListener('click', onOpenButtonClick);
+closeButtonModal.addEventListener('click', onCloseButtonClick);
+backdropTeam.addEventListener('click', onBackdropClick);
+// modal.addEventListener('click', handleClickModal);
+
+function onOpenButtonClick(e) {
+  e.preventDefault();
+  const currentMovie = e.target.closest('[data-modal-open]');
+
+  console.log('open');
+
+  backdropTeam.classList.remove('is-hidden');
+  window.addEventListener('keydown', closeModalByEscape);
+  body.style.overflow = 'hidden';
+}
+
+function onCloseButtonClick() {
+  backdropTeam.classList.add('is-hidden');
+  window.removeEventListener('keydown', closeModalByEscape);
+  document.querySelector('.modal-content-container').innerHTML = '';
+  body.style.overflow = 'auto';
+}
+
+function onBackdropClick(event) {
+  if (event.currentTarget === event.target) {
+    onCloseButtonClick();
+  }
+}
+
+function closeModalByEscape(event) {
+  const closeButtonEscape = 'Escape';
+  if (event.code === closeButtonEscape) {
+    onCloseButtonClick();
   }
 }

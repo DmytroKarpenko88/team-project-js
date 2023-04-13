@@ -27,9 +27,17 @@ function setThemeInfoToLocalStorage() {
 }
 
 getThemeInfoFromLocalStorage();
+setThemeOnLoad();
 
 function getThemeInfoFromLocalStorage() {
   if (localStorage.getItem('active-theme') === Theme.DARK) {
     onCheckboxChange();
+  }
+}
+
+function setThemeOnLoad() {
+  if (localStorage.getItem('active-theme') === Theme.DARK) {
+    document.body.classList.add(Theme.DARK);
+    checkbox.setAttribute('checked', true);
   }
 }
