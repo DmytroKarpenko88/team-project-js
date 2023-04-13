@@ -74,7 +74,10 @@ function renderTrailer(key) {
 }
 
 function renderPopupBody(id) {
+  console.log('id', id);
   dataMovie = JSON.parse(localStorage.getItem('listMovies'))[id];
+
+  console.log('dataMovie', dataMovie);
 
   serviceApi.getTrailer(id)
     .then(renderTrailer)
@@ -168,13 +171,13 @@ function rerenderLibMovies(typeList) {
      pagination.off();
     //  pagination._options.totalItems = newArray.length;
      pagination.reset(newArray.length);
-     
+
     const currentPage = pagination.getCurrentPage(); //1
     const itemsPerPage = pagination._options.itemsPerPage; //6
     const start = (currentPage - 1) * itemsPerPage; //0
     const end = start + itemsPerPage;//6
     const itemsForPage = newArray.slice(start, end);
-     
+
       renderListMovies(itemsForPage);
 
       pagination.on('afterMove', (event) => {
