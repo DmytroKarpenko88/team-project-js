@@ -2,6 +2,7 @@ import { serviceApi } from '../services/service-api';
 import { renderListMovies } from '../events/renderGalleryCard';
 import { getArrayFromObjMovies } from '../services/watchBtn';
 import { libraryPageNotCard } from '../events/libraryPageNotCard';
+import { pagination } from '../services/pagination-library-queue';
 
 const backdrop = document.querySelector('[data-modal]')
 const openButtonModal = document.querySelector('.gallery');
@@ -162,7 +163,34 @@ function rerenderLibMovies(typeList) {
 
   if (typeList === getActiveType()) {
     if (getArrayFromObjMovies(typeList).length > 0) {
-      renderListMovies(getArrayFromObjMovies(typeList));
+     const newArray = getArrayFromObjMovies(typeList)
+     console.log("newArray:", newArray.length)
+     
+    //  pagination._options.totalItems = newArray.length;
+     pagination.reset(newArray.length);
+     pagination.off();
+
+    const currentPage = pagination.getCurrentPage(); //1
+    const itemsPerPage = pagination._options.itemsPerPage; //6
+    const start = (currentPage - 1) * itemsPerPage; //0
+    const end = start + itemsPerPage;//6
+    const itemsForPage = newArray.slice(start, end);
+     
+    
+
+      renderListMovies(itemsForPage);
+
+      pagination.on('afterMove', (event) => {
+        const currentPage = event.page; //1
+        const itemsPerPage = pagination._options.itemsPerPage; //6
+        const start = (currentPage - 1) * itemsPerPage; //0
+        const end = start + itemsPerPage;//6
+        const itemsForPage = newArray.slice(start, end);
+
+        renderListMovies(itemsForPage);
+        console.log(itemsForPage);
+    });
+
       blkLibraryEmpty.classList.remove('active');
     } else {
       libraryPageNotCard();

@@ -2,7 +2,7 @@ import Pagination from 'tui-pagination';
 
 const options = {
   totalItems: 0,
-  itemsPerPage: 6,
+  itemsPerPage: 3,
   visiblePages: 5,
   page: 1,
   centerAlign: true,
@@ -28,3 +28,9 @@ const options = {
 };
 
 export const pagination = new Pagination('#pagination', options);
+// console.log("pagination:", pagination)
+
+
+// const page = pagination.getCurrentPage()
+
+// console.log("page:", page)
