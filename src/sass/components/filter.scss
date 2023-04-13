@@ -1,10 +1,13 @@
+
 .movie-switcher {
   position: absolute;
   bottom: 70px;
   left: 50%;
 
   display: flex;
-  border-radius: 4px;
+  background-color: #a25d5d75;
+  border: 3px solid #b92f2c;
+  border-radius: 30px;
   overflow: hidden;
   font-size: 11px;
   transform: translateX(-50%);
@@ -26,15 +29,19 @@
   padding: 6px 10px;
   // justify-content: center;
   text-align: center;
-  color: #b92f2c;
+  color: #fff;
   text-transform: uppercase;
   font-weight: 500;
-  background-color: #fff;
+  background-color: transparent;
   border: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
-  &:not(:last-child) {
+  &.active{
+    color: #b92f2c;
+  }
+
+  &:not(:last-child){
     margin-right: 5px;
   }
 
@@ -48,7 +55,7 @@
   }
 
   &:hover:not(.active) {
-    background-color: #b92f2c;
+    background-color: #9c1a348a;
     color: #fff;
   }
 
@@ -57,83 +64,84 @@
     color: #fff;
   }
 
-  &:first-of-type {
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-  }
+  // &:first-of-type {
+  //   border:2px;
+  // }
 
-  &:last-of-type {
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-  }
+  // &:last-of-type {
+  //   border:2px;
+  // }
 }
 
-// .movie-switcher {
-//   position: absolute;
-//   bottom: 70px;
-//   left: 50%;
 
-//   display: flex;
-//   background-color: #ffffff4f;
-//   border: 3px solid #b92f2c;
-//   border-radius: 30px;
-//   overflow: hidden;
-//   font-size: 11px;
-//   transform: translateX(-50%);
-//   @media screen and (min-width: $tablet) {
-//     bottom: 17px;
-//     left: 75%;
 
-//     font-size: 12px;
-//   }
-//   @media screen and (min-width: $desktop) {
-//     bottom: 38px;
-//     left: 78%;
 
-//     font-size: 14px;
-//   }
-// }
-// .movie-switcher__button {
-//   flex-grow: 1;
-//   padding: 6px 10px;
-//   // justify-content: center;
-//   text-align: center;
-//   color: #fff;
-//   text-transform: uppercase;
-//   font-weight: 500;
-//   background-color: transparent;
-//   border: none;
-//   cursor: pointer;
-//   transition: all 0.2s ease-in-out;
+// // .movie-switcher {
+// //   position: absolute;
+// //   bottom: 70px;
+// //   left: 50%;
 
-//   &:not(:last-child){
-//     margin-right: 5px;
-//   }
+// //   display: flex;
+// //   background-color: #ffffff4f;
+// //   border: 3px solid #b92f2c;
+// //   border-radius: 30px;
+// //   overflow: hidden;
+// //   font-size: 11px;
+// //   transform: translateX(-50%);
+// //   @media screen and (min-width: $tablet) {
+// //     bottom: 17px;
+// //     left: 75%;
 
-//   @media screen and (min-width: $tablet) {
-//     padding: 10px 18px;
-//     font-weight: 600;
-//   }
-//   @media screen and (min-width: $desktop) {
-//     padding: 12px 20px;
-//     font-weight: 600;
-//   }
+// //     font-size: 12px;
+// //   }
+// //   @media screen and (min-width: $desktop) {
+// //     bottom: 38px;
+// //     left: 78%;
 
-//   &:hover:not(.active) {
-//     background-color: #9c1a348a;
-//     color: #fff;
-//   }
+// //     font-size: 14px;
+// //   }
+// // }
+// // .movie-switcher__button {
+// //   flex-grow: 1;
+// //   padding: 6px 10px;
+// //   // justify-content: center;
+// //   text-align: center;
+// //   color: #fff;
+// //   text-transform: uppercase;
+// //   font-weight: 500;
+// //   background-color: transparent;
+// //   border: none;
+// //   cursor: pointer;
+// //   transition: all 0.2s ease-in-out;
 
-//   &.active {
-//     background-color: #b92f2c;
-//     color: #fff;
-//   }
+// //   &:not(:last-child){
+// //     margin-right: 5px;
+// //   }
 
-//   // &:first-of-type {
-//   //   border:2px;
-//   // }
+// //   @media screen and (min-width: $tablet) {
+// //     padding: 10px 18px;
+// //     font-weight: 600;
+// //   }
+// //   @media screen and (min-width: $desktop) {
+// //     padding: 12px 20px;
+// //     font-weight: 600;
+// //   }
 
-//   // &:last-of-type {
-//   //   border:2px;
-//   // }
-// }
+// //   &:hover:not(.active) {
+// //     background-color: #9c1a348a;
+// //     color: #fff;
+// //   }
+
+// //   &.active {
+// //     background-color: #b92f2c;
+// //     color: #fff;
+// //   }
+
+// //   // &:first-of-type {
+// //   //   border:2px;
+// //   // }
+
+// //   // &:last-of-type {
+// //   //   border:2px;
+// //   // }
+// // }
