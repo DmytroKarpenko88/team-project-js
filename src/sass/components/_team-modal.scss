@@ -130,19 +130,24 @@
 }
 .team-modal {
   position: relative;
-  top: 0;
+  top: 20px;
+  bottom: 20px;
   left: 50%;
+  padding-top:10px;
+  padding-bottom: 10px;
   transform: translateX(-50%);
   background: rgb(194, 190, 190);
   max-width: 90%;
   @media screen and (min-width: $tablet) {
     // position: absolute;
-    top: 0;
+    top: 20px;
+    bottom: 20px;
     max-width: 90%;
   }
   @media screen and (min-width: $desktop) {
     // position: absolute;
-    top: 0;
+    top: 20px;
+    bottom: 20px;
     // left: 28%;
     max-width: 900px;
   }
@@ -186,6 +191,9 @@
       margin-bottom: 15px;
     }
   }
+
+  
+
   @media screen and (min-width: $tablet) {
     flex-basis: calc(100% / 3 - 20px);
     max-width: 330px;
