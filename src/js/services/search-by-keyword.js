@@ -20,13 +20,6 @@ async function onSearchByKeyword(e) {
   try {
     const res = await serviceApi.searchMovie(query);
 
-    setFilmsToLocalStorage(res.listMovies);
-    renderListMovies(res['listMovies']);
-
-    pagination._options.totalItems = res.totalResults;
-    pagination.reset(res.totalResults);
-    pagination.off();
-
     if (!query) {
       return Notify.failure(
         'Sorry, we didn`t find anything. Please, type something'
@@ -36,22 +29,33 @@ async function onSearchByKeyword(e) {
         'Sorry, we didn`t find anything. Please, try again'
       );
     } else if (res.totalResults > 1) {
-      return Notify.success(`Hooray, we found ${res.totalResults} films`);
+       Notify.success(`Hooray, we found ${res.totalResults} films`);
+      
+
+    setFilmsToLocalStorage(res.listMovies);
+    renderListMovies(res['listMovies']);
+
+    pagination._options.totalItems = res.totalResults;
+    pagination.reset(res.totalResults);
+    pagination.off();
+
+    pagination.on('afterMove', event => {
+      const currentPage = event.page;
+  
+      serviceApi
+        .searchMovie(query, currentPage)
+        .then(res => {
+          return renderListMovies(res['listMovies']);
+        })
+        .catch(console.error);
+  
+      window.scrollTo(0, 0);
+    });
     }
+
   } catch (err) {
     console.error(err.message);
   }
 
-  pagination.on('afterMove', event => {
-    const currentPage = event.page;
-
-    serviceApi
-      .searchMovie(query, currentPage)
-      .then(res => {
-        return renderListMovies(res['listMovies']);
-      })
-      .catch(console.error);
-
-    window.scrollTo(0, 0);
-  });
+  
 }
