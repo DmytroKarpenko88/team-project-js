@@ -133,7 +133,7 @@
   top: 20px;
   bottom: 20px;
   left: 50%;
-  padding-top:10px;
+  padding-top: 10px;
   padding-bottom: 10px;
   transform: translateX(-50%);
   background: rgb(194, 190, 190);
@@ -191,8 +191,6 @@
       margin-bottom: 15px;
     }
   }
-
-  
 
   @media screen and (min-width: $tablet) {
     flex-basis: calc(100% / 3 - 20px);
@@ -289,7 +287,7 @@
   border: 1px solid rgba(0, 0, 0, 0.1);
   color: #000;
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
+}
   .backdrop-modal.modal-open {
     position: fixed;
     height: 100vh;
@@ -310,21 +308,20 @@
   .team-modal {
     position: relative;
     top: 0;
-    left: 5%;
+    left: 50%;
     background: rgb(148, 147, 147);
-    max-width: 90%;
+    max-width: 65%;
     padding: 10px;
     @media screen and (min-width: $tablet) {
-      position: absolute;
+      // position: absolute;
       top: 0;
-      max-width: 90%;
+      max-width: 65%;
     }
     @media screen and (min-width: $desktop) {
-      position: absolute;
+      // position: absolute;
       padding: 10px;
       top: 0;
-      left: 28%;
-      max-width: 900px;
+      max-width: 65%;
     }
   }
   .team__modal-leader {
@@ -457,8 +454,8 @@
     &:focus {
       color: var(--accent-txt-cl);
     }
-    &__icon {
-      fill: currentColor;
-    }
   }
-}
+  .modal__btn-icon {
+    fill: currentColor;
+  }
+

@@ -236,7 +236,7 @@
 
 .header__list-buttons {
   display: flex;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .header__list-item:not(:last-child) {
@@ -350,7 +350,7 @@
     padding: 12px 24px;
 
     &.libr{
-      padding: 12px 20px;
+      padding: 12px 18px;
     }
     }
 
@@ -371,6 +371,7 @@
 .header__search {
   width: 252px;
   height: 34px;
+  
   padding-left: 14px;
   padding-right: 14px;
   display: flex;
@@ -400,6 +401,7 @@
 
 .header__input {
   width: 210px;
+  
   // padding-bottom: 5px;
   font-size: 12px;
   line-height: 1.16;
@@ -555,6 +557,7 @@
     margin-bottom: 105px;
     flex-direction: row-reverse;
     justify-content: flex-end;
+    align-items: baseline;
   }
 
   @media screen and (min-width: 1280px) {
@@ -568,10 +571,12 @@
 .header__buttons-libr {
   @media screen and (min-width: 768px) {
     display: flex;
+    align-items: baseline;
   }
 
   @media screen and (min-width: 1280px) {
     display: flex;
+    align-items: baseline;
   }
   // justify-content: space-between;
 }
@@ -581,7 +586,7 @@
   @media screen and (max-width: 767px) {
     position: absolute;
     bottom: 24px;
-    left: 44px;
+    left: 68px;
   }
 
   @media screen and (min-width: 768px) {
