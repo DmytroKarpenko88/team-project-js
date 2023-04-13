@@ -45,7 +45,8 @@ async function onSearchByKeyword(e) {
       serviceApi
         .searchMovie(query, currentPage)
         .then(res => {
-          return renderListMovies(res['listMovies']);
+          setFilmsToLocalStorage(res.listMovies);
+           renderListMovies(res['listMovies']);
         })
         .catch(console.error);
   
