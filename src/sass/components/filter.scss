@@ -34,7 +34,7 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
-  &:not(:last-child){
+  &:not(:last-child) {
     margin-right: 5px;
   }
 
@@ -48,7 +48,7 @@
   }
 
   &:hover:not(.active) {
-    background-color: #702502b3;
+    background-color: #b92f2c;
     color: #fff;
   }
 
@@ -67,7 +67,6 @@
     border-bottom-right-radius: 4px;
   }
 }
-
 
 // .movie-switcher {
 //   position: absolute;
