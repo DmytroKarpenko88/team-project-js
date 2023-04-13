@@ -236,7 +236,7 @@
 
 .header__list-buttons {
   display: flex;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .header__list-item:not(:last-child) {
@@ -371,6 +371,7 @@
 .header__search {
   width: 252px;
   height: 34px;
+  
   padding-left: 14px;
   padding-right: 14px;
   display: flex;
@@ -400,6 +401,7 @@
 
 .header__input {
   width: 210px;
+  
   // padding-bottom: 5px;
   font-size: 12px;
   line-height: 1.16;
