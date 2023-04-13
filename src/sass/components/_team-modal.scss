@@ -131,7 +131,8 @@
 .team-modal {
   position: relative;
   top: 0;
-  left: 5%;
+  left: 50%;
+  transform: translateX(-50%);
   background: rgb(194, 190, 190);
   max-width: 90%;
   @media screen and (min-width: $tablet) {
@@ -304,6 +305,7 @@
     left: 5%;
     background: rgb(148, 147, 147);
     max-width: 90%;
+    padding: 10px;
     @media screen and (min-width: $tablet) {
       position: absolute;
       top: 0;
@@ -311,6 +313,7 @@
     }
     @media screen and (min-width: $desktop) {
       position: absolute;
+      padding: 10px;
       top: 0;
       left: 28%;
       max-width: 900px;
