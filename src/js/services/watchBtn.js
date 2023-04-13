@@ -28,29 +28,35 @@ blkCtrlLib && setActiveButton(baseActive);
 
 if (blkCtrlLib && Object.keys(JSON.parse(localStorage.getItem(baseActive))).length > 0) {
   const listMovies = getArrayFromObjMovies(baseActive);
-
-  const itemsPerPage = pagination._options.itemsPerPage;
-  const start =  itemsPerPage;
-  const end = (start + itemsPerPage) * itemsPerPage;
-  const itemsForPage = listMovies.slice(start, end);
-  
+  console.log("listMovies:", listMovies)
+ 
+  const currentPage = pagination.getCurrentPage(); //1
+    const itemsPerPage = pagination._options.itemsPerPage; //6
+    const start = (currentPage - 1) * itemsPerPage; //0
+    const end = start + itemsPerPage;//6
+    const itemsForPage = listMovies.slice(start, end);
   renderListMovies(itemsForPage);
 
-  blkLibraryEmpty.classList.remove('active');
+  
 
-  pagination._options.totalItems = listMovies.length;
-  pagination.reset(listMovies.length);
-  pagination.off(); 
+  // pagination._options.totalItems = listMovies.length;
+pagination.reset(listMovies.length);
+pagination.off();
    
   pagination.on('afterMove', (event) => {
     const currentPage = event.page; //1
     const itemsPerPage = pagination._options.itemsPerPage; //6
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
+    const start = (currentPage - 1) * itemsPerPage; //0
+    const end = start + itemsPerPage;//6
+    console.log('wchbtnLoad');
     const itemsForPage = listMovies.slice(start, end);
     renderListMovies(itemsForPage);
     console.log(itemsForPage);
 });
+
+blkLibraryEmpty.classList.remove('active');
+
+
 } else {
   libraryPageNotCard();
 }
@@ -112,16 +118,17 @@ function onClickBtn(event) {
   console.log(type, listMovies);
 
   if (listMovies.length > 0) {
-    const itemsPerPage = pagination._options.itemsPerPage;
-    const start =  itemsPerPage;
-    // const end = start + itemsPerPage;
-    const itemsForPage = listMovies.slice(start, 0);
+    const currentPage = pagination.getCurrentPage(); //1
+    const itemsPerPage = pagination._options.itemsPerPage; //6
+    const start = (currentPage - 1) * itemsPerPage; //0
+    const end = start + itemsPerPage;//6
+    const itemsForPage = listMovies.slice(start, end);
   renderListMovies(itemsForPage);
   
     blkLibraryEmpty.classList.remove('active');
 
 
-  pagination._options.totalItems = listMovies.length;
+  // pagination._options.totalItems = listMovies.length;
   pagination.reset(listMovies.length);
   pagination.off();  
 
@@ -131,6 +138,7 @@ function onClickBtn(event) {
     const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     const itemsForPage = listMovies.slice(start, end);
+    console.log('modalClick');
     renderListMovies(itemsForPage);
     console.log(itemsForPage);
 });
