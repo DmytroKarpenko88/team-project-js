@@ -1,73 +1,138 @@
-<div class="backdrop is-hidden" data-modal>
-  <div class="modal">
-    <button type="button" class="button-modal" data-modal-close>
-      <svg class="modal-svg" width="20" height="20">
-        <use class="modal-icon" href="./images/icons-sprite.svg#icon-close"></use>
-      </svg>
-    </button>
-    <div class="modal-content-container">
-      <div class="modal-photo-container">
-        <picture>
-          <source srcset="./images/modal.jpg 1x" media="(min-width: 1200px)" />
-          <source srcset="./images/modal.jpg 1x" media="(min-width: 768px)" />
-          <source srcset="./images/modal.jpg" media="(max-width: 767px)" />
-          <img src="./images/modal.jpg" width="" class="statistick-img" alt="" />
-        </picture>
-      </div>
-      <div class="content-modal">
-        <h2 class="modal-title">A FISTFUL OF LEAD</h2>
-        <div class="statistic-container">
-          <ul class="list">
-            <li>
-              <div>
-                <p>Vote / Votes</p>
-                <p><span class="statistic-vote">7.3</span>/<span class="statistic-votes">1260</span></p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <p>Popularity</p>
-                <p>100.2</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <p>Original Title</p>
-                <p></p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <p>Genre</p>
-                <p>A FISTFUL OF LEAD</p>
-              </div>
-            </li>
-        </div>
-        <h3 class="content-modal-title">About</h3>
-        <p class="content-modal">
-          Four of the West’s most infamous outlaws assemble to steal a huge
-          stash of gold from the most corrupt settlement of the gold rush towns.
-          But not all goes to plan one is killed and the other three escapes
-          with bags of gold hide out in the abandoned gold mine where they
-          happen across another gang of three – who themselves were planning to
-          hit the very same bank! As tensions rise, things go from bad to worse
-          as they realise the bags of gold are filled with lead... they’ve been
-          double crossed – but by who and how?
-        </p>
-        <div class="modal-btn-container">
-          <button class="modal-btn btn-add-watched">add to Watched</button>
-          <button class="modal-btn btn-add-queue">add to queue</button>
-        </div>
-      </div>
-    </div>
-  </div>
+import * as basicLightbox from 'basiclightbox';
+import dmytroUrl from '/src/images/team.images/dmytro-karpenko.jpg';
+import maiiaUrl from '/src/images/team.images/maiia-robeiko.jpg';
+import ruslanUrl from '/src/images/team.images/ruslan-boyko.jpg';
+import halynaUrl from '/src/images/team.images/halyna-tulchii.jpg';
+import mariaUrl from '/src/images/team.images/maria-shymanska.jpg';
+import ludmylaUrl from '/src/images/team.images/ludmyla-chumak.jpg';
+import artemUrl from '/src/images/team.images/artem-liaschenko.jpg';
+import sergiiUrl from '/src/images/team.images/sergii-podobrii.jpg';
+import andreiiUrl from '/src/images/team.images/andreii-pokotilo.jpg';
+import yuraUrl from '/src/images/team.images/yura-doloban.jpg';
+import marynaUrl from '/src/images/team.images/maryna-molchanova.jpg';
+import tetyanaUrl from '/src/images/team.images/tetyana-karlova.jpg';
+import kirillUrl from '/src/images/team.images/kirill-parasochka.jpg';
+import spriteUrl from '/src/images/icons-sprite.svg';
+/*
+const markup = `<div class="team-wrapper">
+<div class="team-card">
+    <img src="${dmytroUrl}" alt="Dmytro" class="team-image">
+    <p class="team-name">Dmytro Karpenko</p>
+    <p class="team-role">Team Lead</p>
+    <a href="https://www.linkedin.com/in/dmytro-karpenko-95a6221a" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
+      <use href="${spriteUrl}#linkedin"></use>
+    </svg>
+    </a>
 </div>
+<div class="team-card">
+    <img src="${maiiaUrl}" alt="Maiia" class="team-image">
+    <p class="team-name">Maiia Robeiko</p>
+    <p class="team-role">Scrum Master</p>
+    <a href="https://www.linkedin.com/in/maiiaro/" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
+      <use href="${spriteUrl}#linkedin"></use>
+    </svg></a>
+</div>
+<div class="team-card">
+    <img src="${ruslanUrl}" alt="Ruslan" class="team-image">
+    <p class="team-name">Ruslan Boiko</p>
+    <p class="team-role">Developer</p>
+    <a href="https://www.linkedin.com/in/ruslan-boiko/" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
+      <use href="${spriteUrl}#linkedin"></use>
+    </svg></a>
+</div>
+<div class="team-card">
+    <img src="${halynaUrl}" alt="Halyna" class="team-image">
+    <p class="team-name">Halyna Tulchii</p>
+    <p class="team-role">Developer</p>
+    <a href="https://www.linkedin.com/in/halyna-tulchii-869569271/" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
+      <use href="${spriteUrl}#linkedin"></use>
+    </svg></a>
+</div>
+<div class="team-card">
+    <img src="${mariaUrl}" alt="Maria" class="team-image">
+    <p class="team-name">Maria Shymanska</p>
+    <p class="team-role">Developer</p>
+    <a href="https://www.linkedin.com/in/maria-shymanska-aa8277251/" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
+      <use href="${spriteUrl}#linkedin"></use>
+    </svg></a>
+</div>
+<div class="team-card">
+    <img src="${ludmylaUrl}" alt="Ludmyla" class="team-image">
+    <p class="team-name">Ludmyla Chumak</p>
+    <p class="team-role">Developer</p>
+    <a href="https://www.linkedin.com/in/liudmyla-chumak-30732a164/" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
+      <use href="${spriteUrl}#linkedin"></use>
+    </svg></a>
+</div>
+<div class="team-card">
+    <img src="${artemUrl}" alt="Artem" class="team-image">
+    <p class="team-name">Artem Liaschenko</p>
+    <p class="team-role">Developer</p>
+    <a href="https://www.linkedin.com/in/artem-liaschenko-658819271" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
+      <use href="${spriteUrl}#linkedin"></use>
+    </svg></a>
+</div>
+<div class="team-card">
+    <img src="${sergiiUrl}" alt="Sergii" class="team-image">
+    <p class="team-name">Sergii Podobrii</p>
+    <p class="team-role">Developer</p>
+    <a href="https://github.com/Mamont777" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
+      <use href="${spriteUrl}#linkedin"></use>
+    </svg></a>
+</div>
+<div class="team-card">
+    <img src="${andreiiUrl}" alt="Andreii" class="team-image">
+    <p class="team-name">Andreii Pokotilo</p>
+    <p class="team-role">Developer</p>
+    <a href="https://www.linkedin.com/in/andrii-pokotilo/" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
+      <use href="${spriteUrl}#linkedin"></use>
+    </svg></a>
+</div>
+<div class="team-card">
+    <img src="${yuraUrl}" alt="Yura" class="team-image">
+    <p class="team-name">Yura Doloban</p>
+    <p class="team-role">Developer</p>
+    <a href="https://www.linkedin.com/in/yurii-doloban-055410254/" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
+      <use href="${spriteUrl}#linkedin"></use>
+    </svg></a>
+</div>
+<div class="team-card">
+    <img src="${marynaUrl}" alt="Maryna" class="team-image">
+    <p class="team-name">Maryna Molchanova</p>
+    <p class="team-role">Developer</p>
+    <a href="https://www.linkedin.com/in/maryna-molchanova-7a0772227/" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
+      <use href="${spriteUrl}#linkedin"></use>
+    </svg></a>
+</div>
+<div class="team-card">
+    <img src="${tetyanaUrl}" alt="Tetyana" class="team-image">
+    <p class="team-name">Tetyana Karlova</p>
+    <p class="team-role">Developer</p>
+    <a href="https://www.linkedin.com/in/tetiana-karlova-083784270" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
+      <use href="${spriteUrl}#linkedin"></use>
+    </svg></a>
+</div>
+<div class="team-card">
+    <img src="${kirillUrl}" alt="Kirill" class="team-image">
+    <p class="team-name">Kirill Parasochka</p>
+    <p class="team-role">Developer</p>
+    <a href="https://www.linkedin.com/in/кирилл-парасочка-825b2b134" target="_blank" class="team-git"><svg class="logo__icon" width="24" height="24">
+      <use href="${spriteUrl}#linkedin"></use>
+    </svg></a>
+</div>
+</div>`;
 
- <div class="backdrop modal-open is-hidden"  data-modal-team>
+*/
+
+//
+
+/*
+const markup = `
+<div class="team-wrapper backdrop-modal modal-open is-hiden"  data-modal-team>
   <div class="team-modal">
     <h2 class="team__modal-title">13 JEDIS OF JS</h2>
 
-    <button class="modale__btn-close btn__close-modal" data-modal-team-close>
+    <button class="modale__btn-close btn__close-modal">
       <svg class="modal__btn-icon" width="18" height="18">
         <use href="./images/icons-sprite.svg#icon-close"></use>
       </svg>
@@ -446,3 +511,65 @@
 </div>
 
 </div> 
+      `;
+//
+const container = document.querySelector('.js-team-modal');
+
+const modal = basicLightbox.create(markup);
+
+container.addEventListener('click', openModal);
+
+function openModal(e) {
+  modal.show();
+
+  window.addEventListener('keydown', closeModalHandler);
+
+  function closeModalHandler(e) {
+    if (e.code === 'Escape') {
+      modal.close();
+      window.removeEventListener('keydown', closeModalHandler);
+    }
+  }
+} */
+
+const backdropTeam = document.querySelector('[data-modal-team]');
+const openButtonModal = document.querySelector('.js-team-modal');
+const closeButtonModal = document.querySelector('[data-modal-team-close]');
+const body = document.querySelector('body');
+const modal = document.querySelector('.modal');
+
+openButtonModal.addEventListener('click', onOpenButtonClick);
+closeButtonModal.addEventListener('click', onCloseButtonClick);
+backdropTeam.addEventListener('click', onBackdropClick);
+// modal.addEventListener('click', handleClickModal);
+
+function onOpenButtonClick(e) {
+  e.preventDefault();
+  const currentMovie = e.target.closest('[data-modal-open]');
+
+  console.log('open');
+
+  backdropTeam.classList.remove('is-hidden');
+  window.addEventListener('keydown', closeModalByEscape);
+  body.style.overflow = 'hidden';
+}
+
+function onCloseButtonClick() {
+  backdropTeam.classList.add('is-hidden');
+  window.removeEventListener('keydown', closeModalByEscape);
+  document.querySelector('.modal-content-container').innerHTML = '';
+  body.style.overflow = 'auto';
+}
+
+function onBackdropClick(event) {
+  if (event.currentTarget === event.target) {
+    onCloseButtonClick();
+  }
+}
+
+function closeModalByEscape(event) {
+  const closeButtonEscape = 'Escape';
+  if (event.code === closeButtonEscape) {
+    onCloseButtonClick();
+  }
+}

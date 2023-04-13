@@ -1,24 +1,44 @@
-
+import { pagination } from './pagination-library-queue';
 
 import {libraryPageNotCard} from '../events/libraryPageNotCard';
-
-
 
 // libraryPageNotCard();
 
 import { renderListMovies } from '../events/renderGalleryCard';
 // import smoothScroll from '../events/scrollUp';
 
+const classTheme = localStorage.getItem('active-theme') === 'dark-theme'
+  ? 'dark-theme'
+  : 'light-theme';
+
+document.body.classList.add(classTheme);
+
 const LIST_WATCHED = 'watchedMovies';
 const LIST_QUEUE = 'listQueue';
 const baseActive = LIST_WATCHED;
-
 const blkCtrlLib = document.querySelector('.js-blockCtrlLib');
+const blkLibraryEmpty = document.querySelector('.library-gallery');
 
 if (blkCtrlLib && Object.keys(JSON.parse(localStorage.getItem(baseActive))).length > 0) {
   const listMovies = getArrayFromObjMovies(baseActive);
+  const itemsPerPage = pagination._options.itemsPerPage;
+    const start =  itemsPerPage;
+    const end = start + itemsPerPage;
+    const itemsForPage = listMovies.slice(start, end);
   setActiveButton(baseActive);
-  renderListMovies(listMovies);
+  renderListMovies(itemsForPage);
+  pagination._options.totalItems = listMovies.length;
+  pagination.reset(listMovies.length);
+  pagination.off();  
+  pagination.on('afterMove', (event) => {
+    const currentPage = event.page;
+    const itemsPerPage = pagination._options.itemsPerPage;
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const itemsForPage = listMovies.slice(start, end);
+    renderListMovies(itemsForPage);
+    console.log(itemsForPage);
+});
 } else {
   libraryPageNotCard();
 }
@@ -70,14 +90,31 @@ function onClickBtn(event) {
     switch (type) {
       case LIST_WATCHED:
         listMovies = getArrayFromObjMovies(LIST_WATCHED);
+        
         break;
       case LIST_QUEUE:
         listMovies = getArrayFromObjMovies(LIST_QUEUE);
+        
         break;
     }
   }
-
-  renderListMovies(listMovies);
+  const itemsPerPage = pagination._options.itemsPerPage;
+    const start =  itemsPerPage;
+    const end = start + itemsPerPage;
+    const itemsForPage = listMovies.slice(start, end);
+  renderListMovies(itemsForPage);
+  pagination._options.totalItems = listMovies.length;
+  pagination.reset(listMovies.length);
+  pagination.off();  
+  pagination.on('afterMove', (event) => {
+    const currentPage = event.page;
+    const itemsPerPage = pagination._options.itemsPerPage;
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const itemsForPage = listMovies.slice(start, end);
+    renderListMovies(itemsForPage);
+    console.log(itemsForPage);
+});
 };
 
 

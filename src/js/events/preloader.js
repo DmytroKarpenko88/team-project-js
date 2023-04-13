@@ -7,6 +7,8 @@ function preloaderDisable() {
 }
 
 window.onload = function () {
-  setTimeout(preloaderIsHided, 500);
-  setTimeout(preloaderDisable, 2000);
+  preloaderIsHided();
+  preloaderDisable();
+  // setTimeout(preloaderIsHided, 500);
+  // setTimeout(preloaderDisable, 2000);
 };
