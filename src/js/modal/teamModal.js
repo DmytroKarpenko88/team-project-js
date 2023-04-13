@@ -149,7 +149,7 @@ const markup = `
         <a
           href="https://github.com/DmytroKarpenko88"
           class="team__modal-link"
-          target="_blank"
+          target="_blank" rel="noreferrer noopener"
         >
           <svg class="icon-github" width="25" height="25">
             <use href="/src/images/icons-sprite.svg#icon-github"></use>
@@ -158,7 +158,7 @@ const markup = `
         <a
           href="https://www.linkedin.com/in/dmytro-karpenko-95a6221a/"
           class="team__modal-link"
-          target="_blank"
+          target="_blank" rel="noreferrer noopener"
         >
           <svg class="icon-linkedin" width="25" height="25">
             <use href="/src/images/icons-sprite.svg#icon-linkedin"></use>
@@ -180,6 +180,7 @@ const markup = `
             href="https://github.com/MaiiaHa"
             class="team__modal-link"
             target="_blank"
+            rel="noreferrer noopener"
           >
             <svg class="icon-github" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-github"></use>
@@ -188,7 +189,7 @@ const markup = `
           <a
             href="https://www.linkedin.com/in/maiiaro/"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-linkedin" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-linkedin"></use>
@@ -208,7 +209,7 @@ const markup = `
           <a
             href="https://github.com/marseille78"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-github" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-github"></use>
@@ -217,7 +218,7 @@ const markup = `
           <a
             href="https://www.linkedin.com/in/ruslan-boiko/"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-linkedin" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-linkedin"></use>
@@ -237,7 +238,7 @@ const markup = `
           <a
             href="https://github.com/Maria-Shymanska"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-github" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-github"></use>
@@ -246,7 +247,7 @@ const markup = `
           <a
             href="https://www.linkedin.com/in/maria-shymanska-aa8277251/"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-linkedin" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-linkedin"></use>
@@ -266,7 +267,7 @@ const markup = `
           <a
             href="https://github.com/AliaTulchii"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-github" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-github"></use>
@@ -275,7 +276,7 @@ const markup = `
           <a
             href="https://www.linkedin.com/in/halyna-tulchii-869569271/"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-linkedin" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-linkedin"></use>
@@ -295,7 +296,7 @@ const markup = `
           <a
             href="https://github.com/ludmila121"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-github" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-github"></use>
@@ -304,7 +305,7 @@ const markup = `
           <a
             href="https://www.linkedin.com/in/liudmyla-chumak-30732a164/"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-linkedin" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-linkedin"></use>
@@ -324,7 +325,7 @@ const markup = `
           <a
             href="https://github.com/Artem4535"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-github" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-github"></use>
@@ -333,7 +334,7 @@ const markup = `
           <a
             href="https://www.linkedin.com/in/artem-liaschenko-658819271"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-linkedin" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-linkedin"></use>
@@ -341,6 +342,7 @@ const markup = `
           </a>
         </div>
       </li>
+
       <li class="team__modal-item">
         <img
           class="team__modal-pic"
@@ -353,23 +355,25 @@ const markup = `
           <a
             href="https://github.com/Mamont777"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-github" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-github"></use>
             </svg>
           </a>
-          <a
-            href="https://www.linkedin.com/in/andrii-pokotilo/"
+           <a
+            href="https://github.com/Mamont777"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
+          
             <svg class="icon-linkedin" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-linkedin"></use>
             </svg>
           </a>
         </div>
       </li>
+
       <li class="team__modal-item">
         <img
           class="team__modal-pic"
@@ -382,7 +386,7 @@ const markup = `
           <a
             href="https://github.com/AndreyPokotilo"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-github" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-github"></use>
@@ -391,7 +395,7 @@ const markup = `
           <a
             href="https://www.linkedin.com/in/andrii-pokotilo/"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-linkedin" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-linkedin"></use>
@@ -399,6 +403,7 @@ const markup = `
           </a>
         </div>
       </li>
+
       <li class="team__modal-item">
         <img
           class="team__modal-pic"
@@ -411,7 +416,7 @@ const markup = `
           <a
             href="https://github.com/YuDo-fsd"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-github" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-github"></use>
@@ -436,7 +441,7 @@ const markup = `
           <a
             href="https://github.com/MarynaMolchanova"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-github" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-github"></use>
@@ -445,7 +450,7 @@ const markup = `
           <a
             href="https://www.linkedin.com/me?trk=p_mwlite_feed_updates-secondary_nav"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-linkedin" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-linkedin"></use>
@@ -465,7 +470,7 @@ const markup = `
           <a
             href="htths://github.com/Yanat58"
             class="team__modal-link"
-            target="_blank"
+            target="_blank" rel="noreferrer noopener"
           >
             <svg class="icon-github" width="25" height="25">
               <use href="/src/images/icons-sprite.svg#icon-github"></use>
@@ -490,7 +495,7 @@ const markup = `
         <a
           href="https://github.com/kirill-pka"
           class="team__modal-link"
-          target="_blank"
+          target="_blank" rel="noreferrer noopener"
         >
           <svg class="icon-github" width="25" height="25">
             <use href="/src/images/icons-sprite.svg#icon-github"></use>
@@ -499,7 +504,7 @@ const markup = `
         <a
           href="https://www.linkedin.com/in/кирилл-парасочка-825b2b134"
           class="team__modal-link"
-          target="_blank"
+          target="_blank" rel="noreferrer noopener"
         >
           <svg class="icon-linkedin" width="25" height="25">
             <use href="/src/images/icons-sprite.svg#icon-linkedin"></use>
