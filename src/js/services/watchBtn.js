@@ -30,25 +30,22 @@ if (blkCtrlLib && Object.keys(JSON.parse(localStorage.getItem(baseActive))).leng
   const listMovies = getArrayFromObjMovies(baseActive);
   console.log("listMovies:", listMovies)
  
-  const currentPage = pagination.getCurrentPage(); //1
-    const itemsPerPage = pagination._options.itemsPerPage; //6
-    const start = (currentPage - 1) * itemsPerPage; //0
-    const end = start + itemsPerPage;//6
+  const currentPage = pagination.getCurrentPage(); 
+    const itemsPerPage = pagination._options.itemsPerPage; 
+    const start = (currentPage - 1) * itemsPerPage; 
+    const end = start + itemsPerPage;
     const itemsForPage = listMovies.slice(start, end);
   renderListMovies(itemsForPage);
 
-  
-
-  // pagination._options.totalItems = listMovies.length;
+pagination._options.totalItems = listMovies.length;
 pagination.reset(listMovies.length);
 pagination.off();
    
   pagination.on('afterMove', (event) => {
-    const currentPage = event.page; //1
-    const itemsPerPage = pagination._options.itemsPerPage; //6
-    const start = (currentPage - 1) * itemsPerPage; //0
-    const end = start + itemsPerPage;//6
-    console.log('wchbtnLoad');
+    const currentPage = event.page; 
+    const itemsPerPage = pagination._options.itemsPerPage; 
+    const start = (currentPage - 1) * itemsPerPage; 
+    const end = start + itemsPerPage;
     const itemsForPage = listMovies.slice(start, end);
     renderListMovies(itemsForPage);
     console.log(itemsForPage);
@@ -118,17 +115,16 @@ function onClickBtn(event) {
   console.log(type, listMovies);
 
   if (listMovies.length > 0) {
-    const currentPage = pagination.getCurrentPage(); //1
-    const itemsPerPage = pagination._options.itemsPerPage; //6
-    const start = (currentPage - 1) * itemsPerPage; //0
-    const end = start + itemsPerPage;//6
+    const currentPage = pagination.getCurrentPage(); 
+    const itemsPerPage = pagination._options.itemsPerPage; 
+    const start = (currentPage - 1) * itemsPerPage; 
+    const end = start + itemsPerPage;
     const itemsForPage = listMovies.slice(start, end);
   renderListMovies(itemsForPage);
   
-    blkLibraryEmpty.classList.remove('active');
+  blkLibraryEmpty.classList.remove('active');
 
-
-  // pagination._options.totalItems = listMovies.length;
+  pagination._options.totalItems = listMovies.length;
   pagination.reset(listMovies.length);
   pagination.off();  
 
@@ -138,7 +134,6 @@ function onClickBtn(event) {
     const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     const itemsForPage = listMovies.slice(start, end);
-    console.log('modalClick');
     renderListMovies(itemsForPage);
     console.log(itemsForPage);
 });

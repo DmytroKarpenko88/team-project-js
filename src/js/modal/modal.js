@@ -165,19 +165,16 @@ function rerenderLibMovies(typeList) {
     if (getArrayFromObjMovies(typeList).length > 0) {
      const newArray = getArrayFromObjMovies(typeList)
      console.log("newArray:", newArray.length)
-     
+     pagination.off();
     //  pagination._options.totalItems = newArray.length;
      pagination.reset(newArray.length);
-     pagination.off();
-
+     
     const currentPage = pagination.getCurrentPage(); //1
     const itemsPerPage = pagination._options.itemsPerPage; //6
     const start = (currentPage - 1) * itemsPerPage; //0
     const end = start + itemsPerPage;//6
     const itemsForPage = newArray.slice(start, end);
      
-    
-
       renderListMovies(itemsForPage);
 
       pagination.on('afterMove', (event) => {
@@ -186,7 +183,6 @@ function rerenderLibMovies(typeList) {
         const start = (currentPage - 1) * itemsPerPage; //0
         const end = start + itemsPerPage;//6
         const itemsForPage = newArray.slice(start, end);
-
         renderListMovies(itemsForPage);
         console.log(itemsForPage);
     });
