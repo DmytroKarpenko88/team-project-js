@@ -1,0 +1,44 @@
+:root {
+  --star-size: 60px;
+  --star-color: #fff;
+  --star-background: #fc0;
+}
+
+.Stars {
+  // calc(var(--rating) / 5 * 100%)
+  --percent: var(--rating);
+
+  display: inline-block;
+
+  //var(--star-size);
+  font-size: 60px;
+  font-family: var(main-font); // Times make sure ★ appears correctly
+  line-height: 1;
+
+  &::before {
+    content: '★★★★★';
+    letter-spacing: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--star-background) var(--percent),
+      var(--star-color) var(--percent)
+    );
+    // -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+// Just to make a preview more beautifull
+
+body {
+  background: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+// * {
+//   position: relative;
+//   box-sizing: border-box;
+// }

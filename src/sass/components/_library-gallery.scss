@@ -1,4 +1,10 @@
 .library-gallery {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
   @media screen and (max-width: 767px) {
     margin-top: 20px;
     margin-bottom: 40px;
@@ -28,6 +34,10 @@
     #67a2b6 10%,
     #fff 50%
   );
+
+  body.dark-theme & {
+    background-image: none;
+  }
 }
 
 .library-gallery__image {

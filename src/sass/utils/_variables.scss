@@ -23,6 +23,10 @@
   //transition
   --duration: 250ms;
   --timing-function: linear;
+
+  // transition for btn
+  --trns-fast: 300ms ease-in-out;
+  --trns-slow: 500ms ease-in;
 }
 // BREAKPOINTS
 $mobile: 320px;

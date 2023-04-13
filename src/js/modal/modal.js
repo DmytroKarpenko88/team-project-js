@@ -1,12 +1,14 @@
 import { serviceApi } from '../services/service-api';
 import { renderListMovies } from '../events/renderGalleryCard';
 import { getArrayFromObjMovies } from '../services/watchBtn';
+import { libraryPageNotCard } from '../events/libraryPageNotCard';
 
 const backdrop = document.querySelector('[data-modal]')
 const openButtonModal = document.querySelector('.gallery');
 const closeButtonModal = document.querySelector('[data-modal-close]')
 const body = document.querySelector('body');
 const modal = document.querySelector('.modal');
+const blkLibraryEmpty = document.querySelector('.library-gallery');
 
 const BTN_WATCHED_ADD = 'add to Watched';
 const BTN_WATCHED_REMOVE = 'remove from Watched';
@@ -22,6 +24,14 @@ openButtonModal.addEventListener('click', onOpenButtonClick)
 closeButtonModal.addEventListener('click', onCloseButtonClick)
 backdrop.addEventListener('click', onBackdropClick)
 modal.addEventListener('click', handleClickModal);
+
+function getActiveType() {
+  try {
+    return document.getElementById('btn__watched').classList.contains('active')
+      ? LIST_WATCHED
+      : LIST_QUEUE;
+  } catch (err) {}
+}
 
 function onOpenButtonClick(e) {
   e.preventDefault();
@@ -149,7 +159,15 @@ function handleClickModal(e) {
 
 function rerenderLibMovies(typeList) {
   onCloseButtonClick();
-  renderListMovies(getArrayFromObjMovies(typeList));
+
+  if (typeList === getActiveType()) {
+    if (getArrayFromObjMovies(typeList).length > 0) {
+      renderListMovies(getArrayFromObjMovies(typeList));
+      blkLibraryEmpty.classList.remove('active');
+    } else {
+      libraryPageNotCard();
+    }
+  }
 }
 
 function isIncluded(idMovie, listLocalStorage) {
@@ -177,7 +195,7 @@ function toggleStatus(dataAttr, typeList) {
 
   const currentID = el.closest('.content-modal').dataset.id;
 
-  const list = JSON.parse(localStorage.getItem(typeList)) ?? {};
+  const list = JSON.parse(localStorage.getItem(typeList));
 
   if (currentID in list) {
     delete list[currentID];
