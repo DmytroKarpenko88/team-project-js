@@ -228,7 +228,7 @@ const markup = `
       <li class="team__modal-item">
         <img
           class="team__modal-pic"
-          src="/src/images/team.images/maria-shymanska.jpg"
+          src="/src/images/team.images/Shymanska.png"
           alt="Developer"
         />
         <p class="team__modal-member">Maria Shymanska</p>
