@@ -1,8 +1,15 @@
+import { serviceApi } from '../services/service-api';
+import { renderListMovies } from '../events/renderGalleryCard';
+import { getArrayFromObjMovies } from '../services/watchBtn';
+import { libraryPageNotCard } from '../events/libraryPageNotCard';
+import { pagination } from '../services/pagination-library-queue';
+
 const backdrop = document.querySelector('[data-modal]')
 const openButtonModal = document.querySelector('.gallery');
 const closeButtonModal = document.querySelector('[data-modal-close]')
 const body = document.querySelector('body');
 const modal = document.querySelector('.modal');
+const blkLibraryEmpty = document.querySelector('.library-gallery');
 
 const BTN_WATCHED_ADD = 'add to Watched';
 const BTN_WATCHED_REMOVE = 'remove from Watched';
@@ -12,11 +19,20 @@ const LIST_WATCHED = 'watchedMovies';
 const LIST_QUEUE = 'listQueue';
 
 let dataMovie = null;
+const isLibraryPage = document.body.classList.contains('library-page');
 
 openButtonModal.addEventListener('click', onOpenButtonClick)
 closeButtonModal.addEventListener('click', onCloseButtonClick)
-backdrop.addEventListener('click', onBackdropClicl)
+backdrop.addEventListener('click', onBackdropClick)
 modal.addEventListener('click', handleClickModal);
+
+function getActiveType() {
+  try {
+    return document.getElementById('btn__watched').classList.contains('active')
+      ? LIST_WATCHED
+      : LIST_QUEUE;
+  } catch (err) {}
+}
 
 function onOpenButtonClick(e) {
   e.preventDefault();
@@ -33,10 +49,11 @@ function onOpenButtonClick(e) {
 function onCloseButtonClick()  {
   backdrop.classList.add('is-hidden')
   window.removeEventListener('keydown', closeModalByEscape)
+  document.querySelector('.modal-content-container').innerHTML = '';
   body.style.overflow = 'auto';
 }
 
-function onBackdropClicl(event) {
+function onBackdropClick(event) {
   if (event.currentTarget === event.target) {
     onCloseButtonClick()
   }
@@ -49,10 +66,21 @@ function closeModalByEscape(event) {
   }
 }
 
+function renderTrailer(key) {
+  if (!key) return;
+
+  const blockTrailer = document.querySelector('.js-modalTrailer');
+  blockTrailer.innerHTML = `
+    <iframe width="560" height="240" src="https://www.youtube.com/embed/${key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  `;
+}
+
 function renderPopupBody(id) {
   dataMovie = JSON.parse(localStorage.getItem('listMovies'))[id];
-  localStorage.getItem(LIST_WATCHED) || localStorage.setItem(LIST_WATCHED, JSON.stringify({}));
-  localStorage.getItem(LIST_QUEUE) || localStorage.setItem(LIST_QUEUE, JSON.stringify({}));
+
+  serviceApi.getTrailer(id)
+    .then(renderTrailer)
+    .catch(err => {});
 
   const {
     poster,
@@ -81,13 +109,13 @@ function renderPopupBody(id) {
               <li>
                 <div class="statistic-wraper">
                   <p class="first-item-statistic">Vote / Votes</p>
-                  <p><span class="statistic-vote">${vote_average}</span>/<span class="statistic-votes">${vote_count}</span></p>
+                  <p><span class="statistic-vote">${Number(vote_average).toFixed(1)}</span>/<span class="statistic-votes">${vote_count}</span></p>
                 </div>
               </li>
               <li>
                 <div class="statistic-wraper">
                   <p class="first-item-statistic">Popularity</p>
-                  <p>${popularity}</p>
+                  <p>${Number(popularity).toFixed(1)}</p>
                 </div>
               </li>
               <li>
@@ -107,11 +135,10 @@ function renderPopupBody(id) {
         <h3 class="content-modal-title">About</h3>
         <p class="content-modal">${overview}</p>
         <div class="modal-btn-container">
-<!--          <button class="modal-btn btn-add-watched" data-btn-watch>add to Watched</button>-->
           <button class="modal-btn btn-add-watched" data-btn-watch>${getButtonText(id, LIST_WATCHED)}</button>
-<!--          <button class="modal-btn btn-add-queue" data-btn-queue>add to queue</button>-->
           <button class="modal-btn btn-add-queue" data-btn-queue>${getButtonText(id, LIST_QUEUE)}</button>
         </div>
+        <div class='modal-trailer js-modalTrailer'></div>
       </div>
     `;
   }
@@ -121,9 +148,51 @@ function handleClickModal(e) {
   const target = e.target;
   if (target.closest('[data-btn-watch]')) {
     toggleStatus('data-btn-watch', LIST_WATCHED);
+    if (isLibraryPage) {
+      rerenderLibMovies(LIST_WATCHED);
+    }
   }
   if (target.closest('[data-btn-queue]')) {
     toggleStatus('data-btn-queue', LIST_QUEUE);
+    if (isLibraryPage) {
+      rerenderLibMovies(LIST_QUEUE);
+    }
+  }
+}
+
+function rerenderLibMovies(typeList) {
+  onCloseButtonClick();
+
+  if (typeList === getActiveType()) {
+    if (getArrayFromObjMovies(typeList).length > 0) {
+     const newArray = getArrayFromObjMovies(typeList)
+     console.log("newArray:", newArray.length)
+     pagination.off();
+    //  pagination._options.totalItems = newArray.length;
+     pagination.reset(newArray.length);
+
+    const currentPage = pagination.getCurrentPage(); //1
+    const itemsPerPage = pagination._options.itemsPerPage; //6
+    const start = (currentPage - 1) * itemsPerPage; //0
+    const end = start + itemsPerPage;//6
+    const itemsForPage = newArray.slice(start, end);
+
+      renderListMovies(itemsForPage);
+
+      pagination.on('afterMove', (event) => {
+        const currentPage = event.page; //1
+        const itemsPerPage = pagination._options.itemsPerPage; //6
+        const start = (currentPage - 1) * itemsPerPage; //0
+        const end = start + itemsPerPage;//6
+        const itemsForPage = newArray.slice(start, end);
+        renderListMovies(itemsForPage);
+        console.log(itemsForPage);
+    });
+
+      blkLibraryEmpty.classList.remove('active');
+    } else {
+      libraryPageNotCard();
+    }
   }
 }
 
@@ -152,7 +221,7 @@ function toggleStatus(dataAttr, typeList) {
 
   const currentID = el.closest('.content-modal').dataset.id;
 
-  const list = JSON.parse(localStorage.getItem(typeList)) ?? {};
+  const list = JSON.parse(localStorage.getItem(typeList));
 
   if (currentID in list) {
     delete list[currentID];

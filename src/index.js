@@ -3,6 +3,7 @@ import './js/pagination';
 import './js/events/renderGalleryCard';
 
 import './js/modal/modal';
+import './js/modal/teamModal';
 
 import './js/loader';
 
@@ -15,3 +16,5 @@ import './js/events/preloader';
 // import './js/team';
 
 import './js/services/firebase';
+
+import '../node_modules/basiclightbox/dist/basicLightbox.min.css';

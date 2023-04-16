@@ -10,6 +10,7 @@
   --btn-txt-cl: #ffffff;
 
   --copyright-txt-cl: #545454;
+  --copyright-txt-cl-dt: #f1f1f1;
   --modal-title: #8c8c8c;
 
   /* BG colors */
@@ -23,6 +24,10 @@
   //transition
   --duration: 250ms;
   --timing-function: linear;
+
+  // transition for btn
+  --trns-fast: 300ms ease-in-out;
+  --trns-slow: 500ms ease-in;
 }
 // BREAKPOINTS
 $mobile: 320px;

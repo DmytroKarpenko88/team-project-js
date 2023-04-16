@@ -1,53 +1,149 @@
+import { pagination } from './pagination-library-queue';
+
+import {libraryPageNotCard} from '../events/libraryPageNotCard';
+
+// libraryPageNotCard();
+
+import { renderListMovies } from '../events/renderGalleryCard';
+// import smoothScroll from '../events/scrollUp';
+
+const classTheme = localStorage.getItem('active-theme') === 'dark-theme'
+  ? 'dark-theme'
+  : 'light-theme';
+
+document.body.classList.add(classTheme);
+
+const LIST_WATCHED = 'watchedMovies';
+const LIST_QUEUE = 'listQueue';
+const baseActive = LIST_WATCHED;
+const blkCtrlLib = document.querySelector('.js-blockCtrlLib');
+const blkLibraryEmpty = document.querySelector('.library-gallery');
+
+localStorage.getItem(LIST_WATCHED) || localStorage.setItem(LIST_WATCHED,
+JSON.stringify({}));
+localStorage.getItem(LIST_QUEUE) || localStorage.setItem(LIST_QUEUE,
+JSON.stringify({}));
+
+blkCtrlLib && setActiveButton(baseActive);
+
+if (blkCtrlLib && Object.keys(JSON.parse(localStorage.getItem(baseActive))).length > 0) {
+  const listMovies = getArrayFromObjMovies(baseActive);
+  console.log("listMovies:", listMovies)
+ 
+  const currentPage = pagination.getCurrentPage(); 
+    const itemsPerPage = pagination._options.itemsPerPage; 
+    const start = (currentPage - 1) * itemsPerPage; 
+    const end = start + itemsPerPage;
+    const itemsForPage = listMovies.slice(start, end);
+  renderListMovies(itemsForPage);
+
+pagination._options.totalItems = listMovies.length;
+pagination.reset(listMovies.length);
+pagination.off();
+   
+  pagination.on('afterMove', (event) => {
+    const currentPage = event.page; 
+    const itemsPerPage = pagination._options.itemsPerPage; 
+    const start = (currentPage - 1) * itemsPerPage; 
+    const end = start + itemsPerPage;
+    const itemsForPage = listMovies.slice(start, end);
+    renderListMovies(itemsForPage);
+    console.log(itemsForPage);
+});
+
+blkLibraryEmpty.classList.remove('active');
 
 
-const refs = {
-    btnWatch: document.querySelector('#watch'),
-    btnQueue: document.querySelector('#queue'),
-    btnAddQueue: document.querySelector('#addQueue'),
-    btnAddWatch: document.querySelector('#addWatch'),
+} else {
+  libraryPageNotCard();
+}
+
+function setActiveButton(typeList) {
+  const opts = {
+    btn__watched: LIST_WATCHED,
+    btn__queue: LIST_QUEUE,
+  };
+
+  Object.entries(opts).forEach(item => {
+    const currentBtn = document.querySelector(`#${item[0]}`);
+    if (item[1] === typeList) {
+      currentBtn.classList.add('active');
+      currentBtn.disabled = true;
+    } else {
+      currentBtn.classList.remove('active');
+      currentBtn.disabled = false;
+    }
+  });
+}
+
+if (blkCtrlLib) {
+  blkCtrlLib.addEventListener('click', onClickBtn);
+}
+
+export function getArrayFromObjMovies(fieldLocalStorage) {
+  const objMovies = JSON.parse(localStorage.getItem(fieldLocalStorage));
+  return Object.entries(objMovies).map(item => ({id: +item[0], ...item[1]}));
+}
+
+function onClickBtn(event) {
+  event.preventDefault();
+  const target = event.target;
+
+  let type = null;
+  let listMovies = null;
+
+  if (target.closest('#btn__watched')) {
+    type = LIST_WATCHED;
+    setActiveButton(LIST_WATCHED);
+  }
+  if (target.closest('#btn__queue')) {
+    type = LIST_QUEUE;
+    setActiveButton(LIST_QUEUE);
+  }
+
+  if (type) {
+    switch (type) {
+      case LIST_WATCHED:
+        listMovies = getArrayFromObjMovies(LIST_WATCHED);
+        break;
+      case LIST_QUEUE:
+        listMovies = getArrayFromObjMovies(LIST_QUEUE);
+        break;
+    }
+  }
+
+  console.log(type, listMovies);
+
+  if (listMovies.length > 0) {
+    const currentPage = pagination.getCurrentPage(); 
+    const itemsPerPage = pagination._options.itemsPerPage; 
+    const start = (currentPage - 1) * itemsPerPage; 
+    const end = start + itemsPerPage;
+    const itemsForPage = listMovies.slice(start, end);
+  renderListMovies(itemsForPage);
+  
+  blkLibraryEmpty.classList.remove('active');
+
+  pagination._options.totalItems = listMovies.length;
+  pagination.reset(listMovies.length);
+  pagination.off();  
+
+  pagination.on('afterMove', (event) => {
+    const currentPage = event.page;
+    const itemsPerPage = pagination._options.itemsPerPage;
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const itemsForPage = listMovies.slice(start, end);
+    renderListMovies(itemsForPage);
+    console.log(itemsForPage);
+});
+
+  } else {
+    libraryPageNotCard();
+  }
+
+  // renderListMovies(listMovies);
+
 };
- refs.btnWatch.addEventListener('click', onBtnWatched);
- refs.btnQueue.addEventListener('click', onQueueBtn);
- refs.btnAddQueue.addEventListener('click', onAddQueue);
- refs.btnAddWatch.addEventListener('click', onAddWatch);
 
- function onBtnWatched(event) {
-    if (event.target === refs.btnWatch) {
-      event.target.classList.add('btn__library--active');
-      refs.btnQueue.classList.remove('btn__library--active');
-      smoothScroll();
-      renderWatched();
-    } else if (event.target === refs.btnQueue) {
-      event.target.classList.add('btn__library--active');
-      refs.btnWatched.classList.remove('btn__library--active');
-      smoothScroll();
-      renderQueue();
-    }
-  };
-  const addToStorage = (key, value) => {
-    try {
-      if (typeof value === 'string') {
-        localStorage.setItem(key, value);
-      } else {
-        localStorage.setItem(key, JSON.stringify(value));
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
-  const getFromStorage = key => {
-    try {
-      return JSON.parse(localStorage.getItem(key));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const removeFromStorage = key => {
-    try {
-      localStorage.removeItem(key);
-    } catch (error) {
-      console.error(error);
-    }
-  };

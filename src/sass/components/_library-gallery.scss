@@ -1,4 +1,10 @@
 .library-gallery {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
   @media screen and (max-width: 767px) {
     margin-top: 20px;
     margin-bottom: 40px;
@@ -26,8 +32,12 @@
     #67a2b6 10%,
     #076585 10%,
     #67a2b6 10%,
-    #fff 50%
+    rgba(255, 255, 255, 0) 50%
   );
+
+  body.dark-theme & {
+    background-image: none;
+  }
 }
 
 .library-gallery__image {
@@ -44,16 +54,17 @@
 
 .library-gallery__text {
   margin-top: 10px;
-  text-transform: uppercase;
   color: var(--accent-txt-cl);
 
   @media screen and (max-width: 767px) {
-    font-style: 500;
+    font-weight: 500;
+    font-style: normal;
     font-size: 20px;
     line-height: 1.05;
   }
   @media screen and (min-width: $tablet) {
-    font-style: 600;
+    font-weight: 700;
+    font-style: normal;
     font-size: 25px;
     line-height: 1.05;
   }
