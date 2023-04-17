@@ -2,8 +2,6 @@ import { pagination } from './pagination-library-queue';
 
 import {libraryPageNotCard} from '../events/libraryPageNotCard';
 
-// libraryPageNotCard();
-
 import { renderListMovies } from '../events/renderGalleryCard';
 // import smoothScroll from '../events/scrollUp';
 
@@ -19,20 +17,18 @@ const baseActive = LIST_WATCHED;
 const blkCtrlLib = document.querySelector('.js-blockCtrlLib');
 const blkLibraryEmpty = document.querySelector('.library-gallery');
 
-localStorage.getItem(LIST_WATCHED) || localStorage.setItem(LIST_WATCHED,
-JSON.stringify({}));
-localStorage.getItem(LIST_QUEUE) || localStorage.setItem(LIST_QUEUE,
-JSON.stringify({}));
+localStorage.getItem(LIST_WATCHED) || localStorage.setItem(LIST_WATCHED, JSON.stringify({}));
+localStorage.getItem(LIST_QUEUE) || localStorage.setItem(LIST_QUEUE, JSON.stringify({}));
 
 blkCtrlLib && setActiveButton(baseActive);
 
 if (blkCtrlLib && Object.keys(JSON.parse(localStorage.getItem(baseActive))).length > 0) {
   const listMovies = getArrayFromObjMovies(baseActive);
   console.log("listMovies:", listMovies)
- 
-  const currentPage = pagination.getCurrentPage(); 
-    const itemsPerPage = pagination._options.itemsPerPage; 
-    const start = (currentPage - 1) * itemsPerPage; 
+
+  const currentPage = pagination.getCurrentPage();
+    const itemsPerPage = pagination._options.itemsPerPage;
+    const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     const itemsForPage = listMovies.slice(start, end);
   renderListMovies(itemsForPage);
@@ -40,11 +36,11 @@ if (blkCtrlLib && Object.keys(JSON.parse(localStorage.getItem(baseActive))).leng
 pagination._options.totalItems = listMovies.length;
 pagination.reset(listMovies.length);
 pagination.off();
-   
+
   pagination.on('afterMove', (event) => {
-    const currentPage = event.page; 
-    const itemsPerPage = pagination._options.itemsPerPage; 
-    const start = (currentPage - 1) * itemsPerPage; 
+    const currentPage = event.page;
+    const itemsPerPage = pagination._options.itemsPerPage;
+    const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     const itemsForPage = listMovies.slice(start, end);
     renderListMovies(itemsForPage);
@@ -112,21 +108,19 @@ function onClickBtn(event) {
     }
   }
 
-  console.log(type, listMovies);
-
   if (listMovies.length > 0) {
-    const currentPage = pagination.getCurrentPage(); 
-    const itemsPerPage = pagination._options.itemsPerPage; 
-    const start = (currentPage - 1) * itemsPerPage; 
+    const currentPage = pagination.getCurrentPage();
+    const itemsPerPage = pagination._options.itemsPerPage;
+    const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     const itemsForPage = listMovies.slice(start, end);
   renderListMovies(itemsForPage);
-  
+
   blkLibraryEmpty.classList.remove('active');
 
   pagination._options.totalItems = listMovies.length;
   pagination.reset(listMovies.length);
-  pagination.off();  
+  pagination.off();
 
   pagination.on('afterMove', (event) => {
     const currentPage = event.page;
@@ -141,8 +135,6 @@ function onClickBtn(event) {
   } else {
     libraryPageNotCard();
   }
-
-  // renderListMovies(listMovies);
 
 };
 
