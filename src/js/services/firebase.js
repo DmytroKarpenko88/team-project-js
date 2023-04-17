@@ -5,8 +5,10 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
 } from 'firebase/auth';
-import { getDatabase, ref, set, push, child } from 'firebase/database';
+import { getDatabase, ref, set, update, push, child } from 'firebase/database';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -58,93 +60,92 @@ const actionCodeSettings = {
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
 
-// let email = 'user3@mail.com';
-// let password = 223456;
-// let userName = 'Dmytro';
-
-// createUser(email, password, userName);
-
-export function registration(email, password, userName) {
-  createUser(email, password, userName);
-}
-function createUser(email, password, userName) {
-  console.log('Firebase', email, password, userName);
-  createUserWithEmailAndPassword(auth, email, password)
+export async function registration(email, password, userName) {
+  await createUserWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       // Signed in
       const user = userCredential.user;
+
+      set(ref(database, 'users/' + user.uid), {
+        userName: userName,
+        email: email,
+      });
+
+      console.log('Created user!');
       // ...
     })
     .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      console.log(errorMessage);
       // ..
     });
 }
 
-// signInWithEmailAndPassword(auth, email, password)
-//   .then(userCredential => {
-//     // Signed in
-//     const user = userCredential.user;
-//     const { uid, email, name } = user;
-//     console.log(
-//       '🚀 ~ file: firebase.js:84 ~ uid, email, name:',
-//       uid,
-//       email,
-//       name
-//     );
-//     const imageUrl = 'https://filmoteka-team-js-default-rtdb.firebaseio.com/';
+export async function login(email, password) {
+  await signInWithEmailAndPassword(auth, email, password)
+    .then(userCredential => {
+      // Signed in
+      const user = userCredential.user;
 
-//     writeUserData(uid, email, { name: 'User' }, imageUrl);
+      const dt = new Date();
 
-//     // ...
-//   })
-//   .catch(error => {
-//     const errorCode = error.code;
-//     const errorMessage = error.message;
-//     console.log(error.message);
-//   });
+      update(ref(database, 'users/' + user.uid), {
+        last_login: dt,
+      });
+
+      console.log('User is logged in!');
+
+      // ...
+    })
+    .catch(error => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage);
+    });
+}
 
 // Initialize Realtime Database and get a reference to the service
 const database = getDatabase(app);
-// console.log('🚀 ~ file: firebase.js:95 ~ database:', database);
 
-function writeUserData(name, email) {
-  // const userId = auth.currentUser.uid;
+// function writeUserData(name, email) {
+//   // const userId = auth.currentUser.uid;
 
-  // Get a key for a new Post.
-  const userId = push(child(ref(database), 'users')).key;
+//   // Get a key for a new Post.
+//   const userId = push(child(ref(database), 'users')).key;
 
-  set(ref(database, 'users/' + userId), {
-    username: name,
-    email: email,
-  });
-}
+//   set(ref(database, 'users/' + userId), {
+//     username: name,
+//     email: email,
+//   });
+// }
 
-// writeUserData(userName, email);
-
-// const db = getDatabase();
-// const starCountRef = ref(db, 'posts/' + postId + '/starCount');
-// onValue(starCountRef, snapshot => {
-//   const data = snapshot.val();
-//   updateStarCount(postElement, data);
-// });
-
-const refs = {
+const refsForm = {
   form_login: document.querySelector('#login'),
   form_register: document.querySelector('#register'),
+  btn_logout: document.querySelector('#logout'),
 };
 
-refs.form_login.addEventListener('submit', onLogin);
-refs.form_register.addEventListener('submit', onRegister);
+refsForm.form_login.addEventListener('submit', onLogin);
+refsForm.form_register.addEventListener('submit', onRegister);
+refsForm.btn_logout.addEventListener('click', () => {
+  signOut(auth)
+    .then(() => {
+      console.log('Sign-out successful');
+    })
+    .catch(error => {
+      console.log(error.message);
+    });
+});
 
 function onLogin(e) {
   e.preventDefault();
   const {
     elements: { logemail, logpass },
   } = e.currentTarget;
-  alert(`Login: ${logemail.value}, Password: ${logpass.value}`);
-  refs.form_login.reset();
+
+  login(logemail.value, logpass.value);
+  refsForm.form_login.reset();
 }
 
 function onRegister(e) {
@@ -155,8 +156,21 @@ function onRegister(e) {
   let email = logemail.value;
   let password = logpass.value;
   let userName = logname.value;
-  registration(email, password, userName);
-  console.log(
-    `User Name: ${logname.value},  Login: ${logemail.value}, Password: ${logpass.value}`
-  );
+  try {
+    registration(email, password, userName);
+
+    console.log('userName:', userName);
+  } catch (error) {
+    console.log(error.message);
+  }
 }
+
+const user = auth.currentUser;
+onAuthStateChanged(auth, user => {
+  if (user) {
+    const uid = user.uid;
+    console.log('You are already logged in');
+  } else {
+    console.log('You have to log in first');
+  }
+});

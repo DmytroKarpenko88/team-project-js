@@ -38,34 +38,3 @@ function openModal(e) {
     }
   }
 }
-
-const refs = {
-  form_login: document.querySelector('#login'),
-  form_register: document.querySelector('#register'),
-};
-
-refs.form_login.addEventListener('submit', onLogin);
-refs.form_register.addEventListener('submit', onRegister);
-
-function onLogin(e) {
-  e.preventDefault();
-  const {
-    elements: { logemail, logpass },
-  } = e.currentTarget;
-  alert(`Login: ${logemail.value}, Password: ${logpass.value}`);
-  refs.form_login.reset();
-}
-
-function onRegister(e) {
-  e.preventDefault();
-  const {
-    elements: { logname, logemail, logpass },
-  } = e.currentTarget;
-  let email = logemail.value;
-  let password = logpass.value;
-  let userName = logname.value;
-  registration(email, password, userName);
-  console.log(
-    `User Name: ${logname.value},  Login: ${logemail.value}, Password: ${logpass.value}`
-  );
-}
