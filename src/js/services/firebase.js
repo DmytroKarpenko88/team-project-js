@@ -58,12 +58,17 @@ const actionCodeSettings = {
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
 
-let email = 'user3@mail.com';
-let password = 223456;
-let userName = 'Dmytro';
+// let email = 'user3@mail.com';
+// let password = 223456;
+// let userName = 'Dmytro';
 
-createUser(email, password, userName);
-function createUser(email, password) {
+// createUser(email, password, userName);
+
+export function registration(email, password, userName) {
+  createUser(email, password, userName);
+}
+function createUser(email, password, userName) {
+  console.log('Firebase', email, password, userName);
   createUserWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       // Signed in
@@ -77,34 +82,32 @@ function createUser(email, password) {
     });
 }
 
-signInWithEmailAndPassword(auth, email, password)
-  .then(userCredential => {
-    // Signed in
-    const user = userCredential.user;
-    const { uid, email, name } = user;
-    console.log(
-      '🚀 ~ file: firebase.js:84 ~ uid, email, name:',
-      uid,
-      email,
-      name
-    );
-    const imageUrl = 'https://filmoteka-team-js-default-rtdb.firebaseio.com/';
+// signInWithEmailAndPassword(auth, email, password)
+//   .then(userCredential => {
+//     // Signed in
+//     const user = userCredential.user;
+//     const { uid, email, name } = user;
+//     console.log(
+//       '🚀 ~ file: firebase.js:84 ~ uid, email, name:',
+//       uid,
+//       email,
+//       name
+//     );
+//     const imageUrl = 'https://filmoteka-team-js-default-rtdb.firebaseio.com/';
 
-    writeUserData(uid, email, { name: 'User' }, imageUrl);
+//     writeUserData(uid, email, { name: 'User' }, imageUrl);
 
-    // ...
-  })
-  .catch(error => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(error.message);
-  });
-
-console.log('Firebase');
+//     // ...
+//   })
+//   .catch(error => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     console.log(error.message);
+//   });
 
 // Initialize Realtime Database and get a reference to the service
 const database = getDatabase(app);
-console.log('🚀 ~ file: firebase.js:95 ~ database:', database);
+// console.log('🚀 ~ file: firebase.js:95 ~ database:', database);
 
 function writeUserData(name, email) {
   // const userId = auth.currentUser.uid;
@@ -118,7 +121,7 @@ function writeUserData(name, email) {
   });
 }
 
-writeUserData(userName, email);
+// writeUserData(userName, email);
 
 // const db = getDatabase();
 // const starCountRef = ref(db, 'posts/' + postId + '/starCount');
@@ -126,3 +129,34 @@ writeUserData(userName, email);
 //   const data = snapshot.val();
 //   updateStarCount(postElement, data);
 // });
+
+const refs = {
+  form_login: document.querySelector('#login'),
+  form_register: document.querySelector('#register'),
+};
+
+refs.form_login.addEventListener('submit', onLogin);
+refs.form_register.addEventListener('submit', onRegister);
+
+function onLogin(e) {
+  e.preventDefault();
+  const {
+    elements: { logemail, logpass },
+  } = e.currentTarget;
+  alert(`Login: ${logemail.value}, Password: ${logpass.value}`);
+  refs.form_login.reset();
+}
+
+function onRegister(e) {
+  e.preventDefault();
+  const {
+    elements: { logname, logemail, logpass },
+  } = e.currentTarget;
+  let email = logemail.value;
+  let password = logpass.value;
+  let userName = logname.value;
+  registration(email, password, userName);
+  console.log(
+    `User Name: ${logname.value},  Login: ${logemail.value}, Password: ${logpass.value}`
+  );
+}
