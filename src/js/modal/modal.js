@@ -38,11 +38,21 @@ function onOpenButtonClick(e) {
   e.preventDefault();
   const currentMovie = e.target.closest('[data-modal-open]');
 
-  if (currentMovie) {
-    backdrop.classList.remove('is-hidden');
-    window.addEventListener('keydown', closeModalByEscape);
-    body.style.overflow = 'hidden';
-    renderPopupBody(currentMovie.dataset.id);
+  // console.log(currentMovie);
+  if (!currentMovie) return;
+
+  backdrop.classList.remove('is-hidden');
+  window.addEventListener('keydown', closeModalByEscape);
+  body.style.overflow = 'hidden';
+
+  if (document.body.classList.contains('library-page')) {
+    if (document.querySelector('#btn__watched').classList.contains('active')) {
+      renderPopupBody(currentMovie.dataset.id, 'watchedMovies');
+    } else {
+      renderPopupBody(currentMovie.dataset.id, 'listQueue');
+    }
+  } else {
+    renderPopupBody(currentMovie.dataset.id, 'listMovies');
   }
 }
 
@@ -75,8 +85,8 @@ function renderTrailer(key) {
   `;
 }
 
-function renderPopupBody(id) {
-  dataMovie = JSON.parse(localStorage.getItem('listMovies'))[id];
+function renderPopupBody(id, listName) {
+  dataMovie = JSON.parse(localStorage.getItem(listName))[id];
 
   serviceApi.getTrailer(id)
     .then(renderTrailer)
